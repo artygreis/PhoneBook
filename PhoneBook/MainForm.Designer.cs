@@ -37,7 +37,7 @@ namespace PhoneBook
             this.panelSide = new System.Windows.Forms.Panel();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelControls = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +50,7 @@ namespace PhoneBook
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(199, 444);
+            this.panel1.Size = new System.Drawing.Size(198, 444);
             this.panel1.TabIndex = 1;
             // 
             // panelSide
@@ -99,14 +99,14 @@ namespace PhoneBook
             this.btnHome.UseVisualStyleBackColor = false;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
-            // panel2
+            // panelControls
             // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(199, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(689, 444);
-            this.panel2.TabIndex = 0;
+            this.panelControls.BackColor = System.Drawing.Color.White;
+            this.panelControls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControls.Location = new System.Drawing.Point(198, 0);
+            this.panelControls.Name = "panelControls";
+            this.panelControls.Size = new System.Drawing.Size(690, 444);
+            this.panelControls.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -138,7 +138,7 @@ namespace PhoneBook
             captionLabel1.Text = "Телефонный справочник";
             this.CaptionLabels.Add(captionLabel1);
             this.ClientSize = new System.Drawing.Size(888, 444);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panelControls);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.Color.White;
@@ -159,7 +159,7 @@ namespace PhoneBook
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnHome;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panelControls;
         private System.Windows.Forms.Panel panelSide;
         private System.Windows.Forms.Button btnAdd;
     }
