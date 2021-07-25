@@ -17,7 +17,7 @@ namespace PhoneBook
         public MainForm()
         {
             InitializeComponent();
-            btnHome_Click(btnHome, new EventArgs());
+            btnSearchClick(btnSearch, new EventArgs());
         }
         private void MoveSidePanel(Control btn)
         {
@@ -30,15 +30,20 @@ namespace PhoneBook
             panelControls.Controls.Clear();
             panelControls.Controls.Add(c);
         }
-        private void btnHome_Click(object sender, EventArgs e)
+        private void btnSearchClick(object sender, EventArgs e)
         {
-            MoveSidePanel(btnHome);
-            AddControlToPanel(new UC_Home());
+            MoveSidePanel(btnSearch);
+            AddControlToPanel(new UC_Search());
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             MoveSidePanel(btnAdd);
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            DbInitializer.InitializeDb();
         }
     }
 }

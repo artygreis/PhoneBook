@@ -8,12 +8,17 @@
 
     <RootNamespace>PhoneBook</RootNamespace>
     <AssemblyName>PhoneBook</AssemblyName>
+    <ApplicationIcon>Icons\phone_logo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.8" />
+    <Reference Include="Syncfusion.SfDataGrid.WinForms">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.2.0.44\precompiledassemblies\net5.0\Syncfusion.SfDataGrid.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="Syncfusion.Shared.Base">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.2.0.44\precompiledassemblies\net5.0\Syncfusion.Shared.Base.dll</HintPath>
     </Reference>
@@ -33,5 +38,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataBase\" />
   </ItemGroup>
 </Project>
