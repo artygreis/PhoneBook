@@ -16,7 +16,6 @@ namespace PhoneBook.Types
         public int CountryId { get; set; }
         public Country Country { get; set; }
 
-        public List<Address> Addresses { get; set; }
-        public List<NumberPhone> NumberPhones { get; set; }
+        public List<Address> Addresses { get; set; } = new List<Address>();
     }
 }

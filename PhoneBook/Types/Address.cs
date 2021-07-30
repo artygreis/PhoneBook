@@ -16,7 +16,8 @@ namespace PhoneBook.Types
         public int? TypeStreetId { get; set; }
         public TypeStreet TypeStreet { get; set; }
 
-        public List<City> Cities { get; set; }
-        public List<NumberPhone> NumberPhones { get; set; }
+        public List<City> Cities { get; set; } = new List<City>();
+
+        public List<NumberPhone> NumberPhones { get; set; } = new List<NumberPhone>();
     }
 }

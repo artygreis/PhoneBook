@@ -15,6 +15,11 @@ namespace PhoneBook.Types
         [DisplayName("Пример")]
         public string Example { get; set; }
 
-        public List<City> Cities { get; set; }
+        public List<City> Cities { get; set; } = new List<City>();
+
+        public override string ToString()
+        {
+            return $"{CountryName} ({CountryCode})";
+        }
     }
 }

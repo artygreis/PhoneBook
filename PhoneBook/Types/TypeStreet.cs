@@ -9,6 +9,6 @@ namespace PhoneBook.Types
         [DisplayName("Тип локации")]
         public string TypeName { get; set; }
 
-        public List<Address> Addresses { get; set; }
+        public List<Address> Addresses { get; set; } = new List<Address>();
     }
 }

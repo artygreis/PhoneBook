@@ -37,6 +37,7 @@ namespace PhoneBook.UserControls
         public UC_GridPhones()
         {
             InitializeComponent();
+            //numberPhoneViewGrid.Columns["Locality"].Width = 50;
         }
     }
 }
