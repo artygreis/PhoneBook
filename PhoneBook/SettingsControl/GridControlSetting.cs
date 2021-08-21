@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace PhoneBook.SettingsControl
 {
-    public class SettingGridControl
+    public class GridControlSetting
     {
-        public static void SetSettingGridControl(SfDataGrid grid)
+        public static void SetGridControlSetting(SfDataGrid grid)
         {
             grid.AllowEditing = false;
             grid.AllowResizingColumns = true;

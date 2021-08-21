@@ -35,7 +35,7 @@ namespace PhoneBook.UserControls
             this.autoCompleteCountry = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
             this.textBoxCountry = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.textBoxCity = new System.Windows.Forms.TextBox();
             this.textBoxApartment = new System.Windows.Forms.TextBox();
             this.textBoxHouse = new System.Windows.Forms.TextBox();
@@ -52,11 +52,13 @@ namespace PhoneBook.UserControls
             this.panel5 = new System.Windows.Forms.Panel();
             this.autoCompleteCity = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
             this.autoCompleteAddress = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
+            this.autoCompleteHouse = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCountry)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteAddress)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.autoCompleteHouse)).BeginInit();
             this.SuspendLayout();
             // 
             // autoCompleteCountry
@@ -76,6 +78,7 @@ namespace PhoneBook.UserControls
             // 
             this.autoCompleteCountry.SetAutoComplete(this.textBoxCountry, Syncfusion.Windows.Forms.Tools.AutoCompleteModes.AutoSuggest);
             this.textBoxCountry.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.textBoxCountry.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
             this.textBoxCountry.Location = new System.Drawing.Point(104, 18);
             this.textBoxCountry.Name = "textBoxCountry";
             this.textBoxCountry.Size = new System.Drawing.Size(169, 26);
@@ -84,7 +87,7 @@ namespace PhoneBook.UserControls
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.btnSearch);
             this.panel1.Controls.Add(this.textBoxCity);
             this.panel1.Controls.Add(this.textBoxApartment);
             this.panel1.Controls.Add(this.textBoxHouse);
@@ -104,22 +107,24 @@ namespace PhoneBook.UserControls
             this.panel1.Size = new System.Drawing.Size(690, 135);
             this.panel1.TabIndex = 1;
             // 
-            // button1
+            // btnSearch
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(262, 98);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(164, 30);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Найти";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnSearch.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSearch.BackColor = System.Drawing.Color.White;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Location = new System.Drawing.Point(262, 98);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(164, 30);
+            this.btnSearch.TabIndex = 5;
+            this.btnSearch.Text = "Найти";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // textBoxCity
             // 
             this.autoCompleteCity.SetAutoComplete(this.textBoxCity, Syncfusion.Windows.Forms.Tools.AutoCompleteModes.AutoSuggest);
             this.textBoxCity.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.textBoxCity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
             this.textBoxCity.Location = new System.Drawing.Point(414, 19);
             this.textBoxCity.Name = "textBoxCity";
             this.textBoxCity.Size = new System.Drawing.Size(169, 26);
@@ -128,6 +133,7 @@ namespace PhoneBook.UserControls
             // textBoxApartment
             // 
             this.textBoxApartment.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.textBoxApartment.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
             this.textBoxApartment.Location = new System.Drawing.Point(571, 60);
             this.textBoxApartment.Name = "textBoxApartment";
             this.textBoxApartment.Size = new System.Drawing.Size(49, 26);
@@ -136,7 +142,9 @@ namespace PhoneBook.UserControls
             // 
             // textBoxHouse
             // 
+            this.autoCompleteHouse.SetAutoComplete(this.textBoxHouse, Syncfusion.Windows.Forms.Tools.AutoCompleteModes.AutoSuggest);
             this.textBoxHouse.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.textBoxHouse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
             this.textBoxHouse.Location = new System.Drawing.Point(466, 60);
             this.textBoxHouse.Name = "textBoxHouse";
             this.textBoxHouse.Size = new System.Drawing.Size(49, 26);
@@ -147,6 +155,7 @@ namespace PhoneBook.UserControls
             // 
             this.autoCompleteAddress.SetAutoComplete(this.textBoxAddress, Syncfusion.Windows.Forms.Tools.AutoCompleteModes.MultiSuggestExtended);
             this.textBoxAddress.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.textBoxAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
             this.textBoxAddress.Location = new System.Drawing.Point(104, 60);
             this.textBoxAddress.Name = "textBoxAddress";
             this.textBoxAddress.Size = new System.Drawing.Size(312, 26);
@@ -291,6 +300,19 @@ namespace PhoneBook.UserControls
             this.autoCompleteAddress.ThemeName = "Default";
             this.autoCompleteAddress.AutoCompleteItemSelected += new Syncfusion.Windows.Forms.Tools.AutoCompleteItemEventHandler(this.autoCompleteAddress_AutoCompleteItemSelected);
             // 
+            // autoCompleteHouse
+            // 
+            this.autoCompleteHouse.HeaderFont = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.autoCompleteHouse.ItemFont = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.autoCompleteHouse.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(158)))), ((int)(((byte)(218)))));
+            this.autoCompleteHouse.ParentForm = this;
+            this.autoCompleteHouse.ShowCloseButton = false;
+            this.autoCompleteHouse.ShowColumnHeader = true;
+            this.autoCompleteHouse.ShowGripper = false;
+            this.autoCompleteHouse.Style = Syncfusion.Windows.Forms.Tools.AutoCompleteStyle.Default;
+            this.autoCompleteHouse.ThemeName = "Default";
+            this.autoCompleteHouse.AutoCompleteItemSelected += new Syncfusion.Windows.Forms.Tools.AutoCompleteItemEventHandler(this.autoCompleteHouse_AutoCompleteItemSelected);
+            // 
             // UC_Search
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -307,6 +329,7 @@ namespace PhoneBook.UserControls
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteAddress)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.autoCompleteHouse)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -331,7 +354,8 @@ namespace PhoneBook.UserControls
         private TextBox textBoxAddress;
         private AutoLabel autoLabelApartment;
         private AutoLabel autoLabelHouse;
-        private Button button1;
+        private Button btnSearch;
         private AutoComplete autoCompleteAddress;
+        private AutoComplete autoCompleteHouse;
     }
 }

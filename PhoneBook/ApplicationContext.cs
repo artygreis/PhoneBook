@@ -16,17 +16,17 @@ namespace PhoneBook
         public DbSet<TypeStreet> TypeStreet { get; set; }
         public DbSet<Address> Address { get; set; }
         public DbSet<NumberPhone> NumberPhone { get; set; }
-        //public DbSet<NumberPhoneView> NumberPhoneView { get; set; }
+        public DbSet<NumberPhoneView> NumberPhoneView { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            //modelBuilder
-            //    .Entity<NumberPhoneView>((np =>
-            //   {
-            //       np.HasNoKey();
-            //       np.ToView("NumberPhoneView");
-            //   }));
+            modelBuilder
+                .Entity<NumberPhoneView>((np =>
+               {
+                   np.HasNoKey();
+                   np.ToView("NumberPhoneView");
+               }));
 
             //modelBuilder
             //    .Entity<TypeStreetWithNameView>((ts =>

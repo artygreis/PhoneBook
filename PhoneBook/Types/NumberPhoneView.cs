@@ -6,7 +6,7 @@ namespace PhoneBook.Types
     public class NumberPhoneView
     {
         [Display(AutoGenerateField = false)]
-        public int CityId { get; set; }
+        public int Id { get; set; }
         [Display(AutoGenerateField = false)]
         public int AddressId { get; set; }
         [Display(Name = "Населенный пункт")]

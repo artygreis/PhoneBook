@@ -36,42 +36,15 @@ namespace PhoneBook.UserControls
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            PhoneBook.Types.NumberPhoneView numberPhoneView1 = new PhoneBook.Types.NumberPhoneView();
-            PhoneBook.Types.NumberPhoneView numberPhoneView2 = new PhoneBook.Types.NumberPhoneView();
-            this.numberPhoneViewBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.mainPanel = new System.Windows.Forms.Panel();
             this.numberPhoneViewGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.numberPhoneViewBindingSource)).BeginInit();
             this.mainPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numberPhoneViewGrid)).BeginInit();
             this.SuspendLayout();
-            // 
-            // numberPhoneViewBindingSource
-            // 
-            numberPhoneView1.AddressId = 0;
-            numberPhoneView1.Apartment = "8";
-            numberPhoneView1.CityId = 0;
-            numberPhoneView1.House = "10";
-            numberPhoneView1.Locality = null;
-            numberPhoneView1.Number = null;
-            numberPhoneView1.StreetName = null;
-            numberPhoneView1.TypeName = null;
-            numberPhoneView2.AddressId = 0;
-            numberPhoneView2.Apartment = null;
-            numberPhoneView2.CityId = 0;
-            numberPhoneView2.House = null;
-            numberPhoneView2.Locality = null;
-            numberPhoneView2.Number = null;
-            numberPhoneView2.StreetName = null;
-            numberPhoneView2.TypeName = null;
-            this.numberPhoneViewBindingSource.DataSource = new PhoneBook.Types.NumberPhoneView[] {
-        numberPhoneView1,
-        numberPhoneView2};
-            this.numberPhoneViewBindingSource.Position = 0;
             // 
             // mainPanel
             // 
@@ -91,7 +64,6 @@ namespace PhoneBook.UserControls
             this.numberPhoneViewGrid.AllowResizingColumns = true;
             this.numberPhoneViewGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.LastColumnFill;
             this.numberPhoneViewGrid.BackColor = System.Drawing.Color.Silver;
-            this.numberPhoneViewGrid.DataSource = this.numberPhoneViewBindingSource;
             this.numberPhoneViewGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.numberPhoneViewGrid.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.numberPhoneViewGrid.HeaderRowHeight = 28;
@@ -157,7 +129,6 @@ namespace PhoneBook.UserControls
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UC_GridPhones";
             this.Size = new System.Drawing.Size(690, 488);
-            ((System.ComponentModel.ISupportInitialize)(this.numberPhoneViewBindingSource)).EndInit();
             this.mainPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numberPhoneViewGrid)).EndInit();
             this.ResumeLayout(false);
@@ -167,7 +138,6 @@ namespace PhoneBook.UserControls
         #endregion
 
         private System.Windows.Forms.Panel mainPanel;
-        private System.Windows.Forms.BindingSource numberPhoneViewBindingSource;
         private SfDataGrid numberPhoneViewGrid;
         private Panel panel1;
         private Panel panel2;

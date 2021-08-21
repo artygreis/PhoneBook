@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid;
 using System.Windows.Forms;
+using PhoneBook.Types;
 
 namespace PhoneBook.UserControls
 {
@@ -34,10 +35,19 @@ namespace PhoneBook.UserControls
                     numberPhoneViewGrid.SelectionUnit = SelectionUnit.Row;
             }
         }
+
+        public SfDataGrid NumberPhoneDataGrid
+        {
+            get
+            {
+                return numberPhoneViewGrid;
+            }
+        }
         public UC_GridPhones()
         {
             InitializeComponent();
-            //numberPhoneViewGrid.Columns["Locality"].Width = 50;
+            
+            //NumberPhoneDataGrid.AutoGenerateColumns = false;
         }
     }
 }

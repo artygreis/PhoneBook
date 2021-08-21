@@ -14,12 +14,12 @@ namespace PhoneBook
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
 
-                //db.Database.ExecuteSqlRaw(@"CREATE VIEW ListNumberPhone AS 
-                //                            SELECT NumberPhone.CityId, NumberPhone.AddressId, Address.Locality, TypeStreet.TypeName,
-                //                                    Address.StreetName, Address.House, NumberPhone.Apartment, NumberPhone.Number
-                //                            FROM NumberPhone NumberPhone
-                //                            INNER JOIN Address Address ON NumberPhone.AddressId = Address.Id
-                //                            INNER JOIN TypeStreet TypeStreet ON Address.TypeStreetId = TypeStreet.Id");
+                db.Database.ExecuteSqlRaw(@"CREATE VIEW NumberPhoneView AS 
+                                            SELECT NumberPhone.Id, NumberPhone.AddressId, Address.Locality, TypeStreet.TypeName,
+                                                    Address.StreetName, Address.House, NumberPhone.Apartment, NumberPhone.Number
+                                            FROM NumberPhone NumberPhone
+                                            INNER JOIN Address Address ON NumberPhone.AddressId = Address.Id
+                                            INNER JOIN TypeStreet TypeStreet ON Address.TypeStreetId = TypeStreet.Id");
 
                 //db.Database.ExecuteSqlRaw(@"CREATE VIEW TypeStreetWithNameView AS 
                 //                            SELECT Address.Id, Address.Locality, TypeStreet.TypeName, Address.StreetName
