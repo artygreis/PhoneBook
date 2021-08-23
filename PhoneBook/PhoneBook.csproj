@@ -37,6 +37,9 @@
     <Reference Include="Syncfusion.Tools.Windows">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.2.0.44\precompiledassemblies\net5.0\Syncfusion.Tools.Windows.dll</HintPath>
     </Reference>
+    <Compile Update="Forms\EditCountry - Копировать.Designer.cs">
+      <DependentUpon>EditCountry.Designer.cs</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -44,6 +47,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Forms\EditCountry - Копировать.resx">
+      <DependentUpon>EditCountry.resx</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

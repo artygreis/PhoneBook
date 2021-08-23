@@ -39,6 +39,7 @@ namespace PhoneBook
         private void btnAdd_Click(object sender, EventArgs e)
         {
             MoveSidePanel(btnAdd);
+            AddControlToPanel(new UC_Add());
         }
 
         private void MainForm_Load(object sender, EventArgs e)

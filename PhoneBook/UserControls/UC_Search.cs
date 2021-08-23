@@ -55,6 +55,11 @@ namespace PhoneBook.UserControls
                 autoCompleteCountry.RefreshColumns();
                 autoCompleteCountry.Columns[1].MatchingColumn = true;
                 autoCompleteCountry.Columns[0].Visible = false;
+                if (countries.Count == 1)
+                {
+                    autoCompleteCountry.SelectedValue = $"{countries.FirstOrDefault().CountryData}";
+                    autoCompleteCountry.ActiveFocusControl = null;
+                }
             }
         }
         /// <summary>
