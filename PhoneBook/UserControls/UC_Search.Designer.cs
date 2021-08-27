@@ -39,8 +39,8 @@ namespace PhoneBook.UserControls
             this.btnSearch = new System.Windows.Forms.Button();
             this.textBoxCity = new System.Windows.Forms.TextBox();
             this.textBoxApartment = new System.Windows.Forms.TextBox();
-            this.textBoxHouse = new System.Windows.Forms.TextBox();
             this.textBoxAddress = new System.Windows.Forms.TextBox();
+            this.textBoxHouse = new System.Windows.Forms.TextBox();
             this.autoLabelCity = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.autoLabelApartment = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.autoLabelHouse = new Syncfusion.Windows.Forms.Tools.AutoLabel();
@@ -91,8 +91,8 @@ namespace PhoneBook.UserControls
             this.panel1.Controls.Add(this.btnSearch);
             this.panel1.Controls.Add(this.textBoxCity);
             this.panel1.Controls.Add(this.textBoxApartment);
-            this.panel1.Controls.Add(this.textBoxHouse);
             this.panel1.Controls.Add(this.textBoxAddress);
+            this.panel1.Controls.Add(this.textBoxHouse);
             this.panel1.Controls.Add(this.textBoxCountry);
             this.panel1.Controls.Add(this.autoLabelCity);
             this.panel1.Controls.Add(this.autoLabelApartment);
@@ -143,6 +143,16 @@ namespace PhoneBook.UserControls
             this.textBoxApartment.TabIndex = 4;
             this.textBoxApartment.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // textBoxAddress
+            // 
+            this.autoCompleteAddress.SetAutoComplete(this.textBoxAddress, Syncfusion.Windows.Forms.Tools.AutoCompleteModes.MultiSuggestExtended);
+            this.textBoxAddress.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.textBoxAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
+            this.textBoxAddress.Location = new System.Drawing.Point(104, 70);
+            this.textBoxAddress.Name = "textBoxAddress";
+            this.textBoxAddress.Size = new System.Drawing.Size(310, 26);
+            this.textBoxAddress.TabIndex = 2;
+            // 
             // textBoxHouse
             // 
             this.autoCompleteHouse.SetAutoComplete(this.textBoxHouse, Syncfusion.Windows.Forms.Tools.AutoCompleteModes.AutoSuggest);
@@ -153,16 +163,6 @@ namespace PhoneBook.UserControls
             this.textBoxHouse.Size = new System.Drawing.Size(49, 26);
             this.textBoxHouse.TabIndex = 3;
             this.textBoxHouse.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // textBoxAddress
-            // 
-            this.autoCompleteAddress.SetAutoComplete(this.textBoxAddress, Syncfusion.Windows.Forms.Tools.AutoCompleteModes.MultiSuggestExtended);
-            this.textBoxAddress.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.textBoxAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
-            this.textBoxAddress.Location = new System.Drawing.Point(104, 70);
-            this.textBoxAddress.Name = "textBoxAddress";
-            this.textBoxAddress.Size = new System.Drawing.Size(310, 26);
-            this.textBoxAddress.TabIndex = 2;
             // 
             // autoLabelCity
             // 

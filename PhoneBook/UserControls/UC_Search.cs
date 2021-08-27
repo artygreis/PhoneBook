@@ -33,12 +33,12 @@ namespace PhoneBook.UserControls
         }
         private void UpdateData(List<NumberPhoneView> numberPhones)
         {
-            uC_GridPhones.NumberPhoneDataGrid.DataSource = numberPhones;
-            uC_GridPhones.NumberPhoneDataGrid.Columns["Locality"].Width = 150;
-            uC_GridPhones.NumberPhoneDataGrid.Columns["TypeName"].Width = 80;
-            uC_GridPhones.NumberPhoneDataGrid.Columns["StreetName"].Width = 180;
-            uC_GridPhones.NumberPhoneDataGrid.Columns["House"].Width = 50;
-            uC_GridPhones.NumberPhoneDataGrid.Columns["Apartment"].Width = 50;
+            uC_GridPhones.DataGrid.DataSource = numberPhones;
+            uC_GridPhones.DataGrid.Columns["Locality"].Width = 150;
+            uC_GridPhones.DataGrid.Columns["TypeName"].Width = 80;
+            uC_GridPhones.DataGrid.Columns["StreetName"].Width = 180;
+            uC_GridPhones.DataGrid.Columns["House"].Width = 50;
+            uC_GridPhones.DataGrid.Columns["Apartment"].Width = 50;
         }
         /// <summary>
         /// Загрузка информации о странах
@@ -55,8 +55,10 @@ namespace PhoneBook.UserControls
                 autoCompleteCountry.RefreshColumns();
                 autoCompleteCountry.Columns[1].MatchingColumn = true;
                 autoCompleteCountry.Columns[0].Visible = false;
+
                 if (countries.Count == 1)
                 {
+                    autoCompleteCountry.ActiveFocusControl = textBoxCountry;
                     autoCompleteCountry.SelectedValue = $"{countries.FirstOrDefault().CountryData}";
                     autoCompleteCountry.ActiveFocusControl = null;
                 }
@@ -72,8 +74,9 @@ namespace PhoneBook.UserControls
             ClearTextEditAndAutoComplete("autoCompleteCountry");
             using (var db = new ApplicationContext())
             {
+                var countryId = autoCompleteCountry.GetItemArray(args.SelectedValue)[0];
                 var cities = db.City
-                    .Where(c => c.CountryId == Convert.ToInt32(args.ItemArray[0]))
+                    .Where(c => c.CountryId == Convert.ToInt32(countryId))
                     .Select(c => new CityCollection() { Id = c.Id, CityData = $"{c.CityName} ({c.CityCode})" })
                     .ToList();
 
@@ -81,6 +84,13 @@ namespace PhoneBook.UserControls
                 autoCompleteCity.RefreshColumns();
                 autoCompleteCity.Columns[1].MatchingColumn = true;
                 autoCompleteCity.Columns[0].Visible = false;
+
+                if (cities.Count == 1)
+                {
+                    autoCompleteCity.ActiveFocusControl = textBoxCity;
+                    autoCompleteCity.SelectedValue = $"{cities.FirstOrDefault().CityData}";
+                    autoCompleteCity.ActiveFocusControl = null;
+                }
             }
         }
         /// <summary>
@@ -93,10 +103,11 @@ namespace PhoneBook.UserControls
             ClearTextEditAndAutoComplete("autoCompleteCity");
             using (var db = new ApplicationContext())
             {
+                var cityId = autoCompleteCity.GetItemArray(args.SelectedValue)[0];
                 var addresses = db.City
                     .Include(c => c.Addresses)
                     .ThenInclude(t => t.TypeStreet)
-                    .Where(c => c.Id == Convert.ToInt32(args.ItemArray[0]))
+                    .Where(c => c.Id == Convert.ToInt32(cityId))
                     .FirstOrDefault()
                     .Addresses
                     .Select(a => new AddressCollection()
@@ -119,22 +130,23 @@ namespace PhoneBook.UserControls
         /// <param name="args"></param>
         private void autoCompleteAddress_AutoCompleteItemSelected(object sender, AutoCompleteItemEventArgs args)
         {
-            ClearTextEditAndAutoComplete("autoCompleteHouse");
+            ClearTextEditAndAutoComplete("autoCompleteAddress");
             using (var db = new ApplicationContext())
             {
                 var numberHouse = db.Address
                     .Where(a => a.Id == Convert.ToInt32(args.ItemArray[0]))
-                    .Select(a => a.House)
+                    .Select(a => new { a.House })
                     .ToList();
 
                 autoCompleteHouse.DataSource = numberHouse;
                 autoCompleteHouse.RefreshColumns();
                 autoCompleteHouse.Columns[0].MatchingColumn = true;
+                autoCompleteHouse.Columns[0].Visible = true;
             }
         }
         private void autoCompleteHouse_AutoCompleteItemSelected(object sender, AutoCompleteItemEventArgs args)
         {
-            ClearTextEditAndAutoComplete("autoCompleteAddress");
+            ClearTextEditAndAutoComplete("autoCompleteHouse");
         }
         /// <summary>
         /// Сброс данных для поиска
@@ -197,7 +209,6 @@ namespace PhoneBook.UserControls
                 }
                 UpdateData(numberPhones);
             }
-
         }
     }
 }

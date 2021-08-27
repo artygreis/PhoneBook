@@ -20,9 +20,9 @@ namespace PhoneBook.UserControls
             set
             {
                 if (value != 0)
-                    numberPhoneViewGrid.SelectionMode = value;
+                    generalViewGrid.SelectionMode = value;
                 else
-                    numberPhoneViewGrid.SelectionMode = GridSelectionMode.Single;
+                    generalViewGrid.SelectionMode = GridSelectionMode.Single;
             }
         }
         public SelectionUnit SelectionUnitGrid
@@ -30,17 +30,17 @@ namespace PhoneBook.UserControls
             set
             {
                 if (value != 0)
-                    numberPhoneViewGrid.SelectionUnit = value;
+                    generalViewGrid.SelectionUnit = value;
                 else
-                    numberPhoneViewGrid.SelectionUnit = SelectionUnit.Row;
+                    generalViewGrid.SelectionUnit = SelectionUnit.Row;
             }
         }
 
-        public SfDataGrid NumberPhoneDataGrid
+        public SfDataGrid DataGrid
         {
             get
             {
-                return numberPhoneViewGrid;
+                return generalViewGrid;
             }
         }
         public UC_GridPhones()

@@ -35,21 +35,20 @@ namespace PhoneBook.UserControls
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.numberPhoneViewGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            this.generalViewGrid = new Syncfusion.WinForms.DataGrid.SfDataGrid();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.mainPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numberPhoneViewGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.generalViewGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // mainPanel
             // 
             this.mainPanel.BackColor = System.Drawing.Color.White;
-            this.mainPanel.Controls.Add(this.numberPhoneViewGrid);
+            this.mainPanel.Controls.Add(this.generalViewGrid);
             this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mainPanel.Location = new System.Drawing.Point(8, 8);
             this.mainPanel.Margin = new System.Windows.Forms.Padding(4);
@@ -57,28 +56,27 @@ namespace PhoneBook.UserControls
             this.mainPanel.Size = new System.Drawing.Size(674, 472);
             this.mainPanel.TabIndex = 0;
             // 
-            // numberPhoneViewGrid
+            // generalViewGrid
             // 
-            this.numberPhoneViewGrid.AccessibleName = "Table";
-            this.numberPhoneViewGrid.AllowEditing = false;
-            this.numberPhoneViewGrid.AllowResizingColumns = true;
-            this.numberPhoneViewGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.LastColumnFill;
-            this.numberPhoneViewGrid.BackColor = System.Drawing.Color.Silver;
-            this.numberPhoneViewGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numberPhoneViewGrid.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.numberPhoneViewGrid.HeaderRowHeight = 28;
-            this.numberPhoneViewGrid.Location = new System.Drawing.Point(0, 0);
-            this.numberPhoneViewGrid.Name = "numberPhoneViewGrid";
-            this.numberPhoneViewGrid.RowHeight = 25;
-            this.numberPhoneViewGrid.Size = new System.Drawing.Size(674, 472);
-            this.numberPhoneViewGrid.Style.BorderColor = System.Drawing.Color.Gray;
-            this.numberPhoneViewGrid.Style.CaptionSummaryRowStyle.BackColor = System.Drawing.Color.White;
-            this.numberPhoneViewGrid.Style.CellStyle.HorizontalAlignment = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numberPhoneViewGrid.Style.HeaderStyle.BackColor = System.Drawing.SystemColors.Window;
-            this.numberPhoneViewGrid.Style.HeaderStyle.Font.Bold = true;
-            this.numberPhoneViewGrid.Style.HeaderStyle.Font.Size = 10F;
-            this.numberPhoneViewGrid.Style.HeaderStyle.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
-            this.numberPhoneViewGrid.TabIndex = 0;
+            this.generalViewGrid.AccessibleName = "Table";
+            this.generalViewGrid.AllowEditing = false;
+            this.generalViewGrid.AutoSizeColumnsMode = Syncfusion.WinForms.DataGrid.Enums.AutoSizeColumnsMode.LastColumnFill;
+            this.generalViewGrid.BackColor = System.Drawing.Color.Silver;
+            this.generalViewGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.generalViewGrid.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.generalViewGrid.HeaderRowHeight = 28;
+            this.generalViewGrid.Location = new System.Drawing.Point(0, 0);
+            this.generalViewGrid.Name = "generalViewGrid";
+            this.generalViewGrid.RowHeight = 25;
+            this.generalViewGrid.Size = new System.Drawing.Size(674, 472);
+            this.generalViewGrid.Style.BorderColor = System.Drawing.Color.Gray;
+            this.generalViewGrid.Style.CaptionSummaryRowStyle.BackColor = System.Drawing.Color.White;
+            this.generalViewGrid.Style.CellStyle.HorizontalAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            this.generalViewGrid.Style.HeaderStyle.BackColor = System.Drawing.SystemColors.Window;
+            this.generalViewGrid.Style.HeaderStyle.Font.Bold = true;
+            this.generalViewGrid.Style.HeaderStyle.Font.Size = 10F;
+            this.generalViewGrid.Style.HeaderStyle.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
+            this.generalViewGrid.TabIndex = 0;
             // 
             // panel1
             // 
@@ -130,7 +128,7 @@ namespace PhoneBook.UserControls
             this.Name = "UC_GridPhones";
             this.Size = new System.Drawing.Size(690, 488);
             this.mainPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numberPhoneViewGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.generalViewGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -138,7 +136,7 @@ namespace PhoneBook.UserControls
         #endregion
 
         private System.Windows.Forms.Panel mainPanel;
-        private SfDataGrid numberPhoneViewGrid;
+        private SfDataGrid generalViewGrid;
         private Panel panel1;
         private Panel panel2;
         private Panel panel3;

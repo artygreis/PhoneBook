@@ -32,14 +32,14 @@ namespace PhoneBook.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditCountry));
+            this.maskedEditBoxExample = new Syncfusion.Windows.Forms.Tools.MaskedEditBox();
+            this.maskedEditCountryCode = new Syncfusion.Windows.Forms.Tools.MaskedEditBox();
             this.autoLabelCountryName = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.textBoxCountryName = new System.Windows.Forms.TextBox();
             this.autoLabelCountryCode = new Syncfusion.Windows.Forms.Tools.AutoLabel();
-            this.textBoxCountryCode = new System.Windows.Forms.TextBox();
             this.autoLabelCountDigits = new Syncfusion.Windows.Forms.Tools.AutoLabel();
-            this.textBoxCountDigits = new System.Windows.Forms.TextBox();
+            this.textBoxCountDigits = new System.Windows.Forms.MaskedTextBox();
             this.autoLabelExample = new Syncfusion.Windows.Forms.Tools.AutoLabel();
-            this.textBoxExample = new System.Windows.Forms.TextBox();
             this.pnlGrid = new System.Windows.Forms.Panel();
             this.uC_GridCountries = new PhoneBook.UserControls.UC_GridPhones();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -48,9 +48,34 @@ namespace PhoneBook.Forms
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.maskedEditBoxExample)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maskedEditCountryCode)).BeginInit();
             this.pnlGrid.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // maskedEditBoxExample
+            // 
+            this.maskedEditBoxExample.BeforeTouchSize = new System.Drawing.Size(184, 27);
+            this.maskedEditBoxExample.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
+            this.maskedEditBoxExample.Location = new System.Drawing.Point(271, 135);
+            this.maskedEditBoxExample.Name = "maskedEditBoxExample";
+            this.maskedEditBoxExample.PositionAt = Syncfusion.Windows.Forms.Tools.SpecialCursorPosition.FirstMaskPosition;
+            this.maskedEditBoxExample.Size = new System.Drawing.Size(184, 27);
+            this.maskedEditBoxExample.TabIndex = 3;
+            this.maskedEditBoxExample.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.maskedEditBoxExample.Validated += new System.EventHandler(this.maskedEditBoxExample_Validated);
+            // 
+            // maskedEditCountryCode
+            // 
+            this.maskedEditCountryCode.BeforeTouchSize = new System.Drawing.Size(184, 27);
+            this.maskedEditCountryCode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
+            this.maskedEditCountryCode.Location = new System.Drawing.Point(271, 73);
+            this.maskedEditCountryCode.Name = "maskedEditCountryCode";
+            this.maskedEditCountryCode.PositionAt = Syncfusion.Windows.Forms.Tools.SpecialCursorPosition.FirstMaskPosition;
+            this.maskedEditCountryCode.Size = new System.Drawing.Size(184, 27);
+            this.maskedEditCountryCode.TabIndex = 1;
+            this.maskedEditCountryCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // autoLabelCountryName
             // 
@@ -72,38 +97,30 @@ namespace PhoneBook.Forms
             this.textBoxCountryName.Location = new System.Drawing.Point(271, 43);
             this.textBoxCountryName.Name = "textBoxCountryName";
             this.textBoxCountryName.Size = new System.Drawing.Size(184, 26);
-            this.textBoxCountryName.TabIndex = 2;
+            this.textBoxCountryName.TabIndex = 0;
+            this.textBoxCountryName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // autoLabelCountryCode
             // 
             this.autoLabelCountryCode.DX = -119;
-            this.autoLabelCountryCode.DY = 3;
+            this.autoLabelCountryCode.DY = 4;
             this.autoLabelCountryCode.ForeColor = System.Drawing.Color.White;
             this.autoLabelCountryCode.Gap = 10;
-            this.autoLabelCountryCode.LabeledControl = this.textBoxCountryCode;
-            this.autoLabelCountryCode.Location = new System.Drawing.Point(152, 78);
+            this.autoLabelCountryCode.LabeledControl = this.maskedEditCountryCode;
+            this.autoLabelCountryCode.Location = new System.Drawing.Point(152, 77);
             this.autoLabelCountryCode.Name = "autoLabelCountryCode";
             this.autoLabelCountryCode.Size = new System.Drawing.Size(109, 19);
             this.autoLabelCountryCode.TabIndex = 0;
             this.autoLabelCountryCode.Text = "Код страны:";
             // 
-            // textBoxCountryCode
-            // 
-            this.textBoxCountryCode.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.textBoxCountryCode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
-            this.textBoxCountryCode.Location = new System.Drawing.Point(271, 75);
-            this.textBoxCountryCode.Name = "textBoxCountryCode";
-            this.textBoxCountryCode.Size = new System.Drawing.Size(184, 26);
-            this.textBoxCountryCode.TabIndex = 3;
-            // 
             // autoLabelCountDigits
             // 
             this.autoLabelCountDigits.DX = -251;
-            this.autoLabelCountDigits.DY = 3;
+            this.autoLabelCountDigits.DY = 4;
             this.autoLabelCountDigits.ForeColor = System.Drawing.Color.White;
             this.autoLabelCountDigits.Gap = 10;
             this.autoLabelCountDigits.LabeledControl = this.textBoxCountDigits;
-            this.autoLabelCountDigits.Location = new System.Drawing.Point(20, 110);
+            this.autoLabelCountDigits.Location = new System.Drawing.Point(20, 108);
             this.autoLabelCountDigits.Name = "autoLabelCountDigits";
             this.autoLabelCountDigits.Size = new System.Drawing.Size(241, 19);
             this.autoLabelCountDigits.TabIndex = 0;
@@ -111,34 +128,26 @@ namespace PhoneBook.Forms
             // 
             // textBoxCountDigits
             // 
-            this.textBoxCountDigits.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.textBoxCountDigits.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
-            this.textBoxCountDigits.Location = new System.Drawing.Point(271, 107);
+            this.textBoxCountDigits.Location = new System.Drawing.Point(271, 104);
+            this.textBoxCountDigits.Mask = "00";
             this.textBoxCountDigits.Name = "textBoxCountDigits";
-            this.textBoxCountDigits.Size = new System.Drawing.Size(184, 26);
-            this.textBoxCountDigits.TabIndex = 4;
+            this.textBoxCountDigits.Size = new System.Drawing.Size(184, 27);
+            this.textBoxCountDigits.TabIndex = 2;
+            this.textBoxCountDigits.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // autoLabelExample
             // 
             this.autoLabelExample.DX = -158;
-            this.autoLabelExample.DY = 3;
+            this.autoLabelExample.DY = 4;
             this.autoLabelExample.ForeColor = System.Drawing.Color.White;
             this.autoLabelExample.Gap = 10;
-            this.autoLabelExample.LabeledControl = this.textBoxExample;
-            this.autoLabelExample.Location = new System.Drawing.Point(113, 142);
+            this.autoLabelExample.LabeledControl = this.maskedEditBoxExample;
+            this.autoLabelExample.Location = new System.Drawing.Point(113, 139);
             this.autoLabelExample.Name = "autoLabelExample";
             this.autoLabelExample.Size = new System.Drawing.Size(148, 19);
             this.autoLabelExample.TabIndex = 0;
             this.autoLabelExample.Text = "Пример номера:";
-            // 
-            // textBoxExample
-            // 
-            this.textBoxExample.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.textBoxExample.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
-            this.textBoxExample.Location = new System.Drawing.Point(271, 139);
-            this.textBoxExample.Name = "textBoxExample";
-            this.textBoxExample.Size = new System.Drawing.Size(184, 26);
-            this.textBoxExample.TabIndex = 5;
             // 
             // pnlGrid
             // 
@@ -164,15 +173,15 @@ namespace PhoneBook.Forms
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
+            this.panel1.Controls.Add(this.maskedEditBoxExample);
+            this.panel1.Controls.Add(this.maskedEditCountryCode);
+            this.panel1.Controls.Add(this.textBoxCountDigits);
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnDelete);
             this.panel1.Controls.Add(this.btnEdit);
             this.panel1.Controls.Add(this.btnAdd);
-            this.panel1.Controls.Add(this.textBoxExample);
-            this.panel1.Controls.Add(this.textBoxCountDigits);
             this.panel1.Controls.Add(this.textBoxCountryName);
-            this.panel1.Controls.Add(this.textBoxCountryCode);
             this.panel1.Controls.Add(this.autoLabelCountryName);
             this.panel1.Controls.Add(this.autoLabelCountryCode);
             this.panel1.Controls.Add(this.autoLabelCountDigits);
@@ -196,6 +205,7 @@ namespace PhoneBook.Forms
             this.btnClose.Size = new System.Drawing.Size(31, 29);
             this.btnClose.TabIndex = 8;
             this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // label1
             // 
@@ -212,39 +222,51 @@ namespace PhoneBook.Forms
             this.btnDelete.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnDelete.BackColor = System.Drawing.Color.White;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnDelete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
-            this.btnDelete.Location = new System.Drawing.Point(333, 181);
+            this.btnDelete.Image = global::PhoneBook.Properties.Resources.delete;
+            this.btnDelete.Location = new System.Drawing.Point(328, 176);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(115, 32);
+            this.btnDelete.Size = new System.Drawing.Size(136, 32);
             this.btnDelete.TabIndex = 6;
             this.btnDelete.Text = "Удалить";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
             this.btnEdit.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnEdit.BackColor = System.Drawing.Color.White;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnEdit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
-            this.btnEdit.Location = new System.Drawing.Point(190, 181);
+            this.btnEdit.Image = global::PhoneBook.Properties.Resources.edit;
+            this.btnEdit.Location = new System.Drawing.Point(184, 176);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(115, 32);
-            this.btnEdit.TabIndex = 6;
+            this.btnEdit.Size = new System.Drawing.Size(136, 32);
+            this.btnEdit.TabIndex = 5;
             this.btnEdit.Text = "Изменить";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
             this.btnAdd.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAdd.BackColor = System.Drawing.Color.White;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
-            this.btnAdd.Location = new System.Drawing.Point(47, 181);
+            this.btnAdd.Image = global::PhoneBook.Properties.Resources.add;
+            this.btnAdd.Location = new System.Drawing.Point(32, 176);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(115, 32);
-            this.btnAdd.TabIndex = 6;
+            this.btnAdd.Size = new System.Drawing.Size(136, 32);
+            this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Добавить";
+            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // EditCountry
             // 
@@ -264,6 +286,9 @@ namespace PhoneBook.Forms
             this.ShowMinimizeBox = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.EditCountry_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.maskedEditBoxExample)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maskedEditCountryCode)).EndInit();
             this.pnlGrid.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -276,18 +301,18 @@ namespace PhoneBook.Forms
         private System.Windows.Forms.Panel pnlGrid;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox textBoxCountryName;
-        private System.Windows.Forms.TextBox textBoxCountryCode;
         private AutoLabel autoLabelCountryName;
         private AutoLabel autoLabelCountryCode;
         private AutoLabel autoLabelCountDigits;
         private AutoLabel autoLabelExample;
-        private System.Windows.Forms.TextBox textBoxExample;
-        private System.Windows.Forms.TextBox textBoxCountDigits;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
         private UserControls.UC_GridPhones uC_GridCountries;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.MaskedTextBox textBoxCountDigits;
+        private MaskedEditBox maskedEditBoxExample;
+        private MaskedEditBox maskedEditCountryCode;
     }
 }
