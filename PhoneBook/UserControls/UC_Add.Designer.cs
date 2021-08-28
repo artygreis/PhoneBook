@@ -144,6 +144,7 @@ namespace PhoneBook.UserControls
             this.btnEditCity.Size = new System.Drawing.Size(40, 35);
             this.btnEditCity.TabIndex = 13;
             this.btnEditCity.UseVisualStyleBackColor = false;
+            this.btnEditCity.Click += new System.EventHandler(this.btnEditCity_Click);
             // 
             // btnEditHouse
             // 

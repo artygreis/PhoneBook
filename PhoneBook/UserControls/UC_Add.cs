@@ -190,5 +190,33 @@ namespace PhoneBook.UserControls
                 autoCompleteHouse.Columns[0].Visible = true;
             }
         }
+
+        private void btnEditCity_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxCountry.Text))
+            {
+                MessageBox.Show("Укажите Страну.", "Уведомление",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                var editCityForm = new EditCity();
+                using (var db = new ApplicationContext())
+                {
+                    var countryId = autoCompleteCountry.GetItemArray(textBoxCountry.Text)[0];
+                    editCityForm.Country = db.Country.Where(c => c.Id == Convert.ToInt32(countryId)).FirstOrDefault();
+                }
+                if (editCityForm.ShowDialog() == DialogResult.OK)
+                {
+                    textBoxCity.Text = "";
+                    autoCompleteCity.DataSource = null;
+                    autoCompleteCity.ResetHistory();
+                    ClearTextEditAndAutoComplete("autoCompleteCity");
+                    autoCompleteCountry.ActiveFocusControl = textBoxCountry;
+                    autoCompleteCountry.SelectedValue = textBoxCountry.Text;
+                    autoCompleteCountry.ActiveFocusControl = null;
+                }
+            }
+        }
     }
 }

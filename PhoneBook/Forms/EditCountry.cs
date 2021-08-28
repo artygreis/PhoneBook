@@ -26,7 +26,11 @@ namespace PhoneBook.Forms
             maskedEditBoxExample.GotFocus += MaskedEditBoxExample_GotFocus;
             maskedEditCountryCode.Mask = "+99999";
         }
-
+        /// <summary>
+        /// Формирование маски для примера номера
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MaskedEditBoxExample_GotFocus(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(maskedEditCountryCode.Text) || maskedEditCountryCode.Text.Replace(" ", "").Length <= 1)
@@ -73,7 +77,9 @@ namespace PhoneBook.Forms
         {
             LoadDataCountry();
         }
-
+        /// <summary>
+        /// Загрузка данных
+        /// </summary>
         private void LoadDataCountry()
         {
             using (var db = new ApplicationContext())
@@ -82,7 +88,11 @@ namespace PhoneBook.Forms
                 UpdateData(countries);
             }
         }
-
+        /// <summary>
+        /// Изменение
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEdit_Click(object sender, System.EventArgs e)
         {
             if (currentCountry != null)
@@ -104,7 +114,11 @@ namespace PhoneBook.Forms
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
+        /// <summary>
+        /// Добавление или Сохранение
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAdd_Click(object sender, System.EventArgs e)
         {
             if (string.IsNullOrEmpty(textBoxCountryName.Text) || string.IsNullOrEmpty(maskedEditCountryCode.Text)
@@ -163,6 +177,9 @@ namespace PhoneBook.Forms
                 }
             }
         }
+        /// <summary>
+        /// Очистка текстовых полей
+        /// </summary>
         private void ClearTextBox()
         {
             textBoxCountryName.Text = "";
@@ -170,6 +187,11 @@ namespace PhoneBook.Forms
             textBoxCountDigits.Text = "";
             maskedEditBoxExample.Text = "";
         }
+        /// <summary>
+        /// Удаление
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (currentCountry != null)
@@ -192,7 +214,11 @@ namespace PhoneBook.Forms
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
+        /// <summary>
+        /// Проверка примера номера
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void maskedEditBoxExample_Validated(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(maskedEditCountryCode.Text) || 

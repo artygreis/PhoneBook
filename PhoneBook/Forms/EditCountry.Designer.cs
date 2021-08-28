@@ -242,7 +242,7 @@ namespace PhoneBook.Forms
             this.btnEdit.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnEdit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
             this.btnEdit.Image = global::PhoneBook.Properties.Resources.edit;
-            this.btnEdit.Location = new System.Drawing.Point(184, 176);
+            this.btnEdit.Location = new System.Drawing.Point(180, 176);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(136, 32);
             this.btnEdit.TabIndex = 5;
