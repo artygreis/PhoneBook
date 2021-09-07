@@ -107,7 +107,7 @@ namespace PhoneBook.Forms
             this.textBoxTypeStreet.Location = new System.Drawing.Point(34, 124);
             this.textBoxTypeStreet.Name = "textBoxTypeStreet";
             this.textBoxTypeStreet.Size = new System.Drawing.Size(141, 27);
-            this.textBoxTypeStreet.TabIndex = 12;
+            this.textBoxTypeStreet.TabIndex = 1;
             // 
             // autoLabelStreetName
             // 
@@ -129,7 +129,7 @@ namespace PhoneBook.Forms
             this.textBoxStreetName.Location = new System.Drawing.Point(198, 124);
             this.textBoxStreetName.Name = "textBoxStreetName";
             this.textBoxStreetName.Size = new System.Drawing.Size(253, 27);
-            this.textBoxStreetName.TabIndex = 10;
+            this.textBoxStreetName.TabIndex = 2;
             // 
             // autoLabelExample
             // 
@@ -151,7 +151,7 @@ namespace PhoneBook.Forms
             this.textBoxHouse.Location = new System.Drawing.Point(474, 124);
             this.textBoxHouse.Name = "textBoxHouse";
             this.textBoxHouse.Size = new System.Drawing.Size(85, 27);
-            this.textBoxHouse.TabIndex = 11;
+            this.textBoxHouse.TabIndex = 3;
             this.textBoxHouse.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // pnlGrid
@@ -208,7 +208,7 @@ namespace PhoneBook.Forms
             this.btnClose.Location = new System.Drawing.Point(551, 4);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(31, 29);
-            this.btnClose.TabIndex = 8;
+            this.btnClose.TabIndex = 7;
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
@@ -374,25 +374,5 @@ namespace PhoneBook.Forms
         private AutoComplete autoCompleteHouse;
         private AutoComplete autoCompleteStreetName;
         private TextBox textBoxTypeStreet;
-    }
-    public class FlatCombo : ComboBox
-    {
-        private const int WM_PAINT = 0xF;
-        private int buttonWidth = SystemInformation.HorizontalScrollBarArrowWidth;
-        protected override void WndProc(ref Message m)
-        {
-            base.WndProc(ref m);
-            if (m.Msg == WM_PAINT)
-            {
-                using (var g = Graphics.FromHwnd(Handle))
-                {
-                    using (var p = new Pen(this.ForeColor))
-                    {
-                        g.DrawRectangle(p, 0, 0, Width - 1, Height - 1);
-                        g.DrawLine(p, Width - buttonWidth, 0, Width - buttonWidth, Height);
-                    }
-                }
-            }
-        }
     }
 }

@@ -10,6 +10,7 @@ using Syncfusion.WinForms.DataGrid.Enums;
 using Syncfusion.WinForms.DataGrid;
 using System.Windows.Forms;
 using PhoneBook.Types;
+using Syncfusion.WinForms.DataGrid.Events;
 
 namespace PhoneBook.UserControls
 {
@@ -43,11 +44,18 @@ namespace PhoneBook.UserControls
                 return generalViewGrid;
             }
         }
+        public delegate void autoGenereting(AutoGeneratingColumnArgs columnArgs);
+        public event autoGenereting EventGenerateColumn;
         public UC_GridPhones()
         {
             InitializeComponent();
-            
-            //NumberPhoneDataGrid.AutoGenerateColumns = false;
+
+            generalViewGrid.AutoGeneratingColumn += GeneralViewGrid_AutoGeneratingColumn;
+        }
+
+        private void GeneralViewGrid_AutoGeneratingColumn(object sender, Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnArgs e)
+        {
+            EventGenerateColumn?.Invoke(e);
         }
     }
 }

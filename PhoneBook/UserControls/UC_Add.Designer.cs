@@ -201,6 +201,7 @@ namespace PhoneBook.UserControls
             this.btnAddSingle.Text = " Добавить 1 квартиру";
             this.btnAddSingle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddSingle.UseVisualStyleBackColor = false;
+            this.btnAddSingle.Click += new System.EventHandler(this.btnAddSingle_Click);
             // 
             // panel3
             // 
@@ -326,6 +327,7 @@ namespace PhoneBook.UserControls
             this.autoCompleteAddress.ShowGripper = false;
             this.autoCompleteAddress.Style = Syncfusion.Windows.Forms.Tools.AutoCompleteStyle.Default;
             this.autoCompleteAddress.ThemeName = "Default";
+            this.autoCompleteAddress.AutoCompleteItemSelected += new Syncfusion.Windows.Forms.Tools.AutoCompleteItemEventHandler(this.autoCompleteAddress_AutoCompleteItemSelected);
             // 
             // UC_Add
             // 

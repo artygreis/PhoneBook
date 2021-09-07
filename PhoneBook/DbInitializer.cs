@@ -40,7 +40,7 @@ namespace PhoneBook
                 {
                     CityName = "Сморгонь",
                     CityCode = "1592",
-                    MaskNumber = "9-99-99",
+                    MaskNumber = "#-##-##",
                 };
 
                 country.Cities.Add(city);
@@ -65,7 +65,7 @@ namespace PhoneBook
                     House = "10",
                     NumberPhones = new List<NumberPhone>()
                     {
-                        new NumberPhone(){ Apartment = "8", Number = "1-23-45" }
+                        new NumberPhone(){ Apartment = "8", Number = "12345" }
                     }
                 };
                 var address1 = new Address()
@@ -75,7 +75,7 @@ namespace PhoneBook
                     House = "15",
                     NumberPhones = new List<NumberPhone>()
                     {
-                        new NumberPhone() { Apartment = "10", Number = "5-43-21" }
+                        new NumberPhone() { Apartment = "10", Number = "54321" }
                     }
                 };
                 typeStreets[0].Addresses.Add(address);

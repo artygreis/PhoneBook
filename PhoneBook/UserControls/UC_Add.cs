@@ -3,6 +3,7 @@ using PhoneBook.Forms;
 using PhoneBook.SettingsControl;
 using PhoneBook.Types;
 using Syncfusion.Windows.Forms.Tools;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +18,7 @@ namespace PhoneBook.UserControls
 {
     public partial class UC_Add : UserControl
     {
+        private string maskNumber = "";
         public UC_Add()
         {
             InitializeComponent();
@@ -26,6 +28,8 @@ namespace PhoneBook.UserControls
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteAddress);
 
             UpdateData(new List<NumberPhoneView>() { new NumberPhoneView() });
+
+            uC_GridPhones.EventGenerateColumn += UC_GridPhones_EventGenerateColumn;
 
             LoadDataToCountry();
         }
@@ -38,6 +42,15 @@ namespace PhoneBook.UserControls
             uC_GridPhones.DataGrid.Columns["House"].Width = 50;
             uC_GridPhones.DataGrid.Columns["Apartment"].Width = 50;
         }
+
+        private void UC_GridPhones_EventGenerateColumn(Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnArgs columnArgs)
+        {
+            if (columnArgs.Column.MappingName == "Number" && !string.IsNullOrEmpty(maskNumber))
+            {
+                columnArgs.Column = new GridMaskColumn() { MappingName = "Number", HeaderText = "Номер телефона", Mask = maskNumber };
+            }
+        }
+
         /// <summary>
         /// Загрузка информации о странах
         /// </summary>
@@ -117,7 +130,7 @@ namespace PhoneBook.UserControls
                     .Where(c => c.CountryId == Convert.ToInt32(countryId))
                     .Select(c => new CityCollection() { Id = c.Id, CityData = $"{c.CityName} ({c.CityCode})" })
                     .ToList();
-
+                maskNumber = db.City.Where(c => c.CountryId == Convert.ToInt32(countryId)).FirstOrDefault().MaskNumber;
                 autoCompleteCity.DataSource = cities;
                 autoCompleteCity.RefreshColumns();
                 autoCompleteCity.Columns[1].MatchingColumn = true;
@@ -215,6 +228,48 @@ namespace PhoneBook.UserControls
                     autoCompleteCity.SelectedValue = textBoxCity.Text;
                     autoCompleteCity.ActiveFocusControl = null;
                 }
+            }
+        }
+
+        private void btnAddSingle_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxCountry.Text) || string.IsNullOrEmpty(textBoxCity.Text) || string.IsNullOrEmpty(textBoxAddress.Text))
+            {
+                MessageBox.Show("Укажите Страну, Город и Адрес.", "Уведомление",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                var addSingleNumber = new AddSingleNumber();
+                addSingleNumber.Mask = maskNumber;
+                addSingleNumber.Address = textBoxAddress.Text;
+                if (addSingleNumber.ShowDialog() == DialogResult.OK)
+                {
+                    using (var db = new ApplicationContext())
+                    {
+                        var addressId = autoCompleteAddress.GetItemArray(textBoxAddress.Text)[0];
+                        var singleNumber = addSingleNumber.NumberPhone;
+                        singleNumber.AddressId = Convert.ToInt32(addressId);
+                        db.NumberPhone.Add(singleNumber);
+                        db.SaveChanges();
+
+                        var numberPhones = db.NumberPhoneView
+                            .Where(n => n.AddressId == Convert.ToInt32(addressId))
+                            .ToList();
+                        UpdateData(numberPhones);
+                    }
+                }
+            }
+        }
+
+        private void autoCompleteAddress_AutoCompleteItemSelected(object sender, AutoCompleteItemEventArgs args)
+        {
+            using (var db = new ApplicationContext())
+            {
+                var numberPhones = db.NumberPhoneView
+                    .Where(n => n.AddressId == Convert.ToInt32(args.ItemArray[0]))
+                    .ToList();
+                UpdateData(numberPhones);
             }
         }
     }

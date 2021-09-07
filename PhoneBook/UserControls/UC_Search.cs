@@ -2,6 +2,7 @@
 using PhoneBook.SettingsControl;
 using PhoneBook.Types;
 using Syncfusion.Windows.Forms.Tools;
+using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ namespace PhoneBook.UserControls
 {
     public partial class UC_Search : UserControl
     {
+        private string maskNumber = "";
         public UC_Search()
         {
             InitializeComponent();
@@ -29,8 +31,19 @@ namespace PhoneBook.UserControls
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteAddress);
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteHouse);
 
+            uC_GridPhones.EventGenerateColumn += UC_GridPhones_EventGenerateColumn;
+
             LoadDataToCountry();
         }
+
+        private void UC_GridPhones_EventGenerateColumn(Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnArgs columnArgs)
+        {
+            if (columnArgs.Column.MappingName == "Number" && !string.IsNullOrEmpty(maskNumber))
+            {
+                columnArgs.Column = new GridMaskColumn() { MappingName = "Number", HeaderText = "Номер телефона", Mask =  maskNumber};
+            }
+        }
+
         private void UpdateData(List<NumberPhoneView> numberPhones)
         {
             uC_GridPhones.DataGrid.DataSource = numberPhones;
@@ -79,7 +92,7 @@ namespace PhoneBook.UserControls
                     .Where(c => c.CountryId == Convert.ToInt32(countryId))
                     .Select(c => new CityCollection() { Id = c.Id, CityData = $"{c.CityName} ({c.CityCode})" })
                     .ToList();
-
+                maskNumber = db.City.Where(c => c.CountryId == Convert.ToInt32(countryId)).FirstOrDefault().MaskNumber;
                 autoCompleteCity.DataSource = cities;
                 autoCompleteCity.RefreshColumns();
                 autoCompleteCity.Columns[1].MatchingColumn = true;
