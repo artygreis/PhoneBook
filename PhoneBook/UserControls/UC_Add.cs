@@ -24,7 +24,6 @@ namespace PhoneBook.UserControls
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteCountry);
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteCity);
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteAddress);
-            AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteHouse);
 
             UpdateData(new List<NumberPhoneView>() { new NumberPhoneView() });
 
@@ -97,11 +96,6 @@ namespace PhoneBook.UserControls
                     textBoxAddress.Text = "";
                     autoCompleteAddress.DataSource = null;
                     autoCompleteAddress.ResetHistory();
-                    goto case "autoCompleteAddress";
-                case "autoCompleteAddress":
-                    textBoxHouse.Text = "";
-                    autoCompleteHouse.DataSource = null;
-                    autoCompleteHouse.ResetHistory();
                     break;
                 default:
                     break;
@@ -158,7 +152,7 @@ namespace PhoneBook.UserControls
                     .Select(a => new AddressCollection()
                     {
                         AddressId = a.Id,
-                        DataAddress = $"{(string.IsNullOrEmpty(a.Locality) ? "" : a.Locality + ", ")}{a.TypeStreet.TypeName} {a.StreetName}"
+                        DataAddress = $"{(string.IsNullOrEmpty(a.Locality) ? "" : a.Locality + ", ")}{a.TypeStreet.TypeName} {a.StreetName}, {a.House}"
                     })
                     .ToList();
 
@@ -166,28 +160,6 @@ namespace PhoneBook.UserControls
                 autoCompleteAddress.RefreshColumns();
                 autoCompleteAddress.Columns[1].MatchingColumn = true;
                 autoCompleteAddress.Columns[0].Visible = false;
-            }
-        }
-
-        /// <summary>
-        /// Выбор адреса и формирование списка домов
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
-        private void autoCompleteAddress_AutoCompleteItemSelected(object sender, AutoCompleteItemEventArgs args)
-        {
-            ClearTextEditAndAutoComplete("autoCompleteAddress");
-            using (var db = new ApplicationContext())
-            {
-                var numberHouse = db.Address
-                    .Where(a => a.Id == Convert.ToInt32(args.ItemArray[0]))
-                    .Select(a => new { a.House })
-                    .ToList();
-
-                autoCompleteHouse.DataSource = numberHouse;
-                autoCompleteHouse.RefreshColumns();
-                autoCompleteHouse.Columns[0].MatchingColumn = true;
-                autoCompleteHouse.Columns[0].Visible = true;
             }
         }
 
@@ -215,6 +187,33 @@ namespace PhoneBook.UserControls
                     autoCompleteCountry.ActiveFocusControl = textBoxCountry;
                     autoCompleteCountry.SelectedValue = textBoxCountry.Text;
                     autoCompleteCountry.ActiveFocusControl = null;
+                }
+            }
+        }
+
+        private void btnEditAddress_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxCountry.Text) || string.IsNullOrEmpty(textBoxCity.Text))
+            {
+                MessageBox.Show("Укажите Страну и Город.", "Уведомление",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                var editAddressForm = new EditAddress();
+                using (var db = new ApplicationContext())
+                {
+                    var cityId = autoCompleteCity.GetItemArray(textBoxCity.Text)[0];
+                    editAddressForm.City = db.City.Where(c => c.Id == Convert.ToInt32(cityId)).FirstOrDefault();
+                }
+                if (editAddressForm.ShowDialog() == DialogResult.OK)
+                {
+                    textBoxAddress.Text = "";
+                    autoCompleteAddress.DataSource = null;
+                    autoCompleteAddress.ResetHistory();
+                    autoCompleteCity.ActiveFocusControl = textBoxCity;
+                    autoCompleteCity.SelectedValue = textBoxCity.Text;
+                    autoCompleteCity.ActiveFocusControl = null;
                 }
             }
         }

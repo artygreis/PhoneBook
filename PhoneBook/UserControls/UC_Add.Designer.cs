@@ -34,12 +34,10 @@ namespace PhoneBook.UserControls
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_Add));
             this.panelControl = new System.Windows.Forms.Panel();
-            this.textBoxHouse = new System.Windows.Forms.TextBox();
             this.textBoxAddress = new System.Windows.Forms.TextBox();
             this.textBoxCity = new System.Windows.Forms.TextBox();
             this.textBoxCountry = new System.Windows.Forms.TextBox();
             this.btnEditCity = new System.Windows.Forms.Button();
-            this.btnEditHouse = new System.Windows.Forms.Button();
             this.btnEditAddress = new System.Windows.Forms.Button();
             this.btnEditCountry = new System.Windows.Forms.Button();
             this.btnAddRange = new System.Windows.Forms.Button();
@@ -51,30 +49,25 @@ namespace PhoneBook.UserControls
             this.autoLabelCountry = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.autoLabelCity = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.autoLabelAddress = new Syncfusion.Windows.Forms.Tools.AutoLabel();
-            this.autoLabelHouse = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.uC_GridPhones = new PhoneBook.UserControls.UC_GridPhones();
             this.autoCompleteCountry = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
             this.autoCompleteCity = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
             this.autoCompleteAddress = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
-            this.autoCompleteHouse = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
             this.panelControl.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCountry)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteAddress)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.autoCompleteHouse)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl
             // 
             this.panelControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
-            this.panelControl.Controls.Add(this.textBoxHouse);
             this.panelControl.Controls.Add(this.textBoxAddress);
             this.panelControl.Controls.Add(this.textBoxCity);
             this.panelControl.Controls.Add(this.textBoxCountry);
             this.panelControl.Controls.Add(this.btnEditCity);
-            this.panelControl.Controls.Add(this.btnEditHouse);
             this.panelControl.Controls.Add(this.btnEditAddress);
             this.panelControl.Controls.Add(this.btnEditCountry);
             this.panelControl.Controls.Add(this.btnAddRange);
@@ -86,7 +79,6 @@ namespace PhoneBook.UserControls
             this.panelControl.Controls.Add(this.autoLabelCountry);
             this.panelControl.Controls.Add(this.autoLabelCity);
             this.panelControl.Controls.Add(this.autoLabelAddress);
-            this.panelControl.Controls.Add(this.autoLabelHouse);
             this.panelControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.panelControl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
@@ -95,23 +87,13 @@ namespace PhoneBook.UserControls
             this.panelControl.Size = new System.Drawing.Size(690, 162);
             this.panelControl.TabIndex = 0;
             // 
-            // textBoxHouse
-            // 
-            this.autoCompleteHouse.SetAutoComplete(this.textBoxHouse, Syncfusion.Windows.Forms.Tools.AutoCompleteModes.AutoSuggest);
-            this.textBoxHouse.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.textBoxHouse.Location = new System.Drawing.Point(534, 70);
-            this.textBoxHouse.Name = "textBoxHouse";
-            this.textBoxHouse.Size = new System.Drawing.Size(50, 26);
-            this.textBoxHouse.TabIndex = 3;
-            this.textBoxHouse.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // textBoxAddress
             // 
-            this.autoCompleteAddress.SetAutoComplete(this.textBoxAddress, Syncfusion.Windows.Forms.Tools.AutoCompleteModes.AutoSuggest);
+            this.autoCompleteAddress.SetAutoComplete(this.textBoxAddress, Syncfusion.Windows.Forms.Tools.AutoCompleteModes.MultiSuggestExtended);
             this.textBoxAddress.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.textBoxAddress.Location = new System.Drawing.Point(104, 70);
             this.textBoxAddress.Name = "textBoxAddress";
-            this.textBoxAddress.Size = new System.Drawing.Size(310, 26);
+            this.textBoxAddress.Size = new System.Drawing.Size(377, 26);
             this.textBoxAddress.TabIndex = 2;
             // 
             // textBoxCity
@@ -146,29 +128,18 @@ namespace PhoneBook.UserControls
             this.btnEditCity.UseVisualStyleBackColor = false;
             this.btnEditCity.Click += new System.EventHandler(this.btnEditCity_Click);
             // 
-            // btnEditHouse
-            // 
-            this.btnEditHouse.BackColor = System.Drawing.Color.White;
-            this.btnEditHouse.FlatAppearance.BorderSize = 0;
-            this.btnEditHouse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditHouse.Image = ((System.Drawing.Image)(resources.GetObject("btnEditHouse.Image")));
-            this.btnEditHouse.Location = new System.Drawing.Point(590, 66);
-            this.btnEditHouse.Name = "btnEditHouse";
-            this.btnEditHouse.Size = new System.Drawing.Size(40, 35);
-            this.btnEditHouse.TabIndex = 13;
-            this.btnEditHouse.UseVisualStyleBackColor = false;
-            // 
             // btnEditAddress
             // 
             this.btnEditAddress.BackColor = System.Drawing.Color.White;
             this.btnEditAddress.FlatAppearance.BorderSize = 0;
             this.btnEditAddress.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditAddress.Image = ((System.Drawing.Image)(resources.GetObject("btnEditAddress.Image")));
-            this.btnEditAddress.Location = new System.Drawing.Point(420, 66);
+            this.btnEditAddress.Location = new System.Drawing.Point(487, 66);
             this.btnEditAddress.Name = "btnEditAddress";
             this.btnEditAddress.Size = new System.Drawing.Size(40, 35);
             this.btnEditAddress.TabIndex = 13;
             this.btnEditAddress.UseVisualStyleBackColor = false;
+            this.btnEditAddress.Click += new System.EventHandler(this.btnEditAddress_Click);
             // 
             // btnEditCountry
             // 
@@ -297,19 +268,6 @@ namespace PhoneBook.UserControls
             this.autoLabelAddress.TabIndex = 11;
             this.autoLabelAddress.Text = "Адрес:";
             // 
-            // autoLabelHouse
-            // 
-            this.autoLabelHouse.DX = -35;
-            this.autoLabelHouse.DY = 3;
-            this.autoLabelHouse.ForeColor = System.Drawing.Color.White;
-            this.autoLabelHouse.Gap = 10;
-            this.autoLabelHouse.LabeledControl = this.textBoxHouse;
-            this.autoLabelHouse.Location = new System.Drawing.Point(499, 73);
-            this.autoLabelHouse.Name = "autoLabelHouse";
-            this.autoLabelHouse.Size = new System.Drawing.Size(25, 19);
-            this.autoLabelHouse.TabIndex = 12;
-            this.autoLabelHouse.Text = "Д.";
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.uC_GridPhones);
@@ -368,19 +326,6 @@ namespace PhoneBook.UserControls
             this.autoCompleteAddress.ShowGripper = false;
             this.autoCompleteAddress.Style = Syncfusion.Windows.Forms.Tools.AutoCompleteStyle.Default;
             this.autoCompleteAddress.ThemeName = "Default";
-            this.autoCompleteAddress.AutoCompleteItemSelected += new Syncfusion.Windows.Forms.Tools.AutoCompleteItemEventHandler(this.autoCompleteAddress_AutoCompleteItemSelected);
-            // 
-            // autoCompleteHouse
-            // 
-            this.autoCompleteHouse.HeaderFont = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.autoCompleteHouse.ItemFont = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.autoCompleteHouse.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(158)))), ((int)(((byte)(218)))));
-            this.autoCompleteHouse.ParentForm = this;
-            this.autoCompleteHouse.ShowCloseButton = false;
-            this.autoCompleteHouse.ShowColumnHeader = true;
-            this.autoCompleteHouse.ShowGripper = false;
-            this.autoCompleteHouse.Style = Syncfusion.Windows.Forms.Tools.AutoCompleteStyle.Default;
-            this.autoCompleteHouse.ThemeName = "Default";
             // 
             // UC_Add
             // 
@@ -394,7 +339,6 @@ namespace PhoneBook.UserControls
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCountry)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteAddress)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.autoCompleteHouse)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -409,22 +353,18 @@ namespace PhoneBook.UserControls
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.TextBox textBoxCountry;
         private System.Windows.Forms.TextBox textBoxCity;
-        private System.Windows.Forms.TextBox textBoxHouse;
         private System.Windows.Forms.TextBox textBoxAddress;
         private System.Windows.Forms.Button btnAddRange;
         private System.Windows.Forms.Button btnAddSingle;
         private AutoLabel autoLabelCountry;
         private AutoLabel autoLabelCity;
         private AutoLabel autoLabelAddress;
-        private AutoLabel autoLabelHouse;
         private System.Windows.Forms.Button btnEditCountry;
         private System.Windows.Forms.Button btnEditCity;
-        private System.Windows.Forms.Button btnEditHouse;
         private System.Windows.Forms.Button btnEditAddress;
         private System.Windows.Forms.Button button1;
         private AutoComplete autoCompleteCountry;
         private AutoComplete autoCompleteCity;
         private AutoComplete autoCompleteAddress;
-        private AutoComplete autoCompleteHouse;
     }
 }

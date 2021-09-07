@@ -57,9 +57,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="autoCompleteHouse.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>32, 17</value>
-  </metadata>
   <metadata name="autoCompleteAddress.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>32, 17</value>
   </metadata>
@@ -71,20 +68,6 @@
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnEditCity.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAd5JREFUSEvt
-        lctKw0AUhmcvIiLuXPkICiqiaLHMTBVEBMEXUHApLryguBNddWsXdk7qDVHci6s+QcGdPoPXVl0V9czJ
-        pElLGtM2QUF/+Gn+cybnYyYpYf/6Y0plu5lUc7FYz64rqcaZgM9YrGfXlQPmcMOE2o3ENCssWIAyldal
-        ZzUAvmUSMpFYz2oAHL1DgSVcMWElIzHNCgv+wWf8C8AcdjA/Ym+SsoA85SDrexw1DRaQphpXMyYXzJog
-        p2mtVtPgVuWABbyg3/A0Dtn0QbvpGvmBJ6wulsz2Mp5ro5w66qHsta7VE4dLM7OM1+90rf/fVWr+qAvU
-        q5WwVk2/xFK5MZbMdOC13vm9WWHkB+awhPma8eywndU+Za91rVZcrWHPhgo1SrWUGsJcRt9RriiqZ+wH
-        FdYA5ieqczVPtYqiANNXiWY84Gn1U82e+4r+wP4C1arUKtgLFdk+qn0L1WoFLGDP3OtChZXAbEM5LFLN
-        Vy640c/iubmvxGRuhGbx3CDmZ7uOb3egXHAzLvpCJaxTLVBTx530KQtrqWYN1N2p/ZdxdrpBtcjlntAZ
-        ZS9UwibVYpGAFQPO48tzir9FO6stsyImCTgxYNfc2jbdGCXgAm3hbpfxeSboHQklxr4AJEpmKMM2TZUA
-        AAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="btnEditHouse.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAd5JREFUSEvt
         lctKw0AUhmcvIiLuXPkICiqiaLHMTBVEBMEXUHApLryguBNddWsXdk7qDVHci6s+QcGdPoPXVl0V9czJ

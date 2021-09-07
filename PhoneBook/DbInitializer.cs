@@ -60,6 +60,7 @@ namespace PhoneBook
 
                 var address = new Address()
                 {
+                    Locality = "",
                     StreetName = "Гагарина",
                     House = "10",
                     NumberPhones = new List<NumberPhone>()
@@ -67,10 +68,21 @@ namespace PhoneBook
                         new NumberPhone(){ Apartment = "8", Number = "1-23-45" }
                     }
                 };
-
+                var address1 = new Address()
+                {
+                    Locality = "",
+                    StreetName = "Советская",
+                    House = "15",
+                    NumberPhones = new List<NumberPhone>()
+                    {
+                        new NumberPhone() { Apartment = "10", Number = "5-43-21" }
+                    }
+                };
                 typeStreets[0].Addresses.Add(address);
+                typeStreets[0].Addresses.Add(address1);
 
                 address.Cities.Add(city);
+                address1.Cities.Add(city);
 
                 db.SaveChanges();
             }
