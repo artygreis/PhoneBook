@@ -13,7 +13,6 @@ namespace PhoneBook.Forms
 {
     public partial class EditAddress : Syncfusion.Windows.Forms.MetroForm
     {
-        Regex regex = new Regex(@"[^0-9]");
         private AddressEdit currentAddress => uC_GridAddresses.DataGrid.SelectedItem as AddressEdit;
         public City City { get; set; }
         public EditAddress()
