@@ -44,18 +44,9 @@ namespace PhoneBook.UserControls
                 return generalViewGrid;
             }
         }
-        public delegate void autoGenereting(AutoGeneratingColumnArgs columnArgs);
-        public event autoGenereting EventGenerateColumn;
         public UC_GridPhones()
         {
             InitializeComponent();
-
-            generalViewGrid.AutoGeneratingColumn += GeneralViewGrid_AutoGeneratingColumn;
-        }
-
-        private void GeneralViewGrid_AutoGeneratingColumn(object sender, Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnArgs e)
-        {
-            EventGenerateColumn?.Invoke(e);
         }
     }
 }

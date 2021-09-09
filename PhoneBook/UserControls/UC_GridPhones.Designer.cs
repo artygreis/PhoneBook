@@ -83,6 +83,7 @@ namespace PhoneBook.UserControls
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(682, 0);
+            this.panel1.MaximumSize = new System.Drawing.Size(8, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(8, 488);
             this.panel1.TabIndex = 1;
@@ -92,6 +93,7 @@ namespace PhoneBook.UserControls
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(8, 480);
+            this.panel2.MaximumSize = new System.Drawing.Size(0, 8);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(674, 8);
             this.panel2.TabIndex = 1;
@@ -101,6 +103,7 @@ namespace PhoneBook.UserControls
             this.panel3.BackColor = System.Drawing.Color.White;
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.MaximumSize = new System.Drawing.Size(8, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(8, 488);
             this.panel3.TabIndex = 1;
@@ -110,6 +113,7 @@ namespace PhoneBook.UserControls
             this.panel4.BackColor = System.Drawing.Color.White;
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(8, 0);
+            this.panel4.MaximumSize = new System.Drawing.Size(0, 8);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(674, 8);
             this.panel4.TabIndex = 2;

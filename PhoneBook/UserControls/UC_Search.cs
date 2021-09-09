@@ -31,16 +31,16 @@ namespace PhoneBook.UserControls
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteAddress);
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteHouse);
 
-            uC_GridPhones.EventGenerateColumn += UC_GridPhones_EventGenerateColumn;
+            uC_GridPhones.DataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
 
             LoadDataToCountry();
         }
 
-        private void UC_GridPhones_EventGenerateColumn(Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnArgs columnArgs)
+        private void DataGrid_AutoGeneratingColumn(object sender, Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnArgs e)
         {
-            if (columnArgs.Column.MappingName == "Number" && !string.IsNullOrEmpty(maskNumber))
+            if (e.Column.MappingName == "Number" && !string.IsNullOrEmpty(maskNumber))
             {
-                columnArgs.Column = new GridMaskColumn() { MappingName = "Number", HeaderText = "Номер телефона", Mask =  maskNumber};
+                e.Column = new GridMaskColumn() { MappingName = "Number", HeaderText = "Номер телефона", Mask = maskNumber };
             }
         }
 

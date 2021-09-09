@@ -91,6 +91,7 @@ namespace PhoneBook.UserControls
             // 
             this.autoCompleteAddress.SetAutoComplete(this.textBoxAddress, Syncfusion.Windows.Forms.Tools.AutoCompleteModes.MultiSuggestExtended);
             this.textBoxAddress.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.textBoxAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
             this.textBoxAddress.Location = new System.Drawing.Point(104, 70);
             this.textBoxAddress.Name = "textBoxAddress";
             this.textBoxAddress.Size = new System.Drawing.Size(377, 26);
@@ -100,6 +101,7 @@ namespace PhoneBook.UserControls
             // 
             this.autoCompleteCity.SetAutoComplete(this.textBoxCity, Syncfusion.Windows.Forms.Tools.AutoCompleteModes.AutoSuggest);
             this.textBoxCity.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.textBoxCity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
             this.textBoxCity.Location = new System.Drawing.Point(414, 25);
             this.textBoxCity.Name = "textBoxCity";
             this.textBoxCity.Size = new System.Drawing.Size(170, 26);
@@ -169,6 +171,7 @@ namespace PhoneBook.UserControls
             this.btnAddRange.Text = " Добавить список квартир";
             this.btnAddRange.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnAddRange.UseVisualStyleBackColor = false;
+            this.btnAddRange.Click += new System.EventHandler(this.btnAddRange_Click);
             // 
             // button1
             // 

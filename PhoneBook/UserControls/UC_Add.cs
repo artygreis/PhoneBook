@@ -1,17 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PhoneBook.Forms;
+using PhoneBook.Properties;
 using PhoneBook.SettingsControl;
 using PhoneBook.Types;
 using Syncfusion.Windows.Forms.Tools;
 using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PhoneBook.UserControls
@@ -29,26 +27,44 @@ namespace PhoneBook.UserControls
 
             UpdateData(new List<NumberPhoneView>() { new NumberPhoneView() });
 
-            uC_GridPhones.EventGenerateColumn += UC_GridPhones_EventGenerateColumn;
+            uC_GridPhones.DataGrid.ShowRowHeader = true;
+            uC_GridPhones.DataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
+            uC_GridPhones.DataGrid.DrawCell += DataGrid_DrawCell;
 
             LoadDataToCountry();
         }
+
+        private void DataGrid_DrawCell(object sender, Syncfusion.WinForms.DataGrid.Events.DrawCellEventArgs e)
+        {
+            if (uC_GridPhones.DataGrid.ShowRowHeader && e.RowIndex != 0)
+            {
+                if (e.ColumnIndex == 0)
+                {
+                    e.Handled = true;
+                    Rectangle rect = new Rectangle(e.Bounds.X + 7, e.Bounds.Y + 7, e.Bounds.Width - 14, e.Bounds.Height - 12);
+                    e.Graphics.FillRectangle(new SolidBrush(uC_GridPhones.DataGrid.Style.RowHeaderStyle.BackColor),
+                        new Rectangle(e.Bounds.X + 1, e.Bounds.Y + 1, e.Bounds.Width - 2, e.Bounds.Height - 2));
+                    e.Graphics.DrawImage(new Bitmap(Resources.remove), rect);
+                }
+            }
+        }
+
+        private void DataGrid_AutoGeneratingColumn(object sender, Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnArgs e)
+        {
+            if (e.Column.MappingName == "Number" && !string.IsNullOrEmpty(maskNumber))
+            {
+                e.Column = new GridMaskColumn() { MappingName = "Number", HeaderText = "Номер телефона", Mask = maskNumber };
+            }
+        }
+
         private void UpdateData(List<NumberPhoneView> numberPhones)
         {
             uC_GridPhones.DataGrid.DataSource = numberPhones;
-            uC_GridPhones.DataGrid.Columns["Locality"].Width = 150;
-            uC_GridPhones.DataGrid.Columns["TypeName"].Width = 80;
+            uC_GridPhones.DataGrid.Columns["Locality"].Width = 140;
+            uC_GridPhones.DataGrid.Columns["TypeName"].Width = 70;
             uC_GridPhones.DataGrid.Columns["StreetName"].Width = 180;
             uC_GridPhones.DataGrid.Columns["House"].Width = 50;
             uC_GridPhones.DataGrid.Columns["Apartment"].Width = 50;
-        }
-
-        private void UC_GridPhones_EventGenerateColumn(Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnArgs columnArgs)
-        {
-            if (columnArgs.Column.MappingName == "Number" && !string.IsNullOrEmpty(maskNumber))
-            {
-                columnArgs.Column = new GridMaskColumn() { MappingName = "Number", HeaderText = "Номер телефона", Mask = maskNumber };
-            }
         }
 
         /// <summary>
@@ -270,6 +286,35 @@ namespace PhoneBook.UserControls
                     .Where(n => n.AddressId == Convert.ToInt32(args.ItemArray[0]))
                     .ToList();
                 UpdateData(numberPhones);
+            }
+        }
+
+        private void btnAddRange_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxCountry.Text) || string.IsNullOrEmpty(textBoxCity.Text) || string.IsNullOrEmpty(textBoxAddress.Text))
+            {
+                MessageBox.Show("Укажите Страну, Город и Адрес.", "Уведомление",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                var addRangeNumber = new AddRangeNumber(maskNumber);
+                addRangeNumber.Address = textBoxAddress.Text;
+                addRangeNumber.AddressId = Convert.ToInt32(autoCompleteAddress.GetItemArray(textBoxAddress.Text)[0]);
+                if (addRangeNumber.ShowDialog() == DialogResult.OK)
+                {
+                    var listNumbers = addRangeNumber.NumberPhones;
+                    using (var db = new ApplicationContext())
+                    {
+                        db.NumberPhone.AddRange(listNumbers);
+                        db.SaveChanges();
+
+                        var numberPhones = db.NumberPhoneView
+                            .Where(n => n.AddressId == Convert.ToInt32(Convert.ToInt32(autoCompleteAddress.GetItemArray(textBoxAddress.Text)[0])))
+                            .ToList();
+                        UpdateData(numberPhones);
+                    }
+                }
             }
         }
     }
