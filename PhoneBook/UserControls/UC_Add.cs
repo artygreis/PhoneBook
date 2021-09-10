@@ -17,6 +17,7 @@ namespace PhoneBook.UserControls
     public partial class UC_Add : UserControl
     {
         private string maskNumber = "";
+        private NumberPhoneView currentNumberPhone => uC_GridPhones.DataGrid.SelectedItem as NumberPhoneView;
         public UC_Add()
         {
             InitializeComponent();
@@ -25,13 +26,48 @@ namespace PhoneBook.UserControls
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteCity);
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteAddress);
 
-            UpdateData(new List<NumberPhoneView>() { new NumberPhoneView() });
+            //UpdateData(new List<NumberPhoneView>() { new NumberPhoneView() });
 
             uC_GridPhones.DataGrid.ShowRowHeader = true;
             uC_GridPhones.DataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
             uC_GridPhones.DataGrid.DrawCell += DataGrid_DrawCell;
+            uC_GridPhones.DataGrid.CellClick += DataGrid_CellClick;
 
             LoadDataToCountry();
+        }
+
+        private void DataGrid_CellClick(object sender, Syncfusion.WinForms.DataGrid.Events.CellClickEventArgs e)
+        {
+            if (e.DataColumn.ColumnIndex == 0 && e.DataRow.RowIndex != uC_GridPhones.DataGrid.RowCount - 1)
+            {
+                var res = MessageBox.Show("Вы действительно хотите удалить данную запись?");
+                if (res == DialogResult.OK)
+                {
+                    int deletingRowIndex = uC_GridPhones.DataGrid.TableControl.ResolveToRecordIndex(e.DataRow.RowIndex);
+                    using (var db = new ApplicationContext())
+                    {
+                        var deleteRow = uC_GridPhones.DataGrid.View.Records[deletingRowIndex].Data as NumberPhoneView;
+                        var deleteRecord = db.NumberPhone.Where(n => n.Id == deleteRow.Id).FirstOrDefault();
+                        if (deleteRecord != null)
+                        {
+                            db.NumberPhone.Remove(deleteRecord);
+                            db.SaveChanges();
+
+                            var numberPhones = db.NumberPhoneView
+                                .Where(n => n.AddressId == Convert.ToInt32(autoCompleteAddress.GetItemArray(textBoxAddress.Text)[0]))
+                                .ToList();
+                            UpdateData(numberPhones);
+                        }    
+                    }
+                    e.Cancel = true;
+                    var recordsCount = uC_GridPhones.DataGrid.View.Records.Count;
+                    if (recordsCount != 0)
+                    {
+                        uC_GridPhones.DataGrid.SelectedItem = uC_GridPhones.DataGrid.View.Records[0];
+
+                    }
+                }
+            }
         }
 
         private void DataGrid_DrawCell(object sender, Syncfusion.WinForms.DataGrid.Events.DrawCellEventArgs e)
@@ -304,10 +340,14 @@ namespace PhoneBook.UserControls
                 if (addRangeNumber.ShowDialog() == DialogResult.OK)
                 {
                     var listNumbers = addRangeNumber.NumberPhones;
+                    
                     using (var db = new ApplicationContext())
                     {
-                        db.NumberPhone.AddRange(listNumbers);
-                        db.SaveChanges();
+                        if (listNumbers.Count != 0)
+                        {
+                            db.NumberPhone.AddRange(listNumbers);
+                            db.SaveChanges();
+                        }
 
                         var numberPhones = db.NumberPhoneView
                             .Where(n => n.AddressId == Convert.ToInt32(Convert.ToInt32(autoCompleteAddress.GetItemArray(textBoxAddress.Text)[0])))
@@ -315,6 +355,40 @@ namespace PhoneBook.UserControls
                         UpdateData(numberPhones);
                     }
                 }
+            }
+        }
+
+        private void btnEditNumber_Click(object sender, EventArgs e)
+        {
+            if (currentNumberPhone != null)
+            {
+                var editSingleNumber = new AddSingleNumber();
+                editSingleNumber.Mask = maskNumber;
+                editSingleNumber.Address = textBoxAddress.Text;
+                using (var db = new ApplicationContext())
+                {
+                    var numberPhone = db.NumberPhone.Where(n => n.Id == currentNumberPhone.Id).FirstOrDefault();
+                    editSingleNumber.NumberPhone = numberPhone;
+                }
+                if (editSingleNumber.ShowDialog() == DialogResult.OK)
+                {
+                    using (var db = new ApplicationContext())
+                    {
+                        var singleNumber = editSingleNumber.NumberPhone;
+                        db.NumberPhone.Update(singleNumber);
+                        db.SaveChanges();
+
+                        var numberPhones = db.NumberPhoneView
+                            .Where(n => n.AddressId == singleNumber.AddressId)
+                            .ToList();
+                        UpdateData(numberPhones);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите запись для редактирования.", "Уведомление",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

@@ -41,7 +41,7 @@ namespace PhoneBook.UserControls
             this.btnEditAddress = new System.Windows.Forms.Button();
             this.btnEditCountry = new System.Windows.Forms.Button();
             this.btnAddRange = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnEditNumber = new System.Windows.Forms.Button();
             this.btnAddSingle = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -71,7 +71,7 @@ namespace PhoneBook.UserControls
             this.panelControl.Controls.Add(this.btnEditAddress);
             this.panelControl.Controls.Add(this.btnEditCountry);
             this.panelControl.Controls.Add(this.btnAddRange);
-            this.panelControl.Controls.Add(this.button1);
+            this.panelControl.Controls.Add(this.btnEditNumber);
             this.panelControl.Controls.Add(this.btnAddSingle);
             this.panelControl.Controls.Add(this.panel3);
             this.panelControl.Controls.Add(this.panel4);
@@ -173,21 +173,22 @@ namespace PhoneBook.UserControls
             this.btnAddRange.UseVisualStyleBackColor = false;
             this.btnAddRange.Click += new System.EventHandler(this.btnAddRange_Click);
             // 
-            // button1
+            // btnEditNumber
             // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(497, 114);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(163, 33);
-            this.button1.TabIndex = 7;
-            this.button1.Text = " Редактировать";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnEditNumber.BackColor = System.Drawing.Color.White;
+            this.btnEditNumber.FlatAppearance.BorderSize = 0;
+            this.btnEditNumber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditNumber.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnEditNumber.Image = ((System.Drawing.Image)(resources.GetObject("btnEditNumber.Image")));
+            this.btnEditNumber.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEditNumber.Location = new System.Drawing.Point(497, 114);
+            this.btnEditNumber.Name = "btnEditNumber";
+            this.btnEditNumber.Size = new System.Drawing.Size(163, 33);
+            this.btnEditNumber.TabIndex = 7;
+            this.btnEditNumber.Text = " Редактировать";
+            this.btnEditNumber.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEditNumber.UseVisualStyleBackColor = false;
+            this.btnEditNumber.Click += new System.EventHandler(this.btnEditNumber_Click);
             // 
             // btnAddSingle
             // 
@@ -367,7 +368,7 @@ namespace PhoneBook.UserControls
         private System.Windows.Forms.Button btnEditCountry;
         private System.Windows.Forms.Button btnEditCity;
         private System.Windows.Forms.Button btnEditAddress;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnEditNumber;
         private AutoComplete autoCompleteCountry;
         private AutoComplete autoCompleteCity;
         private AutoComplete autoCompleteAddress;

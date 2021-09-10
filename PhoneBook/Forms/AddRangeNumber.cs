@@ -1,8 +1,10 @@
 ﻿using PhoneBook.Properties;
 using PhoneBook.Types;
+using Syncfusion.Data;
 using Syncfusion.WinForms.DataGrid;
 using Syncfusion.WinForms.DataGrid.Interactivity;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -12,11 +14,11 @@ namespace PhoneBook.Forms
 {
     public partial class AddRangeNumber : Syncfusion.Windows.Forms.MetroForm
     {
+        Regex regex = new Regex(@"[^0-9]");
         public string Address { get; set; }
-        public NumberPhone NumberPhone { get; set; }
         public string Mask { get; set; }
         public int AddressId { get; set; }
-        public List<NumberPhone> NumberPhones => uC_GridNumberPhones.DataGrid.DataSource as List<NumberPhone>;
+        public List<NumberPhone> NumberPhones { get; set; }
         public AddRangeNumber(string mask)
         {
             InitializeComponent();
@@ -25,15 +27,31 @@ namespace PhoneBook.Forms
             //uC_GridNumberPhones.SelectionUnitGrid = Syncfusion.WinForms.DataGrid.Enums.SelectionUnit.Row;
             uC_GridNumberPhones.DataGrid.AllowEditing = true;
             uC_GridNumberPhones.DataGrid.EditMode = Syncfusion.WinForms.DataGrid.Enums.EditMode.DoubleClick;
-            uC_GridNumberPhones.DataGrid.EditorSelectionBehavior = Syncfusion.WinForms.DataGrid.Enums.EditorSelectionBehavior.MoveLast;
+            uC_GridNumberPhones.DataGrid.EditorSelectionBehavior = Syncfusion.WinForms.DataGrid.Enums.EditorSelectionBehavior.Default;
             uC_GridNumberPhones.DataGrid.ShowRowHeader = true;
             uC_GridNumberPhones.DataGrid.AddNewRowPosition = Syncfusion.WinForms.DataGrid.Enums.RowPosition.Bottom;
 
             uC_GridNumberPhones.DataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
             uC_GridNumberPhones.DataGrid.AddNewRowInitiating += DataGrid_AddNewRowInitiating;
             uC_GridNumberPhones.DataGrid.DrawCell += DataGrid_DrawCell;
+            uC_GridNumberPhones.DataGrid.CellClick += DataGrid_CellClick;
+        }
 
-            UpdateData(new List<NumberPhone>() { new NumberPhone() });
+        private void DataGrid_CellClick(object sender, Syncfusion.WinForms.DataGrid.Events.CellClickEventArgs e)
+        {
+            if (e.DataColumn.ColumnIndex == 0 && e.DataRow.RowIndex != uC_GridNumberPhones.DataGrid.RowCount - 1)
+            {
+                int deletingRowIndex = uC_GridNumberPhones.DataGrid.TableControl.ResolveToRecordIndex(e.DataRow.RowIndex);
+                uC_GridNumberPhones.DataGrid.View.RemoveAt(deletingRowIndex);
+                e.Cancel = true;
+                var recordsCount = uC_GridNumberPhones.DataGrid.View.Records.Count;
+                if (recordsCount == 0)
+                {
+                    UpdateData(new List<NumberPhone>() { new NumberPhone() { AddressId = AddressId } });
+
+                }
+                uC_GridNumberPhones.DataGrid.SelectedItem = uC_GridNumberPhones.DataGrid.View.Records[0];
+            } 
         }
 
         private void DataGrid_DrawCell(object sender, Syncfusion.WinForms.DataGrid.Events.DrawCellEventArgs e)
@@ -86,10 +104,21 @@ namespace PhoneBook.Forms
         {
             labelAddress.Text = $"{Address}";
             uC_GridNumberPhones.DataGrid.ClipboardController = new CustomClipboardController(uC_GridNumberPhones.DataGrid, AddressId);
+            UpdateData(new List<NumberPhone>() { new NumberPhone() { AddressId = AddressId } });
         }
 
         private void btnSave_Click(object sender, System.EventArgs e)
         {
+            var result = new List<NumberPhone>();
+            foreach (var number in uC_GridNumberPhones.DataGrid.DataSource as List<NumberPhone>)
+            {
+                if (number.AddressId == 0)
+                    number.AddressId = AddressId;
+                number.Number = regex.Replace(number.Number ?? "", "");
+                if (!string.IsNullOrEmpty(number.Apartment))
+                    result.Add(number);
+                NumberPhones = result;
+            }
             DialogResult = DialogResult.OK;
         }
     }

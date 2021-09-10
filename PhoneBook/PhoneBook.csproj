@@ -16,6 +16,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.8" />
+    <Reference Include="Syncfusion.Core.WinForms">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.2.0.44\precompiledassemblies\net5.0\Syncfusion.Core.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="Syncfusion.Data.WinForms">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.2.0.44\precompiledassemblies\net5.0\Syncfusion.Data.WinForms.dll</HintPath>
     </Reference>
