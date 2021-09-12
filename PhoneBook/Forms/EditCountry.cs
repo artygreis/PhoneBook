@@ -12,6 +12,7 @@ namespace PhoneBook.Forms
     public partial class EditCountry : Syncfusion.Windows.Forms.MetroForm
     {
         Regex regex = new Regex(@"[^0-9]");
+        const int errorPadding = 4;
         private Country currentCountry => uC_GridCountries.DataGrid.SelectedItem as Country;
         public EditCountry()
         {
@@ -26,6 +27,30 @@ namespace PhoneBook.Forms
             maskedEditBoxExample.GotFocus += MaskedEditBoxExample_GotFocus;
             maskedEditCountryCode.Mask = "+99999";
         }
+        private bool IsValidation()
+        {
+            var result = true;
+            errorValidating.Clear();
+            if (string.IsNullOrEmpty(textBoxCountryName.Text))
+            {
+                errorValidating.SetError(textBoxCountryName, "Введите наименование страны.");
+                errorValidating.SetIconPadding(textBoxCountryName, errorPadding);
+                result = false;
+            }
+            if (string.IsNullOrEmpty(maskedEditCountryCode.Text) || maskedEditCountryCode.Text.Replace(" ", "").Length <= 1)
+            {
+                errorValidating.SetError(maskedEditCountryCode, "Укажите Код страны в международном формате.");
+                errorValidating.SetIconPadding(maskedEditCountryCode, errorPadding);
+                result = false;
+            }
+            if (string.IsNullOrEmpty(textBoxCountDigits.Text))
+            {
+                errorValidating.SetError(textBoxCountDigits, "Введите количество цифр в номере с учетом кода страны и кода города, но без знака +.");
+                errorValidating.SetIconPadding(textBoxCountDigits, errorPadding);
+                result = false;
+            }
+            return result;
+        }
         /// <summary>
         /// Формирование маски для примера номера
         /// </summary>
@@ -33,20 +58,24 @@ namespace PhoneBook.Forms
         /// <param name="e"></param>
         private void MaskedEditBoxExample_GotFocus(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(maskedEditCountryCode.Text) || maskedEditCountryCode.Text.Replace(" ", "").Length <= 1)
-            {
-                maskedEditCountryCode.Focus();
-                MessageBox.Show("Укажите Код страны в международном формате.", "Уведомление",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            if (!IsValidation())
                 return;
-            }
-            if (string.IsNullOrEmpty(textBoxCountDigits.Text))
-            {
-                textBoxCountDigits.Focus();
-                MessageBox.Show("Укажите Количество всех цифр в номере.", "Уведомление",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            //if (string.IsNullOrEmpty(maskedEditCountryCode.Text) || maskedEditCountryCode.Text.Replace(" ", "").Length <= 1)
+            //{
+            //    maskedEditCountryCode.Focus();
+            //    errorValidating.SetError(maskedEditCountryCode, "Укажите Код страны в международном формате.");
+            //    errorValidating.SetIconPadding(maskedEditCountryCode, errorPadding);
+            //    return;
+            //}
+            //errorValidating.Clear();
+            //if (string.IsNullOrEmpty(textBoxCountDigits.Text))
+            //{
+            //    textBoxCountDigits.Focus();
+            //    errorValidating.SetError(textBoxCountDigits, "Укажите Количество всех цифр в номере.");
+            //    errorValidating.SetIconPadding(textBoxCountDigits, errorPadding);
+            //    return;
+            //}
+            //errorValidating.Clear();
             maskedEditBoxExample.Mask = "+" + new string('#', Convert.ToInt32(textBoxCountDigits.Text));
             if (regex.Replace(maskedEditBoxExample.Text, "").Length == Convert.ToInt32(textBoxCountDigits.Text))
             {
@@ -95,6 +124,7 @@ namespace PhoneBook.Forms
         /// <param name="e"></param>
         private void btnEdit_Click(object sender, System.EventArgs e)
         {
+            errorValidating.Clear();
             if (currentCountry != null)
             {
                 textBoxCountryName.Text = currentCountry.CountryName;
@@ -121,15 +151,10 @@ namespace PhoneBook.Forms
         /// <param name="e"></param>
         private void btnAdd_Click(object sender, System.EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBoxCountryName.Text) || string.IsNullOrEmpty(maskedEditCountryCode.Text)
-                    || string.IsNullOrEmpty(textBoxCountDigits.Text))
-            {
-                MessageBox.Show("Заполните обязательные поля: \nНаименование, Код страны и Количество цифр в номере.", "Уведомление",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                var example = "";
+            if (!IsValidation())
+                return;
+
+            var example = "";
                 if (maskedEditBoxExample.Text.Replace(" ", "").Length > maskedEditCountryCode.Text.Replace(" ", "").Length) example = maskedEditBoxExample.Text;
                 if (btnAdd.Text == "Сохранить")
                 {
@@ -175,7 +200,6 @@ namespace PhoneBook.Forms
                 {
                     ;
                 }
-            }
         }
         /// <summary>
         /// Очистка текстовых полей
@@ -194,6 +218,7 @@ namespace PhoneBook.Forms
         /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            errorValidating.Clear();
             if (currentCountry != null)
             {
                 var dialog = MessageBox.Show($"Вы действительно хотите удалить запись:\n " +

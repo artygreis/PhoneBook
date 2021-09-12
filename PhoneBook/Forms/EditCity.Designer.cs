@@ -31,6 +31,7 @@ namespace PhoneBook.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditCity));
             this.maskedEditBoxFormatNumber = new Syncfusion.Windows.Forms.Tools.MaskedEditBox();
             this.maskedEditCityCode = new Syncfusion.Windows.Forms.Tools.MaskedEditBox();
@@ -47,10 +48,12 @@ namespace PhoneBook.Forms
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.errorValidating = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.maskedEditBoxFormatNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maskedEditCityCode)).BeginInit();
             this.pnlGrid.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorValidating)).BeginInit();
             this.SuspendLayout();
             // 
             // maskedEditBoxFormatNumber
@@ -253,6 +256,11 @@ namespace PhoneBook.Forms
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // errorValidating
+            // 
+            this.errorValidating.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorValidating.ContainerControl = this;
+            // 
             // EditCity
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -277,6 +285,7 @@ namespace PhoneBook.Forms
             this.pnlGrid.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorValidating)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -298,5 +307,6 @@ namespace PhoneBook.Forms
         private MaskedEditBox maskedEditBoxFormatNumber;
         private MaskedEditBox maskedEditCityCode;
         private System.Windows.Forms.Label labelCountry;
+        private System.Windows.Forms.ErrorProvider errorValidating;
     }
 }

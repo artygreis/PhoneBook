@@ -105,33 +105,48 @@ namespace PhoneBook.Forms
         /// <param name="e"></param>
         private void btnEdit_Click(object sender, System.EventArgs e)
         {
-            if (currentAddress != null)
+            errorValidating.Clear();
+            if (btnEdit.Text == "Изменить")
             {
-                if (!string.IsNullOrEmpty(currentAddress.Locality))
+                if (currentAddress != null)
                 {
-                    autoCompleteLocality.ActiveFocusControl = textBoxLocality;
-                    autoCompleteLocality.SelectedValue = $"{currentAddress.Locality}";
-                    autoCompleteLocality.ActiveFocusControl = null;
-                }
-                autoCompleteTypeStreet.ActiveFocusControl = textBoxTypeStreet;
-                autoCompleteTypeStreet.SelectedValue = $"{currentAddress.TypeStreetName}";
-                autoCompleteTypeStreet.ActiveFocusControl = null;
-                autoCompleteStreetName.ActiveFocusControl = textBoxStreetName;
-                autoCompleteStreetName.SelectedValue = $"{currentAddress.StreetName}";
-                autoCompleteStreetName.ActiveFocusControl = null;
-                textBoxHouse.Text = currentAddress.House;
+                    if (!string.IsNullOrEmpty(currentAddress.Locality))
+                    {
+                        autoCompleteLocality.ActiveFocusControl = textBoxLocality;
+                        autoCompleteLocality.SelectedValue = $"{currentAddress.Locality}";
+                        autoCompleteLocality.ActiveFocusControl = null;
+                    }
+                    autoCompleteTypeStreet.ActiveFocusControl = textBoxTypeStreet;
+                    autoCompleteTypeStreet.SelectedValue = $"{currentAddress.TypeStreetName}";
+                    autoCompleteTypeStreet.ActiveFocusControl = null;
+                    autoCompleteStreetName.ActiveFocusControl = textBoxStreetName;
+                    autoCompleteStreetName.SelectedValue = $"{currentAddress.StreetName}";
+                    autoCompleteStreetName.ActiveFocusControl = null;
+                    textBoxHouse.Text = currentAddress.House;
 
-                btnAdd.Image = Resources.save;
-                btnAdd.Text = "Сохранить";
-                btnEdit.Enabled = false;
-                btnDelete.Enabled = false;
+                    btnAdd.Image = Resources.save;
+                    btnAdd.Text = "Сохранить";
+                    btnEdit.Image = Resources.cancel;
+                    btnEdit.Text = "Отменить";
+                    btnDelete.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Выберите в таблице адрес для редактирования.", "Уведомление",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-            else
+            else if (btnEdit.Text == "Отменить")
             {
-                MessageBox.Show("Выберите в таблице адрес для редактирования.", "Уведомление", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ClearTextBox();
+                btnAdd.Text = "Добавить";
+                btnAdd.Image = Resources.add;
+                btnEdit.Text = "Изменить";
+                btnEdit.Image = Resources.edit;
+                btnDelete.Enabled = true;
             }
         }
+        const int errorPadding = 4;
         /// <summary>
         /// Добавление или Сохранение
         /// </summary>
@@ -139,71 +154,109 @@ namespace PhoneBook.Forms
         /// <param name="e"></param>
         private void btnAdd_Click(object sender, System.EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBoxStreetName.Text) || string.IsNullOrEmpty(textBoxTypeStreet.Text) || string.IsNullOrEmpty(textBoxHouse.Text))
+            if (!IsValidation())
+                return;
+
+            if (btnAdd.Text == "Сохранить")
             {
-                MessageBox.Show("Заполните обязательные поля: \nТип улицы, Наименование улицы и Дом,№.", "Уведомление",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (AddressIsExist())
+                {
+                    MessageBox.Show("Данный адрес уже существует!", "Уведомление",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                using (var db = new ApplicationContext())
+                {
+                    if (currentAddress != null)
+                    {
+                        var tempAddress = new Address();
+                        tempAddress.Id = currentAddress.Id;
+                        tempAddress.Locality = textBoxLocality.Text.Trim();
+                        tempAddress.TypeStreetId = Convert.ToInt32(autoCompleteTypeStreet.GetItemArray(textBoxTypeStreet.Text)[0]);
+                        tempAddress.StreetName = textBoxStreetName.Text.Trim();
+                        tempAddress.House = textBoxHouse.Text;
+
+                        db.Address.Update(tempAddress);
+                        db.SaveChanges();
+                    }
+                }
+                ClearTextBox();
+                LoadDataAddress();
+                btnAdd.Text = "Добавить";
+                btnAdd.Image = Resources.add;
+                btnEdit.Text = "Изменить";
+                btnEdit.Image = Resources.edit;
+                btnDelete.Enabled = true;
+
+            }
+            else if (btnAdd.Text == "Добавить")
+            {
+                if (AddressIsExist())
+                {
+                    MessageBox.Show("Данный адрес уже существует!", "Уведомление",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                using (var db = new ApplicationContext())
+                {
+                    var address = new Address()
+                    {
+                        Locality = textBoxLocality.Text.Trim(),
+                        TypeStreetId = Convert.ToInt32(autoCompleteTypeStreet.GetItemArray(textBoxTypeStreet.Text)[0]),
+                        StreetName = textBoxStreetName.Text.Trim(),
+                        House = textBoxHouse.Text.Trim()
+                    };
+                    var city = db.City.Where(c => c.Id == City.Id).FirstOrDefault();
+                    db.Address.Add(address);
+                    address.Cities.Add(city);
+                    db.SaveChanges();
+                }
+                ClearTextBox();
+                LoadDataAddress();
             }
             else
             {
-                if (btnAdd.Text == "Сохранить")
-                {
-                    using (var db = new ApplicationContext())
-                    {
-                        if (currentAddress != null)
-                        {
-                            var tempAddress = new Address();
-                            tempAddress.Id = currentAddress.Id;
-                            tempAddress.Locality = textBoxLocality.Text.Trim();
-                            tempAddress.TypeStreetId = Convert.ToInt32(autoCompleteTypeStreet.GetItemArray(textBoxTypeStreet.Text)[0]);
-                            tempAddress.StreetName = textBoxStreetName.Text.Trim();
-                            tempAddress.House = textBoxHouse.Text;
-
-                            db.Address.Update(tempAddress);
-                            db.SaveChanges();
-                        }
-                    }
-                    ClearTextBox();
-                    LoadDataAddress();
-                    btnAdd.Text = "Добавить";
-                    btnEdit.Enabled = true;
-                    btnDelete.Enabled = true;
-
-                }
-                else if (btnAdd.Text == "Добавить")
-                {
-                    var addresses = uC_GridAddresses.DataGrid.DataSource as List<AddressEdit>;
-                    var find = addresses
-                        .Where(a => a.Locality == textBoxLocality.Text.Trim() && a.TypeStreetName == textBoxTypeStreet.Text.Trim()
-                            && a.StreetName == textBoxStreetName.Text.Trim() && a.House == textBoxHouse.Text.Trim()).ToList();
-                    if (find.Count != 0)
-                    {
-                        MessageBox.Show("Данный адрес уже существует!", "Уведомление",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                    using (var db = new ApplicationContext())
-                    {
-                        var address = new Address()
-                        {
-                            Locality = textBoxLocality.Text.Trim(),
-                            TypeStreetId = Convert.ToInt32(autoCompleteTypeStreet.GetItemArray(textBoxTypeStreet.Text)[0]),
-                            StreetName = textBoxStreetName.Text.Trim(),
-                            House = textBoxHouse.Text.Trim()
-                        };
-                        var city = db.City.Where(c => c.Id == City.Id).FirstOrDefault();
-                        db.Address.Add(address);
-                        address.Cities.Add(city);
-                        db.SaveChanges();
-                    }
-                    ClearTextBox();
-                    LoadDataAddress();
-                }
-                else
-                {
-                    ;
-                }
+                ;
             }
+        }
+        private bool IsValidation()
+        {
+            var result = true;
+            errorValidating.Clear();
+            if (string.IsNullOrEmpty(textBoxTypeStreet.Text))
+            {
+                errorValidating.SetError(textBoxTypeStreet, "Выберите тип улицы или введите новый.");
+                errorValidating.SetIconPadding(textBoxTypeStreet, errorPadding);
+                result = false;
+            }
+
+            if (string.IsNullOrEmpty(textBoxStreetName.Text))
+            {
+                errorValidating.SetError(textBoxStreetName, "Выберите наименование улицы или введите новое.");
+                errorValidating.SetIconPadding(textBoxStreetName, errorPadding);
+                result = false;
+            }
+
+            if (string.IsNullOrEmpty(textBoxHouse.Text))
+            {
+                errorValidating.SetError(textBoxHouse, "Укажите номер дома.");
+                errorValidating.SetIconPadding(textBoxHouse, errorPadding);
+                result = false;
+            }
+
+            return result;
+        }
+        /// <summary>
+        /// Проверка существует ли данный адрес
+        /// </summary>
+        /// <returns></returns>
+        private bool AddressIsExist()
+        {
+            var addresses = uC_GridAddresses.DataGrid.DataSource as List<AddressEdit>;
+            var find = addresses
+                .Where(a => a.Locality == textBoxLocality.Text.Trim() && a.TypeStreetName == textBoxTypeStreet.Text.Trim()
+                    && a.StreetName == textBoxStreetName.Text.Trim() && a.House == textBoxHouse.Text.Trim()).ToList();
+            return find.Count > 0;
         }
         /// <summary>
         /// Очистка текстовых полей
@@ -222,6 +275,7 @@ namespace PhoneBook.Forms
         /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            errorValidating.Clear();
             if (currentAddress != null)
             {
                 var dialog = MessageBox.Show($"Вы действительно хотите удалить запись:\n " +

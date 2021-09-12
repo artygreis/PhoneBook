@@ -55,12 +55,14 @@ namespace PhoneBook.Forms
             this.autoCompleteLocality = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
             this.autoCompleteHouse = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
             this.autoCompleteStreetName = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
+            this.errorValidating = new System.Windows.Forms.ErrorProvider(this.components);
             this.pnlGrid.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteTypeStreet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteLocality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteHouse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteStreetName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorValidating)).BeginInit();
             this.SuspendLayout();
             // 
             // autoLabelLocality
@@ -322,6 +324,11 @@ namespace PhoneBook.Forms
             this.autoCompleteStreetName.Style = Syncfusion.Windows.Forms.Tools.AutoCompleteStyle.Default;
             this.autoCompleteStreetName.ThemeName = "Default";
             // 
+            // errorValidating
+            // 
+            this.errorValidating.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorValidating.ContainerControl = this;
+            // 
             // EditAddress
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -348,6 +355,7 @@ namespace PhoneBook.Forms
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteLocality)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteHouse)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteStreetName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorValidating)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -374,5 +382,6 @@ namespace PhoneBook.Forms
         private AutoComplete autoCompleteHouse;
         private AutoComplete autoCompleteStreetName;
         private TextBox textBoxTypeStreet;
+        private ErrorProvider errorValidating;
     }
 }

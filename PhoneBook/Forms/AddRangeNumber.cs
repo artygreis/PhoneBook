@@ -35,10 +35,34 @@ namespace PhoneBook.Forms
             uC_GridNumberPhones.DataGrid.AddNewRowInitiating += DataGrid_AddNewRowInitiating;
             uC_GridNumberPhones.DataGrid.DrawCell += DataGrid_DrawCell;
             uC_GridNumberPhones.DataGrid.CellClick += DataGrid_CellClick;
+            uC_GridNumberPhones.DataGrid.CurrentCellValidating += DataGrid_CurrentCellValidating;
+        }
+
+        private void DataGrid_CurrentCellValidating(object sender, Syncfusion.WinForms.DataGrid.Events.CurrentCellValidatingEventArgs e)
+        {
+            if (e.Column == uC_GridNumberPhones.DataGrid.Columns["Apartment"])
+            {
+                e.NewValue = e.NewValue?.ToString().Trim().ToUpper() ?? "";
+                if (string.IsNullOrEmpty(e.NewValue.ToString()))
+                {
+                    e.IsValid = false;
+                    e.ErrorMessage = "Введите номер квартиры. Для отмены нажмите на клавиатуре Esc.";
+                }
+            }
+
+            if (e.Column == uC_GridNumberPhones.DataGrid.Columns["Number"])
+            {
+                if (regex.Replace(e.NewValue?.ToString() ?? "", "").Length != 0 && regex.Replace(e.NewValue?.ToString() ?? "", "").Length != Mask.Replace("-","").Length)
+                {
+                    e.IsValid = false;
+                    e.ErrorMessage = $"В номере должно быть {Mask.Replace("-", "").Length} цифр. Для отмены нажмите на клавиатуре Esc.";
+                }
+            }
         }
 
         private void DataGrid_CellClick(object sender, Syncfusion.WinForms.DataGrid.Events.CellClickEventArgs e)
         {
+            if (!uC_GridNumberPhones.Validate()) return;
             if (e.DataColumn.ColumnIndex == 0 && e.DataRow.RowIndex != uC_GridNumberPhones.DataGrid.RowCount - 1)
             {
                 int deletingRowIndex = uC_GridNumberPhones.DataGrid.TableControl.ResolveToRecordIndex(e.DataRow.RowIndex);
@@ -91,8 +115,9 @@ namespace PhoneBook.Forms
             uC_GridNumberPhones.DataGrid.DataSource = numberPhones;
             uC_GridNumberPhones.DataGrid.Columns["Id"].Visible = false;
             uC_GridNumberPhones.DataGrid.Columns["Apartment"].Width = 120;
+            uC_GridNumberPhones.DataGrid.Columns["Apartment"].ValidationMode = Syncfusion.WinForms.DataGrid.Enums.GridValidationMode.InView;
             uC_GridNumberPhones.DataGrid.Columns["AddressId"].Visible = false;
-            uC_GridNumberPhones.DataGrid.Columns["Number"].Width = 190;
+            uC_GridNumberPhones.DataGrid.Columns["Number"].Width = 180;
         }
 
         private void btnClose_Click(object sender, System.EventArgs e)
@@ -147,7 +172,7 @@ namespace PhoneBook.Forms
                         var firsrRow = selectedRecord[0] as NumberPhone;
                         if (i==0 && selectedRecord.Count == 1 && string.IsNullOrEmpty(firsrRow.Apartment ?? "") && string.IsNullOrEmpty(firsrRow.Number ?? ""))
                         {
-                            base.PasteToRow(copiedRecord[i], selectedRecord[0]);
+                            base.PasteToRow(copiedRecord[i].Trim().ToUpper(), selectedRecord[0]);
                             base.PasteToCell(selectedRecord[0], this.dataGrid.Columns["AddressId"], addressId);
                             continue;
                         }
@@ -165,7 +190,7 @@ namespace PhoneBook.Forms
                             //Adds the new record by using the PasteToCell method, by passing       the created data, particular column, and clipboard value.
                             if (this.dataGrid.Columns[j].Visible == true && k < splitRecord.Length)
                             {
-                                this.PasteToCell(this.dataGrid.View.CurrentAddItem, this.dataGrid.Columns[j], splitRecord[k]);
+                                this.PasteToCell(this.dataGrid.View.CurrentAddItem, this.dataGrid.Columns[j], splitRecord[k].Trim().ToUpper());
                                 ++k;
                             }
                             

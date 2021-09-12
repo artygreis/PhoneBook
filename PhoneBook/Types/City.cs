@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace PhoneBook.Types
 {
     public class City
     {
         public int Id { get; set; }
-        [DisplayName("Город")]
+        [Display(Name = "Город")]
         public string CityName { get; set; }
-        [DisplayName("Код города")]
+        [Display(Name = "Код города")]
         public string CityCode { get; set; }
-        [DisplayName("Маска номера")]
+        [Display(Name = "Маска номера")]
         public string MaskNumber { get; set; }
 
         public int CountryId { get; set; }

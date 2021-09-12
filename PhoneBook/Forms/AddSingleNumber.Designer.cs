@@ -34,6 +34,7 @@ namespace PhoneBook.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddSingleNumber));
             this.autoLabelApartment = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.textBoxApartment = new System.Windows.Forms.TextBox();
@@ -44,8 +45,10 @@ namespace PhoneBook.Forms
             this.btnClose = new System.Windows.Forms.Button();
             this.labelHeader = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
+            this.errorValidating = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.maskedEditNumber)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorValidating)).BeginInit();
             this.SuspendLayout();
             // 
             // autoLabelApartment
@@ -63,6 +66,7 @@ namespace PhoneBook.Forms
             // 
             // textBoxApartment
             // 
+            this.textBoxApartment.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.textBoxApartment.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
             this.textBoxApartment.Location = new System.Drawing.Point(101, 102);
             this.textBoxApartment.Name = "textBoxApartment";
@@ -86,6 +90,7 @@ namespace PhoneBook.Forms
             // maskedEditNumber
             // 
             this.maskedEditNumber.BeforeTouchSize = new System.Drawing.Size(184, 27);
+            this.maskedEditNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.maskedEditNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
             this.maskedEditNumber.Location = new System.Drawing.Point(101, 163);
             this.maskedEditNumber.Name = "maskedEditNumber";
@@ -165,6 +170,11 @@ namespace PhoneBook.Forms
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // errorValidating
+            // 
+            this.errorValidating.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorValidating.ContainerControl = this;
+            // 
             // AddSingleNumber
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -186,6 +196,7 @@ namespace PhoneBook.Forms
             ((System.ComponentModel.ISupportInitialize)(this.maskedEditNumber)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorValidating)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -200,5 +211,6 @@ namespace PhoneBook.Forms
         private MaskedEditBox maskedEditNumber;
         private TextBox textBoxApartment;
         private Label labelAddress;
+        private ErrorProvider errorValidating;
     }
 }

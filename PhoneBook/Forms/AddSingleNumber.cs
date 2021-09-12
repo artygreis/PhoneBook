@@ -40,9 +40,24 @@ namespace PhoneBook.Forms
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(textBoxApartment.Text))
+            {
+                errorValidating.SetError(textBoxApartment, "Введите номер квартиры.");
+                errorValidating.SetIconPadding(textBoxApartment, 8);
+                return;
+            }
+            errorValidating.Clear();
+            if (regex.Replace(maskedEditNumber.Text, "").Length != 0 && regex.Replace(maskedEditNumber.Text, "").Length != Mask.Replace("-", "").Length)
+            {
+                errorValidating.SetError(maskedEditNumber, $"В номере должно быть {Mask.Replace("-", "").Length} цифр");
+                errorValidating.SetIconPadding(maskedEditNumber, 8);
+                return;
+            }
+            errorValidating.Clear();
             NumberPhone.Apartment = textBoxApartment.Text.Trim();
             NumberPhone.Number = regex.Replace(maskedEditNumber.Text.Trim(), "");
             DialogResult = DialogResult.OK;
+            
         }
     }
 }

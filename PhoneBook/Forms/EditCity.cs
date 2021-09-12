@@ -33,13 +33,15 @@ namespace PhoneBook.Forms
         /// <param name="e"></param>
         private void MaskedEditBoxFormatNumber_GotFocus(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(maskedEditCityCode.Text.Replace(" ", "")))
-            {
-                maskedEditCityCode.Focus();
-                MessageBox.Show("Укажите Код города.", "Уведомление",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            if (!IsValidation())
                 return;
-            }
+            //if (string.IsNullOrEmpty(maskedEditCityCode.Text.Replace(" ", "")))
+            //{
+            //    maskedEditCityCode.Focus();
+            //    MessageBox.Show("Укажите Код города.", "Уведомление",
+            //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
             if (!ValidateMaskNumber())
             {
                 var tempText = maskedEditBoxFormatNumber.Text.Replace(" ", "");
@@ -82,6 +84,41 @@ namespace PhoneBook.Forms
                 UpdateData(cities);
             }
         }
+        private bool IsValidation()
+        {
+            var result = true;
+            errorValidating.Clear();
+
+            if (string.IsNullOrEmpty(textBoxCityName.Text))
+            {
+                errorValidating.SetError(textBoxCityName, "Введите нименование города.");
+                errorValidating.SetIconPadding(textBoxCityName, errorPadding);
+                result = false;
+            }
+
+            if (string.IsNullOrEmpty(maskedEditCityCode.Text.Replace(" ", "")))
+            {
+                errorValidating.SetError(maskedEditCityCode, "Введите код города.");
+                errorValidating.SetIconPadding(maskedEditCityCode, errorPadding);
+                result = false;
+            }
+
+            if (maskedEditCityCode.Text.StartsWith('0'))
+            {
+                errorValidating.SetError(maskedEditCityCode, "Код города должен быть в международном формате и не начинаться с 0.");
+                errorValidating.SetIconPadding(maskedEditCityCode, errorPadding);
+                result = false;
+            }
+
+            if (ValidateMaskNumber())
+            {
+                errorValidating.SetError(maskedEditBoxFormatNumber, "Проверьте количество символов маркера \"#\".");
+                errorValidating.SetIconPadding(maskedEditBoxFormatNumber, errorPadding);
+                result = false;
+            }
+
+            return result;
+        }
         /// <summary>
         /// Изменение
         /// </summary>
@@ -89,24 +126,39 @@ namespace PhoneBook.Forms
         /// <param name="e"></param>
         private void btnEdit_Click(object sender, System.EventArgs e)
         {
-            if (currentCity != null)
+            errorValidating.Clear();
+            if (btnEdit.Text == "Изменить")
             {
-                textBoxCityName.Text = currentCity.CityName;
-                maskedEditCityCode.Text = currentCity.CityCode;
-                maskedEditBoxFormatNumber.Text = currentCity.MaskNumber;
+                if (currentCity != null)
+                {
+                    textBoxCityName.Text = currentCity.CityName;
+                    maskedEditCityCode.Text = currentCity.CityCode;
+                    maskedEditBoxFormatNumber.Text = currentCity.MaskNumber;
 
 
-                btnAdd.Image = Resources.save;
-                btnAdd.Text = "Сохранить";
-                btnEdit.Enabled = false;
-                btnDelete.Enabled = false;
+                    btnAdd.Image = Resources.save;
+                    btnAdd.Text = "Сохранить";
+                    btnEdit.Image = Resources.cancel;
+                    btnEdit.Text = "Отменить";
+                    btnDelete.Enabled = false;
+                }
+                else
+                {
+                    MessageBox.Show("Выберите в таблице город для редактирования.", "Уведомление",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-            else
+            else if (btnEdit.Text == "Отменить")
             {
-                MessageBox.Show("Выберите в таблице город для редактирования.", "Уведомление", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ClearTextBox();
+                btnAdd.Text = "Добавить";
+                btnAdd.Image = Resources.add;
+                btnEdit.Text = "Изменить";
+                btnEdit.Image = Resources.edit;
+                btnDelete.Enabled = true;
             }
         }
+        const int errorPadding = 4;
         /// <summary>
         /// Добавление или Сохранение
         /// </summary>
@@ -114,61 +166,53 @@ namespace PhoneBook.Forms
         /// <param name="e"></param>
         private void btnAdd_Click(object sender, System.EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBoxCityName.Text) || string.IsNullOrEmpty(maskedEditCityCode.Text.Replace(" ", "")))
+            if (!IsValidation())
+                return;
+
+            if (btnAdd.Text == "Сохранить")
             {
-                MessageBox.Show("Заполните обязательные поля: \nНаименование и Код города.", "Уведомление",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                using (var db = new ApplicationContext())
+                {
+                    if (currentCity != null)
+                    {
+                        currentCity.CityName = textBoxCityName.Text.Trim();
+                        currentCity.CityCode = maskedEditCityCode.Text.Replace(" ", "");
+                        currentCity.MaskNumber = maskedEditBoxFormatNumber.Text.Trim();
+
+                        db.City.Update(currentCity);
+                        db.SaveChanges();
+                    }
+                }
+                ClearTextBox();
+                LoadDataCity();
+                btnAdd.Text = "Добавить";
+                btnAdd.Image = Resources.add;
+                btnEdit.Text = "Изменить";
+                btnEdit.Image = Resources.edit;
+                btnDelete.Enabled = true;
+
             }
-            else if (ValidateMaskNumber())
+            else if (btnAdd.Text == "Добавить")
             {
-                MessageBox.Show("Проверьте формат номера.", "Уведомление",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                using (var db = new ApplicationContext())
+                {
+                    db.City.Add(new City()
+                    {
+                        CityName = textBoxCityName.Text.Trim(),
+                        CityCode = maskedEditCityCode.Text.Replace(" ", ""),
+                        MaskNumber = maskedEditBoxFormatNumber.Text.Trim(),
+                        CountryId = Country.Id
+                    });
+
+                    db.SaveChanges();
+                }
+                ClearTextBox();
+                LoadDataCity();
             }
             else
             {
-                if (btnAdd.Text == "Сохранить")
-                {
-                    using (var db = new ApplicationContext())
-                    {
-                        if (currentCity != null)
-                        {
-                            currentCity.CityName = textBoxCityName.Text.Trim();
-                            currentCity.CityCode = maskedEditCityCode.Text.Replace(" ", "");
-                            currentCity.MaskNumber = maskedEditBoxFormatNumber.Text.Trim();
-
-                            db.City.Update(currentCity);
-                            db.SaveChanges();
-                        }
-                    }
-                    ClearTextBox();
-                    LoadDataCity();
-                    btnAdd.Text = "Добавить";
-                    btnEdit.Enabled = true;
-                    btnDelete.Enabled = true;
-
-                }
-                else if (btnAdd.Text == "Добавить")
-                {
-
-                    using (var db = new ApplicationContext())
-                    {
-                        db.City.Add(new City()
-                        {
-                            CityName = textBoxCityName.Text.Trim(),
-                            CityCode = maskedEditCityCode.Text.Replace(" ", ""),
-                            MaskNumber = maskedEditBoxFormatNumber.Text.Trim(),
-                            CountryId = Country.Id
-                        });
-
-                        db.SaveChanges();
-                    }
-                    ClearTextBox();
-                    LoadDataCity();
-                }
-                else
-                {
-                    ;
-                }
+                ;
             }
         }
         /// <summary>
@@ -187,6 +231,7 @@ namespace PhoneBook.Forms
         /// <param name="e"></param>
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            errorValidating.Clear();
             if (currentCity != null)
             {
                 var dialog = MessageBox.Show($"Вы действительно хотите удалить запись:\n " +
@@ -230,12 +275,23 @@ namespace PhoneBook.Forms
         /// <param name="e"></param>
         private void maskedEditBoxFormatNumber_Validated(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(maskedEditCityCode.Text.Replace(" ", ""))) return;
-            if (ValidateMaskNumber())
+            var regex = new Regex(@"[^#-]");
+            if (regex.IsMatch(maskedEditBoxFormatNumber.Text))
             {
-                MessageBox.Show("Проверьте формат номера.", "Уведомление",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                errorValidating.SetError(maskedEditBoxFormatNumber, "В качестве маркера нужно использовать \"#\", а в качестве разделителя \"-\".");
+                errorValidating.SetIconPadding(maskedEditBoxFormatNumber, errorPadding);
+
+                return;
             }
+            errorValidating.Clear();
+
+
+            //if (string.IsNullOrEmpty(maskedEditCityCode.Text.Replace(" ", ""))) return;
+            //if (ValidateMaskNumber())
+            //{
+            //    MessageBox.Show("Проверьте формат номера.", "Уведомление",
+            //        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //}
         }
         /// <summary>
         /// Проверка соответсвие формата номера

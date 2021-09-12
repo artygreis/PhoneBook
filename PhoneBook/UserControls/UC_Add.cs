@@ -38,9 +38,9 @@ namespace PhoneBook.UserControls
 
         private void DataGrid_CellClick(object sender, Syncfusion.WinForms.DataGrid.Events.CellClickEventArgs e)
         {
-            if (e.DataColumn.ColumnIndex == 0 && e.DataRow.RowIndex != uC_GridPhones.DataGrid.RowCount - 1)
+            if (e.DataColumn.ColumnIndex == 0)
             {
-                var res = MessageBox.Show("Вы действительно хотите удалить данную запись?");
+                var res = MessageBox.Show("Вы действительно хотите удалить данную запись?", "Предупреждение", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                 if (res == DialogResult.OK)
                 {
                     int deletingRowIndex = uC_GridPhones.DataGrid.TableControl.ResolveToRecordIndex(e.DataRow.RowIndex);
@@ -182,7 +182,6 @@ namespace PhoneBook.UserControls
                     .Where(c => c.CountryId == Convert.ToInt32(countryId))
                     .Select(c => new CityCollection() { Id = c.Id, CityData = $"{c.CityName} ({c.CityCode})" })
                     .ToList();
-                maskNumber = db.City.Where(c => c.CountryId == Convert.ToInt32(countryId)).FirstOrDefault().MaskNumber;
                 autoCompleteCity.DataSource = cities;
                 autoCompleteCity.RefreshColumns();
                 autoCompleteCity.Columns[1].MatchingColumn = true;
@@ -220,7 +219,7 @@ namespace PhoneBook.UserControls
                         DataAddress = $"{(string.IsNullOrEmpty(a.Locality) ? "" : a.Locality + ", ")}{a.TypeStreet.TypeName} {a.StreetName}, {a.House}"
                     })
                     .ToList();
-
+                maskNumber = db.City.Where(c => c.Id == Convert.ToInt32(cityId)).FirstOrDefault().MaskNumber;
                 autoCompleteAddress.DataSource = addresses;
                 autoCompleteAddress.RefreshColumns();
                 autoCompleteAddress.Columns[1].MatchingColumn = true;
