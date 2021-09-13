@@ -147,7 +147,7 @@ namespace PhoneBook.Forms
             this.uC_GridCities.Margin = new System.Windows.Forms.Padding(4);
             this.uC_GridCities.Name = "uC_GridCities";
             this.uC_GridCities.Size = new System.Drawing.Size(502, 241);
-            this.uC_GridCities.TabIndex = 0;
+            this.uC_GridCities.TabIndex = 6;
             // 
             // panel1
             // 

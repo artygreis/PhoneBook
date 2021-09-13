@@ -171,7 +171,7 @@ namespace PhoneBook.Forms
             this.uC_GridCountries.Margin = new System.Windows.Forms.Padding(4);
             this.uC_GridCountries.Name = "uC_GridCountries";
             this.uC_GridCountries.Size = new System.Drawing.Size(502, 231);
-            this.uC_GridCountries.TabIndex = 0;
+            this.uC_GridCountries.TabIndex = 7;
             // 
             // panel1
             // 

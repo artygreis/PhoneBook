@@ -65,7 +65,7 @@ namespace PhoneBook.Forms
             this.uC_GridNumberPhones.Margin = new System.Windows.Forms.Padding(4);
             this.uC_GridNumberPhones.Name = "uC_GridNumberPhones";
             this.uC_GridNumberPhones.Size = new System.Drawing.Size(366, 398);
-            this.uC_GridNumberPhones.TabIndex = 0;
+            this.uC_GridNumberPhones.TabIndex = 1;
             // 
             // panel1
             // 
@@ -102,7 +102,7 @@ namespace PhoneBook.Forms
             this.btnClose.Location = new System.Drawing.Point(332, 4);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(31, 29);
-            this.btnClose.TabIndex = 7;
+            this.btnClose.TabIndex = 2;
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
@@ -128,7 +128,7 @@ namespace PhoneBook.Forms
             this.btnSave.Location = new System.Drawing.Point(218, 75);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(136, 32);
-            this.btnSave.TabIndex = 4;
+            this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Сохранить";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = false;

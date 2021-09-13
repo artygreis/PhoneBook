@@ -105,11 +105,13 @@ namespace PhoneBook.Forms
             // textBoxTypeStreet
             // 
             this.autoCompleteTypeStreet.SetAutoComplete(this.textBoxTypeStreet, Syncfusion.Windows.Forms.Tools.AutoCompleteModes.AutoSuggest);
+            this.textBoxTypeStreet.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
             this.textBoxTypeStreet.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
             this.textBoxTypeStreet.Location = new System.Drawing.Point(34, 124);
             this.textBoxTypeStreet.Name = "textBoxTypeStreet";
             this.textBoxTypeStreet.Size = new System.Drawing.Size(141, 27);
             this.textBoxTypeStreet.TabIndex = 1;
+            this.textBoxTypeStreet.Leave += new System.EventHandler(this.textBoxTypeStreet_Leave);
             // 
             // autoLabelStreetName
             // 
@@ -175,7 +177,7 @@ namespace PhoneBook.Forms
             this.uC_GridAddresses.Margin = new System.Windows.Forms.Padding(4);
             this.uC_GridAddresses.Name = "uC_GridAddresses";
             this.uC_GridAddresses.Size = new System.Drawing.Size(594, 306);
-            this.uC_GridAddresses.TabIndex = 0;
+            this.uC_GridAddresses.TabIndex = 7;
             // 
             // panel1
             // 

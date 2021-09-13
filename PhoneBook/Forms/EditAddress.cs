@@ -29,6 +29,7 @@ namespace PhoneBook.Forms
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteStreetName);
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteHouse);
         }
+
         /// <summary>
         /// Загрузка и обновление данных
         /// </summary>
@@ -146,7 +147,7 @@ namespace PhoneBook.Forms
                 btnDelete.Enabled = true;
             }
         }
-        const int errorPadding = 4;
+        const int errorPadding = 3;
         /// <summary>
         /// Добавление или Сохранение
         /// </summary>
@@ -295,6 +296,37 @@ namespace PhoneBook.Forms
             {
                 MessageBox.Show("Выберите в таблице адрес для удаления.", "Уведомление",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void textBoxTypeStreet_Leave(object sender, EventArgs e)
+        {
+            var text = textBoxTypeStreet.Text;
+            if (!string.IsNullOrEmpty(text) && autoCompleteTypeStreet.GetItemArray(text) == null)
+            {
+                var dialog = MessageBox.Show($"Вы действительно добавить тип улицы:\n " +
+                       $"{text.ToLower().Trim()}", "Уведомление",
+                       MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialog == DialogResult.No)
+                {
+                    textBoxTypeStreet.Text = "";
+                    return;
+                }
+                    
+                using (var db = new ApplicationContext())
+                {
+                    db.TypeStreet.Add(new TypeStreet() { TypeName = text.Trim() });
+                    db.SaveChanges();
+
+                    var typeStreet = db.TypeStreet.ToList();
+                    autoCompleteTypeStreet.DataSource = typeStreet;
+                    autoCompleteTypeStreet.RefreshColumns();
+                    autoCompleteTypeStreet.Columns[1].MatchingColumn = true;
+                    autoCompleteTypeStreet.Columns[0].Visible = false;
+                    autoCompleteTypeStreet.Columns[2].Visible = false;
+
+                    autoCompleteTypeStreet.SelectedValue = text.ToLower().Trim();
+                }
             }
         }
     }
