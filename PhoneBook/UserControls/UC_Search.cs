@@ -32,8 +32,6 @@ namespace PhoneBook.UserControls
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteHouse);
 
             uC_GridPhones.DataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
-
-            LoadDataToCountry();
         }
 
         private void DataGrid_AutoGeneratingColumn(object sender, Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnArgs e)
@@ -222,6 +220,11 @@ namespace PhoneBook.UserControls
                 }
                 UpdateData(numberPhones);
             }
+        }
+
+        private void UC_Search_Load(object sender, EventArgs e)
+        {
+            LoadDataToCountry();
         }
     }
 }

@@ -150,7 +150,6 @@ namespace PhoneBook
             this.ShowMaximizeBox = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

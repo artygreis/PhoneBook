@@ -326,6 +326,7 @@ namespace PhoneBook.UserControls
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UC_Search";
             this.Size = new System.Drawing.Size(690, 444);
+            this.Load += new System.EventHandler(this.UC_Search_Load);
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCountry)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

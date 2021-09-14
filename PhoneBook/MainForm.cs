@@ -16,7 +16,9 @@ namespace PhoneBook
     {
         public MainForm()
         {
+
             InitializeComponent();
+            DbInitializer.InitializeDb();
             btnSearchClick(btnSearch, new EventArgs());
         }
         private void MoveSidePanel(Control btn)
@@ -40,11 +42,6 @@ namespace PhoneBook
         {
             MoveSidePanel(btnAdd);
             AddControlToPanel(new UC_Add());
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            DbInitializer.InitializeDb();
         }
     }
 }
