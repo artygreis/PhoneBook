@@ -11,7 +11,7 @@ namespace PhoneBook
         {
             using (var db = new ApplicationContext())
             {
-                db.Database.EnsureDeleted();
+                //db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
 
                 db.Database.ExecuteSqlRaw(@"CREATE VIEW NumberPhoneView AS 

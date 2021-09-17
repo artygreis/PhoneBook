@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PhoneBook.Forms;
 using PhoneBook.UserControls;
 using Syncfusion.Windows.Forms;
 
@@ -16,10 +18,17 @@ namespace PhoneBook
     {
         public MainForm()
         {
-
             InitializeComponent();
-            DbInitializer.InitializeDb();
-            btnSearchClick(btnSearch, new EventArgs());
+            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var settings = configFile.AppSettings.Settings;
+            if (settings["UserSourceDb"] == null || string.IsNullOrEmpty(settings["UserSourceDb"].Value))
+            {
+                var settingsForm = new SettingsApp();
+                if (settingsForm.ShowDialog() == DialogResult.OK)
+                {
+                    btnSearchClick(btnSearch, new EventArgs());
+                }
+            }
         }
         private void MoveSidePanel(Control btn)
         {

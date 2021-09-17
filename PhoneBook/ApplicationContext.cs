@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using PhoneBook.Types;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,15 @@ namespace PhoneBook
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(ConfigurationManager.ConnectionStrings["PhoneDatabase"].ConnectionString);
+            var conn = new SqliteConnection($"Data Source={ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["UserSourceDb"].Value};");
+            if (!string.IsNullOrEmpty(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["PasswordDb"].Value))
+            {
+                conn.ConnectionString =
+                    new SqliteConnectionStringBuilder(conn.ConnectionString)
+                    { Password = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["PasswordDb"].Value }
+                    .ToString();
+            }
+            optionsBuilder.UseSqlite(conn);
         }
     }
 }
