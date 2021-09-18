@@ -110,13 +110,6 @@ namespace PhoneBook.Forms
                 result = false;
             }
 
-            if (ValidateMaskNumber())
-            {
-                errorValidating.SetError(maskedEditBoxFormatNumber, "Проверьте количество символов маркера \"#\".");
-                errorValidating.SetIconPadding(maskedEditBoxFormatNumber, errorPadding);
-                result = false;
-            }
-
             return result;
         }
         /// <summary>
@@ -168,7 +161,12 @@ namespace PhoneBook.Forms
         {
             if (!IsValidation())
                 return;
-
+            if (ValidateMaskNumber())
+            {
+                errorValidating.SetError(maskedEditBoxFormatNumber, "Проверьте количество символов маркера \"#\".");
+                errorValidating.SetIconPadding(maskedEditBoxFormatNumber, errorPadding);
+                return;
+            }
             if (btnAdd.Text == "Сохранить")
             {
                 using (var db = new ApplicationContext())

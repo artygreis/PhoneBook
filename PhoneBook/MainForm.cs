@@ -29,6 +29,10 @@ namespace PhoneBook
                     btnSearchClick(btnSearch, new EventArgs());
                 }
             }
+            else
+            {
+                btnSearchClick(btnSearch, new EventArgs());
+            }
         }
         private void MoveSidePanel(Control btn)
         {

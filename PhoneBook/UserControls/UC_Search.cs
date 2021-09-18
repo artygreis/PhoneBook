@@ -90,7 +90,7 @@ namespace PhoneBook.UserControls
                     .Where(c => c.CountryId == Convert.ToInt32(countryId))
                     .Select(c => new CityCollection() { Id = c.Id, CityData = $"{c.CityName} ({c.CityCode})" })
                     .ToList();
-                maskNumber = db.City.Where(c => c.CountryId == Convert.ToInt32(countryId)).FirstOrDefault().MaskNumber;
+                maskNumber = db.City.Where(c => c.CountryId == Convert.ToInt32(countryId)).FirstOrDefault()?.MaskNumber ?? "";
                 autoCompleteCity.DataSource = cities;
                 autoCompleteCity.RefreshColumns();
                 autoCompleteCity.Columns[1].MatchingColumn = true;
