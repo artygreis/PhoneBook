@@ -60,22 +60,7 @@ namespace PhoneBook.Forms
         {
             if (!IsValidation())
                 return;
-            //if (string.IsNullOrEmpty(maskedEditCountryCode.Text) || maskedEditCountryCode.Text.Replace(" ", "").Length <= 1)
-            //{
-            //    maskedEditCountryCode.Focus();
-            //    errorValidating.SetError(maskedEditCountryCode, "Укажите Код страны в международном формате.");
-            //    errorValidating.SetIconPadding(maskedEditCountryCode, errorPadding);
-            //    return;
-            //}
-            //errorValidating.Clear();
-            //if (string.IsNullOrEmpty(textBoxCountDigits.Text))
-            //{
-            //    textBoxCountDigits.Focus();
-            //    errorValidating.SetError(textBoxCountDigits, "Укажите Количество всех цифр в номере.");
-            //    errorValidating.SetIconPadding(textBoxCountDigits, errorPadding);
-            //    return;
-            //}
-            //errorValidating.Clear();
+
             maskedEditBoxExample.Mask = "+" + new string('#', Convert.ToInt32(textBoxCountDigits.Text));
             if (regex.Replace(maskedEditBoxExample.Text, "").Length == Convert.ToInt32(textBoxCountDigits.Text))
             {

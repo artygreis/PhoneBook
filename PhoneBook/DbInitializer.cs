@@ -11,7 +11,6 @@ namespace PhoneBook
         {
             using (var db = new ApplicationContext())
             {
-                //db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
 
                 db.Database.ExecuteSqlRaw(@"CREATE VIEW NumberPhoneView AS 
@@ -20,11 +19,6 @@ namespace PhoneBook
                                             FROM NumberPhone NumberPhone
                                             INNER JOIN Address Address ON NumberPhone.AddressId = Address.Id
                                             INNER JOIN TypeStreet TypeStreet ON Address.TypeStreetId = TypeStreet.Id");
-
-                //db.Database.ExecuteSqlRaw(@"CREATE VIEW TypeStreetWithNameView AS 
-                //                            SELECT Address.Id, Address.Locality, TypeStreet.TypeName, Address.StreetName
-                //                            FROM TypeStreet TypeStreet 
-                //                            INNER JOIN Address Address ON TypeStreet.Id = Address.TypeStreetId");
 
                 var country = new Country()
                 {

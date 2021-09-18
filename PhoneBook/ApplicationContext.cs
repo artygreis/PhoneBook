@@ -21,20 +21,12 @@ namespace PhoneBook
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder
                 .Entity<NumberPhoneView>((np =>
                {
                    np.HasNoKey();
                    np.ToView("NumberPhoneView");
                }));
-
-            //modelBuilder
-            //    .Entity<TypeStreetWithNameView>((ts =>
-            //    {
-            //        ts.HasNoKey();
-            //        ts.ToView("TypeStreetWithNameView");
-            //    }));
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

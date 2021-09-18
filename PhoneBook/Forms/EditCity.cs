@@ -35,13 +35,7 @@ namespace PhoneBook.Forms
         {
             if (!IsValidation())
                 return;
-            //if (string.IsNullOrEmpty(maskedEditCityCode.Text.Replace(" ", "")))
-            //{
-            //    maskedEditCityCode.Focus();
-            //    MessageBox.Show("Укажите Код города.", "Уведомление",
-            //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    return;
-            //}
+
             if (!ValidateMaskNumber())
             {
                 var tempText = maskedEditBoxFormatNumber.Text.Replace(" ", "");
@@ -282,14 +276,6 @@ namespace PhoneBook.Forms
                 return;
             }
             errorValidating.Clear();
-
-
-            //if (string.IsNullOrEmpty(maskedEditCityCode.Text.Replace(" ", ""))) return;
-            //if (ValidateMaskNumber())
-            //{
-            //    MessageBox.Show("Проверьте формат номера.", "Уведомление",
-            //        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //}
         }
         /// <summary>
         /// Проверка соответсвие формата номера
