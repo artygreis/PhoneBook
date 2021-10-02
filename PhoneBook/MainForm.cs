@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PhoneBook.Forms;
+using PhoneBook.Types;
 using PhoneBook.UserControls;
 using Syncfusion.Windows.Forms;
 
@@ -19,9 +20,8 @@ namespace PhoneBook
         public MainForm()
         {
             InitializeComponent();
-            var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var settings = configFile.AppSettings.Settings;
-            if (settings["UserSourceDb"] == null || string.IsNullOrEmpty(settings["UserSourceDb"].Value))
+            var settings = Settings.Load();
+            if (settings == null || string.IsNullOrEmpty(settings?.UserSourceDb ?? ""))
             {
                 var settingsForm = new SettingsApp();
                 if (settingsForm.ShowDialog() == DialogResult.OK)
@@ -55,6 +55,12 @@ namespace PhoneBook
         {
             MoveSidePanel(btnAdd);
             AddControlToPanel(new UC_Add());
+        }
+
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            MoveSidePanel(btnSettings);
+            AddControlToPanel(new UC_Settings());
         }
     }
 }

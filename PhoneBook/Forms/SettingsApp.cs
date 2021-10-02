@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PhoneBook.Services;
 using PhoneBook.Types;
 using System;
 using System.Configuration;
@@ -23,11 +24,19 @@ namespace PhoneBook.Forms
 
         private void btnClose_Click(object sender, System.EventArgs e)
         {
-            var dialog = MessageBox.Show($"Прекратить первоначальную настройку приложения и справочника?\n" +
+            var settings = Settings.Load();
+            if (settings == null || string.IsNullOrEmpty(settings.UserSourceDb))
+            {
+                var dialog = MessageBox.Show($"Прекратить первоначальную настройку приложения и справочника?\n" +
                 $"Дальнейшая работа с программой будет некорректной.", "Предупреждение",
                        MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (dialog == DialogResult.Yes)
+                if (dialog == DialogResult.Yes)
+                    DialogResult = DialogResult.Cancel;
+            }
+            else
+            {
                 DialogResult = DialogResult.Cancel;
+            }
         }
 
         private void AddOneApartment_Load(object sender, System.EventArgs e)
@@ -126,14 +135,17 @@ namespace PhoneBook.Forms
         }
         private bool CheckAndSaveUserSettings()
         {
+            var settings = Settings.Load();
             var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             if (rdbExist.Checked)
-                config.AppSettings.Settings["UserSourceDb"].Value = $"{textBoxSourceFile.Text}";
+                settings.UserSourceDb = $"{textBoxSourceFile.Text}";
             if (rdbNew.Checked)
-                config.AppSettings.Settings["UserSourceDb"].Value = $"{textBoxSourceDb.Text}\\{config.AppSettings.Settings["DefaultFileNameDb"].Value}";
-            config.AppSettings.Settings["PasswordDb"].Value = textBoxPassword.Text;
-            config.Save(ConfigurationSaveMode.Modified);
-            ConfigurationManager.RefreshSection(config.AppSettings.SectionInformation.Name);
+                settings.UserSourceDb = $"{textBoxSourceDb.Text}\\{config.AppSettings.Settings["DefaultFileNameDb"].Value}";
+            if (!string.IsNullOrEmpty(textBoxPassword.Text.Replace(" ", "")))
+            {
+                settings.Password = CryptoService.Encrypt(textBoxPassword.Text.Trim());
+            }
+            settings.Save();
             using (var db = new ApplicationContext())
             {
                 try
@@ -144,12 +156,9 @@ namespace PhoneBook.Forms
                 }
                 catch
                 {
-                    errorValidating.SetError(textBoxPassword, "Проверьте пароль для подключения");
+                    errorValidating.SetError(textBoxPassword, "Проверьте данные для подключения");
                     errorValidating.SetIconPadding(textBoxPassword, 4);
-                    config.AppSettings.Settings["UserSourceDb"].Value = "";
-                    config.AppSettings.Settings["PasswordDb"].Value = "";
-                    config.Save(ConfigurationSaveMode.Modified);
-                    ConfigurationManager.RefreshSection(config.AppSettings.SectionInformation.Name);
+                    Settings.DeleteFileSettings();
                     return false;
                 }
             }

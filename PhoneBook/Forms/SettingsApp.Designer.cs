@@ -88,9 +88,9 @@ namespace PhoneBook.Forms
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
-            this.panel1.Controls.Add(this.pnlStep2);
             this.panel1.Controls.Add(this.pnlStep3);
             this.panel1.Controls.Add(this.pnlStep1);
+            this.panel1.Controls.Add(this.pnlStep2);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Controls.Add(this.labelHeader);
@@ -106,7 +106,7 @@ namespace PhoneBook.Forms
             // 
             this.pnlStep2.Controls.Add(this.groupBox2);
             this.pnlStep2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlStep2.Location = new System.Drawing.Point(0, -401);
+            this.pnlStep2.Location = new System.Drawing.Point(0, 39);
             this.pnlStep2.Name = "pnlStep2";
             this.pnlStep2.Size = new System.Drawing.Size(658, 220);
             this.pnlStep2.TabIndex = 10;
@@ -158,7 +158,6 @@ namespace PhoneBook.Forms
             this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(307, 23);
             this.textBoxPassword.TabIndex = 1;
-            this.textBoxPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxPassword.UseSystemPasswordChar = true;
             // 
             // pnlStep3
@@ -167,7 +166,7 @@ namespace PhoneBook.Forms
             this.pnlStep3.Controls.Add(this.pictureBox1);
             this.pnlStep3.Controls.Add(this.label1);
             this.pnlStep3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlStep3.Location = new System.Drawing.Point(0, -181);
+            this.pnlStep3.Location = new System.Drawing.Point(0, -401);
             this.pnlStep3.Name = "pnlStep3";
             this.pnlStep3.Size = new System.Drawing.Size(658, 220);
             this.pnlStep3.TabIndex = 11;
@@ -213,7 +212,7 @@ namespace PhoneBook.Forms
             // 
             this.pnlStep1.Controls.Add(this.groupBox1);
             this.pnlStep1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlStep1.Location = new System.Drawing.Point(0, 39);
+            this.pnlStep1.Location = new System.Drawing.Point(0, -181);
             this.pnlStep1.Name = "pnlStep1";
             this.pnlStep1.Size = new System.Drawing.Size(658, 220);
             this.pnlStep1.TabIndex = 8;

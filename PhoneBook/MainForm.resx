@@ -58,6 +58,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnSettings.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAGlSURBVEhL7Za7SgNRFEVDUKIRC1MpStTPSBGxS6Og6GcoCBHtBEnjlyhofIK9rZaClmoRG7VS
+        wc64zr0nyCT3zvUxo00WbPI4a/aBgXlkuoRoNps1stWWmo7TgQXjxEdRteShfN7ucDKnWrJQnCOHZoWb
+        A5JT/WdQsEzWiDl9fC6SWxLihizoMUUiHUvyOwjiJHkjwju5t1+/RYPIsYJ0TWi9H6RjoyfLkda7QahY
+        LxUquiYKg15ybZR46qRMhjRTZJ+EuCI9uu4T/hwhd2LEsKJ6B8xWreJFuodVj8KgQM7EclBXzQuO73KT
+        zoJqbhDy5EnsNsqqeMGZtmqEB5JXJR7EF3NIlAEde8EZtGqEZx2HQX61x0RIdzFi0qf6kcSfagS5zV2K
+        7eBENS84p1btQDrdTy8GX7mcNlTvgNmmVby4Lyf+zJILMQK0biB9pJ/IDUSeTCHOSVbXRWFQIq2be5JI
+        Z0nXuEHYMWqybGu9H6T/eSwKiH//IuCDAnn12SM+dsnvXn18UDxrVriZUS15KB+zO5yMqpYOLKiS9bZU
+        ddzFQybzAfn/ITHrn6KdAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="btnAdd.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAcFJREFUSEvt
@@ -91,7 +104,7 @@
   <data name="captionImage1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAyCAIAAADEPPy4AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAAAGdJREFUWEe1x7ENADAIwDC+401O7Z7Zlbx4Zu+XHuqhHuqhHuqhHuqhHuqhHuqh
+        vQAADr0BR/uQrQAAAGdJREFUWEe1x7ENADAIwDC+401O7Z7Zlbx4Zu+XHuqhHuqhHuqhHuqhHuqhHuqh
         HuqhHuqhHuqhHuqhHuqhHuqhHuqhHuqhHuqhHuqhHuqhHuqhHuqhHuqhHuqhHuqhHuqhHuqhXtl7eQdJ
         0Fr6ckgAAAAASUVORK5CYII=
 </value>

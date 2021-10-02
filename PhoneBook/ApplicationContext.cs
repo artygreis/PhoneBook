@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using PhoneBook.Services;
 using PhoneBook.Types;
 using System;
 using System.Collections.Generic;
@@ -30,15 +31,53 @@ namespace PhoneBook
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var conn = new SqliteConnection($"Data Source={ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["UserSourceDb"].Value};");
-            if (!string.IsNullOrEmpty(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["PasswordDb"].Value))
+            optionsBuilder.UseSqlite(SqliteConnection());
+        }
+        private SqliteConnection SqliteConnection()
+        {
+            var settings = Settings.Load();
+            var conn = new SqliteConnection($"Data Source={settings.UserSourceDb};");
+            if (!string.IsNullOrEmpty(settings.Password))
             {
+                var password = CryptoService.Decrypt(settings.Password);
                 conn.ConnectionString =
                     new SqliteConnectionStringBuilder(conn.ConnectionString)
-                    { Password = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["PasswordDb"].Value }
+                    { Password = password }
                     .ToString();
             }
-            optionsBuilder.UseSqlite(conn);
+            return conn;
+        }
+        public bool RekeyDb(string oldPassword, string newPassword)
+        {
+            var conn = SqliteConnection();
+            try
+            {
+                var settings = Settings.Load();
+                if (CryptoService.Decrypt(settings.Password) == oldPassword)
+                {
+                    conn.Open();
+                    var command = conn.CreateCommand();
+                    command.CommandText = "SELECT quote($newPassword);";
+                    command.Parameters.AddWithValue("$newPassword", newPassword);
+                    var quotedNewPassword = (string)command.ExecuteScalar();
+
+                    command.CommandText = "PRAGMA rekey = " + quotedNewPassword;
+                    command.Parameters.Clear();
+                    command.ExecuteNonQuery();
+                    settings.Password = CryptoService.Encrypt(newPassword);
+                    settings.Save();
+                    return true;
+                }
+                throw new Exception();
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                conn?.Close();
+            }
         }
     }
 }
