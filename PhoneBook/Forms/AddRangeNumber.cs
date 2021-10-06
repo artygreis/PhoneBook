@@ -66,13 +66,18 @@ namespace PhoneBook.Forms
             if (e.DataColumn.ColumnIndex == 0 && e.DataRow.RowIndex != uC_GridNumberPhones.DataGrid.RowCount - 1)
             {
                 int deletingRowIndex = uC_GridNumberPhones.DataGrid.TableControl.ResolveToRecordIndex(e.DataRow.RowIndex);
-                uC_GridNumberPhones.DataGrid.View.RemoveAt(deletingRowIndex);
+                var dataSource = uC_GridNumberPhones.DataGrid.DataSource as List<NumberPhone>;
+
+                dataSource.RemoveAt(deletingRowIndex);
+                uC_GridNumberPhones.DataGrid.DataSource = null;
                 e.Cancel = true;
-                var recordsCount = uC_GridNumberPhones.DataGrid.View.Records.Count;
-                if (recordsCount == 0)
+                if (dataSource.Count == 0)
                 {
                     UpdateData(new List<NumberPhone>() { new NumberPhone() { AddressId = AddressId } });
-
+                }
+                else
+                {
+                    UpdateData(dataSource);
                 }
                 uC_GridNumberPhones.DataGrid.SelectedItem = uC_GridNumberPhones.DataGrid.View.Records[0];
             } 
