@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,19 +21,28 @@ namespace PhoneBook
         public MainForm()
         {
             InitializeComponent();
-            var settings = Settings.Load();
-            if (settings == null || string.IsNullOrEmpty(settings?.UserSourceDb ?? ""))
+            if (!CheckExistDb())
             {
                 var settingsForm = new SettingsApp();
-                if (settingsForm.ShowDialog() == DialogResult.OK)
-                {
-                    btnSearchClick(btnSearch, new EventArgs());
-                }
-            }
-            else
-            {
+                settingsForm.ShowDialog();
                 btnSearchClick(btnSearch, new EventArgs());
             }
+        }
+        private bool CheckExistDb()
+        {
+            var settings = Settings.Load();
+            if (settings == null || string.IsNullOrEmpty(settings?.UserSourceDb ?? ""))
+                return false;
+
+            if (!string.IsNullOrEmpty(settings?.UserSourceDb ?? "") && !File.Exists(settings.UserSourceDb))
+            {
+                settings.UserSourceDb = "";
+                settings.Password = "";
+                settings.Save();
+                return false;
+            }
+                
+            return true;
         }
         private void MoveSidePanel(Control btn)
         {
@@ -48,13 +58,19 @@ namespace PhoneBook
         private void btnSearchClick(object sender, EventArgs e)
         {
             MoveSidePanel(btnSearch);
-            AddControlToPanel(new UC_Search());
+            if (CheckExistDb())
+                AddControlToPanel(new UC_Search());
+            else
+                AddControlToPanel(new UC_ErrorConnect());
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             MoveSidePanel(btnAdd);
-            AddControlToPanel(new UC_Add());
+            if (CheckExistDb())
+                AddControlToPanel(new UC_Add());
+            else
+                AddControlToPanel(new UC_ErrorConnect());
         }
 
         private void btnSettings_Click(object sender, EventArgs e)
