@@ -4,6 +4,7 @@ using PhoneBook.Types;
 using System;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -133,6 +134,23 @@ namespace PhoneBook.Forms
             }
             return true;
         }
+        private string GetNameFile(string defaultName)
+        {
+            var listFiles = Directory.GetFiles(textBoxSourceDb.Text).Select(f => Path.GetFileName(f)).ToList();
+            int count = 1;
+            while(true)
+            {
+                if (listFiles.Contains(defaultName))
+                {
+                    defaultName = defaultName.Substring(0, defaultName.LastIndexOf('.')) + count + ".db";
+                    count++;
+                }
+                else
+                {
+                    return defaultName;
+                }
+            }
+        }
         private bool CheckAndSaveUserSettings()
         {
             var settings = Settings.Load();
@@ -140,7 +158,7 @@ namespace PhoneBook.Forms
             if (rdbExist.Checked)
                 settings.UserSourceDb = $"{textBoxSourceFile.Text}";
             if (rdbNew.Checked)
-                settings.UserSourceDb = $"{textBoxSourceDb.Text}\\{config.AppSettings.Settings["DefaultFileNameDb"].Value}";
+                settings.UserSourceDb = $"{textBoxSourceDb.Text}\\{GetNameFile(config.AppSettings.Settings["DefaultFileNameDb"].Value)}";
             if (!string.IsNullOrEmpty(textBoxPassword.Text.Replace(" ", "")))
             {
                 settings.Password = CryptoService.Encrypt(textBoxPassword.Text.Trim());

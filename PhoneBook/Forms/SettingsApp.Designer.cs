@@ -38,11 +38,6 @@ namespace PhoneBook.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsApp));
             this.textBoxSourceDb = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pnlStep2 = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBoxPassword = new System.Windows.Forms.CheckBox();
-            this.autoLabelPassword = new Syncfusion.Windows.Forms.Tools.AutoLabel();
-            this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.pnlStep3 = new System.Windows.Forms.Panel();
             this.btnFinish = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -55,6 +50,11 @@ namespace PhoneBook.Forms
             this.rdbNew = new System.Windows.Forms.RadioButton();
             this.textBoxSourceFile = new System.Windows.Forms.TextBox();
             this.checkBoxDefault = new System.Windows.Forms.CheckBox();
+            this.pnlStep2 = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBoxPassword = new System.Windows.Forms.CheckBox();
+            this.autoLabelPassword = new Syncfusion.Windows.Forms.Tools.AutoLabel();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
@@ -64,12 +64,12 @@ namespace PhoneBook.Forms
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.panel1.SuspendLayout();
-            this.pnlStep2.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.pnlStep3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlStep1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.pnlStep2.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorValidating)).BeginInit();
             this.SuspendLayout();
@@ -89,8 +89,8 @@ namespace PhoneBook.Forms
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
             this.panel1.Controls.Add(this.pnlStep3);
-            this.panel1.Controls.Add(this.pnlStep1);
             this.panel1.Controls.Add(this.pnlStep2);
+            this.panel1.Controls.Add(this.pnlStep1);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Controls.Add(this.labelHeader);
@@ -101,64 +101,6 @@ namespace PhoneBook.Forms
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(658, 318);
             this.panel1.TabIndex = 1;
-            // 
-            // pnlStep2
-            // 
-            this.pnlStep2.Controls.Add(this.groupBox2);
-            this.pnlStep2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlStep2.Location = new System.Drawing.Point(0, 39);
-            this.pnlStep2.Name = "pnlStep2";
-            this.pnlStep2.Size = new System.Drawing.Size(658, 220);
-            this.pnlStep2.TabIndex = 10;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.checkBoxPassword);
-            this.groupBox2.Controls.Add(this.autoLabelPassword);
-            this.groupBox2.Controls.Add(this.textBoxPassword);
-            this.groupBox2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox2.ForeColor = System.Drawing.Color.White;
-            this.groupBox2.Location = new System.Drawing.Point(12, 3);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(634, 211);
-            this.groupBox2.TabIndex = 9;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Настройка доступа к базе данных (справочнику)";
-            // 
-            // checkBoxPassword
-            // 
-            this.checkBoxPassword.AutoSize = true;
-            this.checkBoxPassword.Location = new System.Drawing.Point(36, 50);
-            this.checkBoxPassword.Name = "checkBoxPassword";
-            this.checkBoxPassword.Size = new System.Drawing.Size(112, 22);
-            this.checkBoxPassword.TabIndex = 0;
-            this.checkBoxPassword.Text = "Без пароля";
-            this.checkBoxPassword.UseVisualStyleBackColor = true;
-            this.checkBoxPassword.CheckedChanged += new System.EventHandler(this.checkBoxPassword_CheckedChanged);
-            // 
-            // autoLabelPassword
-            // 
-            this.autoLabelPassword.DY = -23;
-            this.autoLabelPassword.ForeColor = System.Drawing.Color.White;
-            this.autoLabelPassword.Gap = 5;
-            this.autoLabelPassword.LabeledControl = this.textBoxPassword;
-            this.autoLabelPassword.Location = new System.Drawing.Point(48, 86);
-            this.autoLabelPassword.Name = "autoLabelPassword";
-            this.autoLabelPassword.Position = Syncfusion.Windows.Forms.Tools.AutoLabelPosition.Top;
-            this.autoLabelPassword.Size = new System.Drawing.Size(64, 18);
-            this.autoLabelPassword.TabIndex = 1;
-            this.autoLabelPassword.Text = "Пароль";
-            // 
-            // textBoxPassword
-            // 
-            this.textBoxPassword.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.textBoxPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
-            this.textBoxPassword.Location = new System.Drawing.Point(48, 109);
-            this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.PasswordChar = '*';
-            this.textBoxPassword.Size = new System.Drawing.Size(307, 23);
-            this.textBoxPassword.TabIndex = 1;
-            this.textBoxPassword.UseSystemPasswordChar = true;
             // 
             // pnlStep3
             // 
@@ -212,7 +154,7 @@ namespace PhoneBook.Forms
             // 
             this.pnlStep1.Controls.Add(this.groupBox1);
             this.pnlStep1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlStep1.Location = new System.Drawing.Point(0, -181);
+            this.pnlStep1.Location = new System.Drawing.Point(0, 39);
             this.pnlStep1.Name = "pnlStep1";
             this.pnlStep1.Size = new System.Drawing.Size(658, 220);
             this.pnlStep1.TabIndex = 8;
@@ -316,6 +258,64 @@ namespace PhoneBook.Forms
             this.checkBoxDefault.UseVisualStyleBackColor = true;
             this.checkBoxDefault.CheckedChanged += new System.EventHandler(this.checkBoxDefault_CheckedChanged);
             // 
+            // pnlStep2
+            // 
+            this.pnlStep2.Controls.Add(this.groupBox2);
+            this.pnlStep2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlStep2.Location = new System.Drawing.Point(0, -181);
+            this.pnlStep2.Name = "pnlStep2";
+            this.pnlStep2.Size = new System.Drawing.Size(658, 220);
+            this.pnlStep2.TabIndex = 10;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.checkBoxPassword);
+            this.groupBox2.Controls.Add(this.autoLabelPassword);
+            this.groupBox2.Controls.Add(this.textBoxPassword);
+            this.groupBox2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupBox2.ForeColor = System.Drawing.Color.White;
+            this.groupBox2.Location = new System.Drawing.Point(12, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(634, 211);
+            this.groupBox2.TabIndex = 9;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Настройка доступа к базе данных (справочнику)";
+            // 
+            // checkBoxPassword
+            // 
+            this.checkBoxPassword.AutoSize = true;
+            this.checkBoxPassword.Location = new System.Drawing.Point(36, 50);
+            this.checkBoxPassword.Name = "checkBoxPassword";
+            this.checkBoxPassword.Size = new System.Drawing.Size(112, 22);
+            this.checkBoxPassword.TabIndex = 0;
+            this.checkBoxPassword.Text = "Без пароля";
+            this.checkBoxPassword.UseVisualStyleBackColor = true;
+            this.checkBoxPassword.CheckedChanged += new System.EventHandler(this.checkBoxPassword_CheckedChanged);
+            // 
+            // autoLabelPassword
+            // 
+            this.autoLabelPassword.DY = -23;
+            this.autoLabelPassword.ForeColor = System.Drawing.Color.White;
+            this.autoLabelPassword.Gap = 5;
+            this.autoLabelPassword.LabeledControl = this.textBoxPassword;
+            this.autoLabelPassword.Location = new System.Drawing.Point(48, 86);
+            this.autoLabelPassword.Name = "autoLabelPassword";
+            this.autoLabelPassword.Position = Syncfusion.Windows.Forms.Tools.AutoLabelPosition.Top;
+            this.autoLabelPassword.Size = new System.Drawing.Size(64, 18);
+            this.autoLabelPassword.TabIndex = 1;
+            this.autoLabelPassword.Text = "Пароль";
+            // 
+            // textBoxPassword
+            // 
+            this.textBoxPassword.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.textBoxPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
+            this.textBoxPassword.Location = new System.Drawing.Point(48, 109);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
+            this.textBoxPassword.Size = new System.Drawing.Size(307, 23);
+            this.textBoxPassword.TabIndex = 1;
+            this.textBoxPassword.UseSystemPasswordChar = true;
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.btnNext);
@@ -409,15 +409,15 @@ namespace PhoneBook.Forms
             this.Load += new System.EventHandler(this.AddOneApartment_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.pnlStep2.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.pnlStep3.ResumeLayout(false);
             this.pnlStep3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.pnlStep1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.pnlStep2.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.errorValidating)).EndInit();
             this.ResumeLayout(false);

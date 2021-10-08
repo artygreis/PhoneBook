@@ -25,8 +25,8 @@ namespace PhoneBook
             {
                 var settingsForm = new SettingsApp();
                 settingsForm.ShowDialog();
-                btnSearchClick(btnSearch, new EventArgs());
             }
+            btnSearchClick(btnSearch, new EventArgs());
         }
         private bool CheckExistDb()
         {
