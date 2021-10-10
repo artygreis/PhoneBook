@@ -76,7 +76,7 @@ namespace PhoneBook
         private void btnSettings_Click(object sender, EventArgs e)
         {
             MoveSidePanel(btnSettings);
-            AddControlToPanel(new UC_Settings());
+            AddControlToPanel(new UC_Settings(btnSettings));
         }
     }
 }

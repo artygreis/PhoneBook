@@ -1,27 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PhoneBook.Forms;
-using PhoneBook.Properties;
-using PhoneBook.SettingsControl;
-using PhoneBook.Types;
-using Syncfusion.Windows.Forms.Tools;
-using Syncfusion.WinForms.DataGrid;
+﻿using PhoneBook.Forms;
+using Squirrel;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 using Settings = PhoneBook.Types.Settings;
+using System.Threading.Tasks;
+using System.Drawing;
 
 namespace PhoneBook.UserControls
 {
     public partial class UC_Settings : UserControl
     {
+        private Button buttonSetting;
         public UC_Settings()
         {
             InitializeComponent();
+        }
+        public UC_Settings(Button button) : this()
+        {
+            buttonSetting = button;
         }
 
         private void btnSearchFile_Click(object sender, EventArgs e)
@@ -72,6 +68,50 @@ namespace PhoneBook.UserControls
             {
                 textBoxSourceFile.Text = settings.UserSourceDb;
             }
+        }
+        private async void CheckForUpdates()
+        {
+            using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/artygreis/PhoneBook"))
+            {
+                var result = await mgr.UpdateApp();
+                if (result != null)
+                {
+                    AddTextToPicture();
+                    btnApplyUpdate.Visible = true;
+                }
+                    
+            }
+        }
+        private void AddTextToPicture()
+        {
+            string firstText = "!";
+
+            PointF firstLocation = new PointF(3f, 0f);
+
+            //previousBitmap = new Bitmap((Bitmap)button1.Image);
+
+            Bitmap bitmap = (Bitmap)buttonSetting.Image;//load the image file
+
+            using (Graphics graphics = Graphics.FromImage(bitmap))
+            {
+                using (Font arialFont = new Font("Century Gothic", 10, FontStyle.Bold))
+                {
+                    graphics.FillEllipse(new SolidBrush(Color.Red), 0f, 0f, 15, 15);
+                    graphics.DrawString(firstText, arialFont, Brushes.White, firstLocation);
+                }
+            }
+            buttonSetting.Image = null;
+            buttonSetting.Image = bitmap;
+            //bitmap.Save(imageFilePath);//save the image file
+        }
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CheckForUpdates();
+        }
+
+        private void btnApplyUpdate_Click(object sender, EventArgs e)
+        {
+            UpdateManager.RestartApp();
         }
     }
 }

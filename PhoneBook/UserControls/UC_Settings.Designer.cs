@@ -32,7 +32,11 @@ namespace PhoneBook.UserControls
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_Settings));
             this.panelControl = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.btnApplyUpdate = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBoxOldPassword = new System.Windows.Forms.TextBox();
             this.autoLabelOldPassword = new Syncfusion.Windows.Forms.Tools.AutoLabel();
@@ -50,6 +54,7 @@ namespace PhoneBook.UserControls
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.errorValidating = new System.Windows.Forms.ErrorProvider(this.components);
             this.panelControl.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorValidating)).BeginInit();
@@ -58,6 +63,7 @@ namespace PhoneBook.UserControls
             // panelControl
             // 
             this.panelControl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
+            this.panelControl.Controls.Add(this.groupBox2);
             this.panelControl.Controls.Add(this.groupBox1);
             this.panelControl.Controls.Add(this.btnSearchFile);
             this.panelControl.Controls.Add(this.textBoxSourceFile);
@@ -73,6 +79,51 @@ namespace PhoneBook.UserControls
             this.panelControl.Name = "panelControl";
             this.panelControl.Size = new System.Drawing.Size(690, 444);
             this.panelControl.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.linkLabel1);
+            this.groupBox2.Controls.Add(this.btnApplyUpdate);
+            this.groupBox2.ForeColor = System.Drawing.Color.White;
+            this.groupBox2.Location = new System.Drawing.Point(38, 306);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(605, 81);
+            this.groupBox2.TabIndex = 15;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Обновления";
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.ActiveLinkColor = System.Drawing.Color.LightGray;
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.linkLabel1.Font = new System.Drawing.Font("Century Gothic", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.linkLabel1.ForeColor = System.Drawing.Color.Transparent;
+            this.linkLabel1.LinkColor = System.Drawing.Color.White;
+            this.linkLabel1.Location = new System.Drawing.Point(41, 36);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(275, 21);
+            this.linkLabel1.TabIndex = 14;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Проверить наличие обновлений";
+            this.linkLabel1.VisitedLinkColor = System.Drawing.Color.White;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // btnApplyUpdate
+            // 
+            this.btnApplyUpdate.BackColor = System.Drawing.Color.White;
+            this.btnApplyUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnApplyUpdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
+            this.btnApplyUpdate.Image = ((System.Drawing.Image)(resources.GetObject("btnApplyUpdate.Image")));
+            this.btnApplyUpdate.Location = new System.Drawing.Point(412, 31);
+            this.btnApplyUpdate.Name = "btnApplyUpdate";
+            this.btnApplyUpdate.Size = new System.Drawing.Size(137, 30);
+            this.btnApplyUpdate.TabIndex = 12;
+            this.btnApplyUpdate.Text = " Обновить !!!";
+            this.btnApplyUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnApplyUpdate.UseVisualStyleBackColor = false;
+            this.btnApplyUpdate.Visible = false;
+            this.btnApplyUpdate.Click += new System.EventHandler(this.btnApplyUpdate_Click);
             // 
             // groupBox1
             // 
@@ -252,6 +303,8 @@ namespace PhoneBook.UserControls
             this.Load += new System.EventHandler(this.UC_Settings_Load);
             this.panelControl.ResumeLayout(false);
             this.panelControl.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -279,5 +332,8 @@ namespace PhoneBook.UserControls
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.ErrorProvider errorValidating;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnApplyUpdate;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
