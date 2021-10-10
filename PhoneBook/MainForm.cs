@@ -10,14 +10,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PhoneBook.Forms;
+using PhoneBook.SettingsControl;
 using PhoneBook.Types;
 using PhoneBook.UserControls;
+using Squirrel;
 using Syncfusion.Windows.Forms;
 
 namespace PhoneBook
 {
     public partial class MainForm : MetroForm
     {
+        private bool availableUpdate = false;
         public MainForm()
         {
             InitializeComponent();
@@ -27,6 +30,7 @@ namespace PhoneBook
                 settingsForm.ShowDialog();
             }
             btnSearchClick(btnSearch, new EventArgs());
+            CheckForUpdates();
         }
         private bool CheckExistDb()
         {
@@ -43,6 +47,18 @@ namespace PhoneBook
             }
                 
             return true;
+        }
+        private async void CheckForUpdates()
+        {
+            using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/artygreis/PhoneBook"))
+            {
+                var result = await mgr.UpdateApp();
+                if (result != null)
+                {
+                    SettingsPicture.AddTextToPicture(btnSettings);
+                    availableUpdate = true;
+                }
+            }
         }
         private void MoveSidePanel(Control btn)
         {
@@ -76,7 +92,7 @@ namespace PhoneBook
         private void btnSettings_Click(object sender, EventArgs e)
         {
             MoveSidePanel(btnSettings);
-            AddControlToPanel(new UC_Settings(btnSettings));
+            AddControlToPanel(new UC_Settings(btnSettings, availableUpdate));
         }
     }
 }

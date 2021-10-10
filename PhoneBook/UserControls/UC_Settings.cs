@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Settings = PhoneBook.Types.Settings;
 using System.Threading.Tasks;
 using System.Drawing;
+using PhoneBook.SettingsControl;
 
 namespace PhoneBook.UserControls
 {
@@ -15,9 +16,10 @@ namespace PhoneBook.UserControls
         {
             InitializeComponent();
         }
-        public UC_Settings(Button button) : this()
+        public UC_Settings(Button button, bool update) : this()
         {
             buttonSetting = button;
+            btnApplyUpdate.Visible = update;
         }
 
         private void btnSearchFile_Click(object sender, EventArgs e)
@@ -76,33 +78,11 @@ namespace PhoneBook.UserControls
                 var result = await mgr.UpdateApp();
                 if (result != null)
                 {
-                    AddTextToPicture();
+                    SettingsPicture.AddTextToPicture(buttonSetting);
                     btnApplyUpdate.Visible = true;
                 }
                     
             }
-        }
-        private void AddTextToPicture()
-        {
-            string firstText = "!";
-
-            PointF firstLocation = new PointF(3f, 0f);
-
-            //previousBitmap = new Bitmap((Bitmap)button1.Image);
-
-            Bitmap bitmap = (Bitmap)buttonSetting.Image;//load the image file
-
-            using (Graphics graphics = Graphics.FromImage(bitmap))
-            {
-                using (Font arialFont = new Font("Century Gothic", 10, FontStyle.Bold))
-                {
-                    graphics.FillEllipse(new SolidBrush(Color.Red), 0f, 0f, 15, 15);
-                    graphics.DrawString(firstText, arialFont, Brushes.White, firstLocation);
-                }
-            }
-            buttonSetting.Image = null;
-            buttonSetting.Image = bitmap;
-            //bitmap.Save(imageFilePath);//save the image file
         }
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {

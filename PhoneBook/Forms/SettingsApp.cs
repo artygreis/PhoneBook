@@ -54,6 +54,7 @@ namespace PhoneBook.Forms
             textBoxSourceDb.Enabled = false;
             textBoxSourceFile.Enabled = false;
             btnSearchFile.Enabled = false;
+            errorValidating.Clear();
             var radioButton = (RadioButton)sender;
             if (radioButton.Name == "rdbNew")
             {
@@ -112,24 +113,21 @@ namespace PhoneBook.Forms
         }
         private bool CheckSourceData()
         {
-            if (rdbNew.Checked && !checkBoxDefault.Checked)
+            if (!Directory.Exists(textBoxSourceDb.Text))
             {
-                if (!Directory.Exists(textBoxSourceDb.Text))
+                errorValidating.SetError(textBoxSourceDb, "Проверьте указанный путь.");
+                errorValidating.SetIconAlignment(textBoxSourceDb, ErrorIconAlignment.MiddleLeft);
+                errorValidating.SetIconPadding(textBoxSourceDb, 4);
+                return false;
+            }
+            if (rdbExist.Checked)
+            {
+                if (!File.Exists(textBoxSourceFile.Text))
                 {
-                    errorValidating.SetError(textBoxSourceDb, "Проверьте указанный путь.");
-                    errorValidating.SetIconAlignment(textBoxSourceDb, ErrorIconAlignment.MiddleLeft);
-                    errorValidating.SetIconPadding(textBoxSourceDb, 4);
+                    errorValidating.SetError(textBoxSourceFile, "Не найден файл.");
+                    errorValidating.SetIconAlignment(textBoxSourceFile, ErrorIconAlignment.MiddleLeft);
+                    errorValidating.SetIconPadding(textBoxSourceFile, 4);
                     return false;
-                }
-                if (rdbExist.Checked)
-                {
-                    if (!File.Exists(textBoxSourceFile.Text))
-                    {
-                        errorValidating.SetError(textBoxSourceFile, "Не найден файл.");
-                        errorValidating.SetIconAlignment(textBoxSourceFile, ErrorIconAlignment.MiddleLeft);
-                        errorValidating.SetIconPadding(textBoxSourceFile, 4);
-                        return false;
-                    }
                 }
             }
             return true;
@@ -211,6 +209,7 @@ namespace PhoneBook.Forms
             folderBrowserDialog.ShowNewFolderButton = false;
             if (folderBrowserDialog.ShowDialog() == DialogResult.Cancel)
                 return;
+            errorValidating.Clear();
             textBoxSourceDb.Text = folderBrowserDialog.SelectedPath;
             
         }
@@ -219,11 +218,13 @@ namespace PhoneBook.Forms
         {
             if (openFileDialog.ShowDialog() == DialogResult.Cancel)
                 return;
+            errorValidating.Clear();
             textBoxSourceFile.Text = openFileDialog.FileName;
         }
 
         private void checkBoxPassword_CheckedChanged(object sender, EventArgs e)
         {
+            errorValidating.Clear();
             if (checkBoxPassword.Checked)
                 textBoxPassword.Enabled = false;
             else
