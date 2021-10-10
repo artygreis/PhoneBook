@@ -32,6 +32,8 @@ namespace PhoneBook.Services
         /// <returns></returns>
         public static string Encrypt(string plainText)
         {
+            if (string.IsNullOrEmpty(plainText))
+                return "";
             byte[] plainBytes = Encoding.Unicode.GetBytes(plainText);
 
             Aes aes = GetAesInstance();
@@ -54,6 +56,8 @@ namespace PhoneBook.Services
         /// <returns></returns>
         public static string Decrypt(string cryptoText)
         {
+            if (string.IsNullOrEmpty(cryptoText))
+                return "";
             byte[] cryptoBytes = Convert.FromBase64String(cryptoText);
 
             Aes aes = GetAesInstance();

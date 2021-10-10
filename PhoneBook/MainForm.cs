@@ -30,7 +30,9 @@ namespace PhoneBook
                 settingsForm.ShowDialog();
             }
             btnSearchClick(btnSearch, new EventArgs());
+            #if (!DEBUG)
             CheckForUpdates();
+            #endif
         }
         private bool CheckExistDb()
         {

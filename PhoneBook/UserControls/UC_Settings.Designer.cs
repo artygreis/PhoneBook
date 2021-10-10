@@ -182,7 +182,7 @@ namespace PhoneBook.UserControls
             this.btnSaveNewPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
             this.btnSaveNewPassword.Image = global::PhoneBook.Properties.Resources.save;
             this.btnSaveNewPassword.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSaveNewPassword.Location = new System.Drawing.Point(333, 120);
+            this.btnSaveNewPassword.Location = new System.Drawing.Point(370, 120);
             this.btnSaveNewPassword.Name = "btnSaveNewPassword";
             this.btnSaveNewPassword.Size = new System.Drawing.Size(188, 33);
             this.btnSaveNewPassword.TabIndex = 7;

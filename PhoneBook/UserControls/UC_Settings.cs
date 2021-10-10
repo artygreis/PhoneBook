@@ -31,7 +31,15 @@ namespace PhoneBook.UserControls
 
         private void btnSaveNewPassword_Click(object sender, EventArgs e)
         {
+            errorValidating.Clear();
             var settings = Settings.Load();
+            if (string.IsNullOrEmpty(settings.Password))
+            {
+                MessageBox.Show("Невозможно задать пароль к базе данных, которая была создана без пароля.\n" +
+                    "Можно изменить только существующий пароль!", "Предупреждение",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (!string.IsNullOrEmpty(settings.Password) && string.IsNullOrEmpty(textBoxOldPassword.Text))
             {
                 errorValidating.SetError(textBoxOldPassword, "Введите старый пароль.");

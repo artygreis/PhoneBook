@@ -226,9 +226,15 @@ namespace PhoneBook.Forms
         {
             errorValidating.Clear();
             if (checkBoxPassword.Checked)
+            {
                 textBoxPassword.Enabled = false;
+                lblInfo.Visible = true;
+            }
             else
+            {
                 textBoxPassword.Enabled = true;
+                lblInfo.Visible = false;
+            }  
         }
 
         private void btnFinish_Click(object sender, EventArgs e)
