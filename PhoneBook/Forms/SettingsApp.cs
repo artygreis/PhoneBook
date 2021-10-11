@@ -13,7 +13,8 @@ namespace PhoneBook.Forms
 {
     public partial class SettingsApp : Syncfusion.Windows.Forms.MetroForm
     {
-        readonly string DefaultPath = $"{AppDomain.CurrentDomain.BaseDirectory}{ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["DefaultFoldereDb"].Value}";
+
+        readonly string DefaultPath = Path.GetFullPath(Path.Combine($"{AppDomain.CurrentDomain.BaseDirectory}", @"..\"));
         int currentControlNumber = 1;
         public SettingsApp()
         {

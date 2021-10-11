@@ -10,7 +10,7 @@ namespace PhoneBook.Types
 {
     public class AppSettings<T> where T : new()
     {
-        private const string DEFAULT_FILENAME = "settings.data";
+        private const string DEFAULT_FILENAME = @"..\settings.data";
         public AppSettings()
         {
             var options = new JsonSerializerOptions

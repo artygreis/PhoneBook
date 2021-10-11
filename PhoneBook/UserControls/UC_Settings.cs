@@ -3,8 +3,6 @@ using Squirrel;
 using System;
 using System.Windows.Forms;
 using Settings = PhoneBook.Types.Settings;
-using System.Threading.Tasks;
-using System.Drawing;
 using PhoneBook.SettingsControl;
 
 namespace PhoneBook.UserControls
