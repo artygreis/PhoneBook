@@ -103,7 +103,7 @@ namespace PhoneBook.Forms
                     if (rdbNew.Checked && checkBoxDefault.Checked)
                     {
                         var dialog = MessageBox.Show($"При использовании пути к базе данных по умолчанию, при удалении приложения " +
-                            $"будет удалена и сама база данных (телефонный справочник)", "Предупреждение",
+                            $"будет удалена и сама база данных (телефонный справочник). Продолжить?", "Предупреждение",
                        MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                         if (dialog == DialogResult.Cancel)
                             return false;
