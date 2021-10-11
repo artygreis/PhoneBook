@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -30,9 +31,17 @@ namespace PhoneBook
                 settingsForm.ShowDialog();
             }
             btnSearchClick(btnSearch, new EventArgs());
-            #if (!DEBUG)
+#if (!DEBUG)
             CheckForUpdates();
-            #endif
+#endif
+            AddVersionNumber();
+        }
+        private void AddVersionNumber()
+        {
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+
+            this.Text += $" v.{versionInfo.FileVersion}";
         }
         private bool CheckExistDb()
         {
