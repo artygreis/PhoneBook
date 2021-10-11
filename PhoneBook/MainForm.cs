@@ -40,8 +40,7 @@ namespace PhoneBook
         {
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
             FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
-
-            this.Text += $" v.{versionInfo.FileVersion}";
+            CaptionLabels[1].Text = $"v.{versionInfo.FileVersion}";
         }
         private bool CheckExistDb()
         {

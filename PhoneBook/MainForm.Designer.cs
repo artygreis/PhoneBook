@@ -33,12 +33,13 @@ namespace PhoneBook
             Syncfusion.Windows.Forms.CaptionImage captionImage1 = new Syncfusion.Windows.Forms.CaptionImage();
             Syncfusion.Windows.Forms.CaptionImage captionImage2 = new Syncfusion.Windows.Forms.CaptionImage();
             Syncfusion.Windows.Forms.CaptionLabel captionLabel1 = new Syncfusion.Windows.Forms.CaptionLabel();
+            Syncfusion.Windows.Forms.CaptionLabel captionLabel2 = new Syncfusion.Windows.Forms.CaptionLabel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnSettings = new System.Windows.Forms.Button();
             this.panelSide = new System.Windows.Forms.Panel();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.panelControls = new System.Windows.Forms.Panel();
-            this.btnSettings = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +55,25 @@ namespace PhoneBook
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(198, 444);
             this.panel1.TabIndex = 1;
+            // 
+            // btnSettings
+            // 
+            this.btnSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
+            this.btnSettings.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnSettings.FlatAppearance.BorderSize = 0;
+            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSettings.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSettings.Image = ((System.Drawing.Image)(resources.GetObject("btnSettings.Image")));
+            this.btnSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSettings.Location = new System.Drawing.Point(12, 199);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
+            this.btnSettings.Size = new System.Drawing.Size(187, 65);
+            this.btnSettings.TabIndex = 3;
+            this.btnSettings.Text = "  Настройки";
+            this.btnSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSettings.UseVisualStyleBackColor = false;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
             // 
             // panelSide
             // 
@@ -110,25 +130,6 @@ namespace PhoneBook
             this.panelControls.Size = new System.Drawing.Size(690, 444);
             this.panelControls.TabIndex = 0;
             // 
-            // btnSettings
-            // 
-            this.btnSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
-            this.btnSettings.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnSettings.FlatAppearance.BorderSize = 0;
-            this.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSettings.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSettings.Image = ((System.Drawing.Image)(resources.GetObject("btnSettings.Image")));
-            this.btnSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSettings.Location = new System.Drawing.Point(12, 199);
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
-            this.btnSettings.Size = new System.Drawing.Size(187, 65);
-            this.btnSettings.TabIndex = 3;
-            this.btnSettings.Text = "  Настройки";
-            this.btnSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSettings.UseVisualStyleBackColor = false;
-            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -157,7 +158,13 @@ namespace PhoneBook
             captionLabel1.Name = "CaptionLabel";
             captionLabel1.Size = new System.Drawing.Size(300, 24);
             captionLabel1.Text = "Телефонный справочник";
+            captionLabel2.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            captionLabel2.ForeColor = System.Drawing.Color.White;
+            captionLabel2.Location = new System.Drawing.Point(355, 12);
+            captionLabel2.Name = "Version";
+            captionLabel2.Size = new System.Drawing.Size(180, 24);
             this.CaptionLabels.Add(captionLabel1);
+            this.CaptionLabels.Add(captionLabel2);
             this.ClientSize = new System.Drawing.Size(888, 444);
             this.Controls.Add(this.panelControls);
             this.Controls.Add(this.panel1);
