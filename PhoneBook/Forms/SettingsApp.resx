@@ -131,6 +131,11 @@
         SUVORK5CYII=
 </value>
   </data>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>ВАЖНО!
+    Если к базе данных добавить пароль, то она будет защищена от доступа к ней третьих лиц. Запомните ваш пароль. Однако в этом случае программа будет работать медленнее.
+    Если создать базу данных без пароля, то программа будет работать быстрее, однако будет легко получить доступ к данным в базе данных. Добавить пароль в дальнейшем будет нельзя.</value>
+  </data>
   <data name="btnNext.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAATZJREFUOE+9

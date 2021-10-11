@@ -237,12 +237,10 @@ namespace PhoneBook.Forms
             if (checkBoxPassword.Checked)
             {
                 textBoxPassword.Enabled = false;
-                lblInfo.Visible = true;
             }
             else
             {
                 textBoxPassword.Enabled = true;
-                lblInfo.Visible = false;
             }  
         }
 
