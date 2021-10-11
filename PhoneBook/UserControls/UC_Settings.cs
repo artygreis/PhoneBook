@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Settings = PhoneBook.Types.Settings;
 using PhoneBook.SettingsControl;
 using System.Reflection;
+using System.IO;
 
 namespace PhoneBook.UserControls
 {
@@ -98,7 +99,7 @@ namespace PhoneBook.UserControls
 
         private void btnApplyUpdate_Click(object sender, EventArgs e)
         {
-            UpdateManager.RestartApp(Assembly.GetEntryAssembly().Location.Replace(".dll", ".exe"));
+            UpdateManager.RestartApp(Path.GetFileName(Assembly.GetEntryAssembly().Location).Replace(".dll", ".exe"));
         }
     }
 }
