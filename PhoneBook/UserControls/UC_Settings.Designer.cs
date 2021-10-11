@@ -122,7 +122,6 @@ namespace PhoneBook.UserControls
             this.btnApplyUpdate.Text = " Обновить !!!";
             this.btnApplyUpdate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnApplyUpdate.UseVisualStyleBackColor = false;
-            this.btnApplyUpdate.Visible = false;
             this.btnApplyUpdate.Click += new System.EventHandler(this.btnApplyUpdate_Click);
             // 
             // groupBox1
