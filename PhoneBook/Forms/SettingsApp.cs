@@ -100,6 +100,14 @@ namespace PhoneBook.Forms
             switch (numberPanel)
             {
                 case 1:
+                    if (rdbNew.Checked && checkBoxDefault.Checked)
+                    {
+                        var dialog = MessageBox.Show($"При использовании пути к базе данных по умолчанию, при удалении приложения " +
+                            $"будет удалена и сама база данных (телефонный справочник)", "Предупреждение",
+                       MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                        if (dialog == DialogResult.Cancel)
+                            return false;
+                    }
                     return CheckSourceData();
                 case 2:
                     if (!checkBoxPassword.Checked && string.IsNullOrEmpty(textBoxPassword.Text))
