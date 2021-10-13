@@ -27,8 +27,16 @@ namespace PhoneBook.UserControls
             var settingsForm = new SettingsApp();
             settingsForm.Text = $"Настройка нового телефонного справоника (базы данных)";
             settingsForm.ShowDialog();
+            UpdateDataSourceDb();
         }
-
+        private void UpdateDataSourceDb()
+        {
+            var settings = Settings.Load();
+            if (settings != null || !string.IsNullOrEmpty(settings?.UserSourceDb ?? ""))
+            {
+                textBoxSourceFile.Text = settings.UserSourceDb;
+            }
+        }
         private void btnSaveNewPassword_Click(object sender, EventArgs e)
         {
             errorValidating.Clear();
@@ -73,11 +81,7 @@ namespace PhoneBook.UserControls
 
         private void UC_Settings_Load(object sender, EventArgs e)
         {
-            var settings = Settings.Load();
-            if (settings != null || !string.IsNullOrEmpty(settings?.UserSourceDb ?? ""))
-            {
-                textBoxSourceFile.Text = settings.UserSourceDb;
-            }
+            UpdateDataSourceDb();
         }
         private async void CheckForUpdates()
         {
@@ -88,8 +92,7 @@ namespace PhoneBook.UserControls
                 {
                     SettingsPicture.AddTextToPicture(buttonSetting);
                     btnApplyUpdate.Visible = true;
-                }
-                    
+                }    
             }
         }
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
