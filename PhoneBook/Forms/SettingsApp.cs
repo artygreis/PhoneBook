@@ -84,6 +84,7 @@ namespace PhoneBook.Forms
                     btnNext.Enabled = true;
                     break;
                 case 2:
+                    textBoxPassword.Text = "";
                     pnlStep2.Visible = true;
                     btnPrevious.Enabled = true;
                     btnNext.Enabled = true;
@@ -166,9 +167,13 @@ namespace PhoneBook.Forms
                 settings.UserSourceDb = $"{textBoxSourceFile.Text}";
             if (rdbNew.Checked)
                 settings.UserSourceDb = $"{textBoxSourceDb.Text}\\{GetNameFile(config.AppSettings.Settings["DefaultFileNameDb"].Value)}";
-            if (!string.IsNullOrEmpty(textBoxPassword.Text.Replace(" ", "")))
+            if (!checkBoxPassword.Checked && !string.IsNullOrEmpty(textBoxPassword.Text.Replace(" ", "")))
             {
                 settings.Password = CryptoService.Encrypt(textBoxPassword.Text.Trim());
+            }
+            else
+            {
+                settings.Password = "";
             }
             settings.Save();
             using (var db = new ApplicationContext())
@@ -237,6 +242,7 @@ namespace PhoneBook.Forms
             if (checkBoxPassword.Checked)
             {
                 textBoxPassword.Enabled = false;
+                textBoxPassword.Text = "";
             }
             else
             {
