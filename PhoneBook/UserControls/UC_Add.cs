@@ -320,6 +320,7 @@ namespace PhoneBook.UserControls
                 var numberPhones = db.NumberPhoneView
                     .Where(n => n.AddressId == Convert.ToInt32(args.ItemArray[0]))
                     .ToList();
+                numberPhones.Sort();
                 UpdateData(numberPhones);
             }
         }
