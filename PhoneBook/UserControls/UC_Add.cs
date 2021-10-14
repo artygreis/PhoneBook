@@ -351,6 +351,7 @@ namespace PhoneBook.UserControls
                         var numberPhones = db.NumberPhoneView
                             .Where(n => n.AddressId == Convert.ToInt32(Convert.ToInt32(autoCompleteAddress.GetItemArray(textBoxAddress.Text)[0])))
                             .ToList();
+                        numberPhones.Sort();
                         UpdateData(numberPhones);
                     }
                 }

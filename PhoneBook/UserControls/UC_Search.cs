@@ -29,7 +29,6 @@ namespace PhoneBook.UserControls
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteCountry);
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteCity);
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteAddress);
-            AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteHouse);
 
             uC_GridPhones.DataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
         }
@@ -124,7 +123,7 @@ namespace PhoneBook.UserControls
                     .Select(a => new AddressCollection()
                     {
                         AddressId = a.Id,
-                        DataAddress = $"{(string.IsNullOrEmpty(a.Locality) ? "" : a.Locality + ", ")}{a.TypeStreet.TypeName} {a.StreetName}"
+                        DataAddress = $"{(string.IsNullOrEmpty(a.Locality) ? "" : a.Locality + ", ")}{a.TypeStreet.TypeName} {a.StreetName}, {a.House}"
                     })
                     .ToList();
 
@@ -141,23 +140,7 @@ namespace PhoneBook.UserControls
         /// <param name="args"></param>
         private void autoCompleteAddress_AutoCompleteItemSelected(object sender, AutoCompleteItemEventArgs args)
         {
-            ClearTextEditAndAutoComplete("autoCompleteAddress");
-            using (var db = new ApplicationContext())
-            {
-                var numberHouse = db.Address
-                    .Where(a => a.Id == Convert.ToInt32(args.ItemArray[0]))
-                    .Select(a => new { a.House })
-                    .ToList();
-
-                autoCompleteHouse.DataSource = numberHouse;
-                autoCompleteHouse.RefreshColumns();
-                autoCompleteHouse.Columns[0].MatchingColumn = true;
-                autoCompleteHouse.Columns[0].Visible = true;
-            }
-        }
-        private void autoCompleteHouse_AutoCompleteItemSelected(object sender, AutoCompleteItemEventArgs args)
-        {
-            ClearTextEditAndAutoComplete("autoCompleteHouse");
+            UpdateData(new List<NumberPhoneView>() { new NumberPhoneView() });
         }
         /// <summary>
         /// Сброс данных для поиска
@@ -178,11 +161,7 @@ namespace PhoneBook.UserControls
                     autoCompleteAddress.ResetHistory();
                     goto case "autoCompleteAddress";
                 case "autoCompleteAddress": 
-                    textBoxHouse.Text = ""; 
-                    autoCompleteHouse.DataSource = null;
-                    autoCompleteHouse.ResetHistory();
-                    goto case "autoCompleteHouse";
-                case "autoCompleteHouse": textBoxApartment.Text = ""; break;
+                    textBoxApartment.Text = ""; break;
                 default:
                     break;
             }
@@ -210,14 +189,11 @@ namespace PhoneBook.UserControls
                 var numberPhones = db.NumberPhoneView
                     .Where(n => n.AddressId == addressId)
                     .ToList();
-                if (!string.IsNullOrEmpty(autoCompleteHouse.GetItemArray(textBoxHouse.Text)?.ToString()))
-                {
-                    numberPhones = numberPhones.Where(n => n.House == textBoxHouse.Text).ToList();
-                }
                 if (!string.IsNullOrEmpty(textBoxApartment.Text))
                 {
                     numberPhones = numberPhones.Where(n => n.Apartment == textBoxApartment.Text).ToList();
                 }
+                numberPhones.Sort();
                 UpdateData(numberPhones);
             }
         }

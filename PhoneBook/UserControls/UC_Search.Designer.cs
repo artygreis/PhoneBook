@@ -40,10 +40,8 @@ namespace PhoneBook.UserControls
             this.textBoxCity = new System.Windows.Forms.TextBox();
             this.textBoxApartment = new System.Windows.Forms.TextBox();
             this.textBoxAddress = new System.Windows.Forms.TextBox();
-            this.textBoxHouse = new System.Windows.Forms.TextBox();
             this.autoLabelCity = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.autoLabelApartment = new Syncfusion.Windows.Forms.Tools.AutoLabel();
-            this.autoLabelHouse = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.autoLabelAddress = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.autoLabelCountry = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -53,13 +51,11 @@ namespace PhoneBook.UserControls
             this.panel5 = new System.Windows.Forms.Panel();
             this.autoCompleteCity = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
             this.autoCompleteAddress = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
-            this.autoCompleteHouse = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCountry)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteAddress)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.autoCompleteHouse)).BeginInit();
             this.SuspendLayout();
             // 
             // autoCompleteCountry
@@ -92,11 +88,9 @@ namespace PhoneBook.UserControls
             this.panel1.Controls.Add(this.textBoxCity);
             this.panel1.Controls.Add(this.textBoxApartment);
             this.panel1.Controls.Add(this.textBoxAddress);
-            this.panel1.Controls.Add(this.textBoxHouse);
             this.panel1.Controls.Add(this.textBoxCountry);
             this.panel1.Controls.Add(this.autoLabelCity);
             this.panel1.Controls.Add(this.autoLabelApartment);
-            this.panel1.Controls.Add(this.autoLabelHouse);
             this.panel1.Controls.Add(this.autoLabelAddress);
             this.panel1.Controls.Add(this.autoLabelCountry);
             this.panel1.Controls.Add(this.panel4);
@@ -150,19 +144,8 @@ namespace PhoneBook.UserControls
             this.textBoxAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
             this.textBoxAddress.Location = new System.Drawing.Point(104, 70);
             this.textBoxAddress.Name = "textBoxAddress";
-            this.textBoxAddress.Size = new System.Drawing.Size(310, 26);
+            this.textBoxAddress.Size = new System.Drawing.Size(409, 26);
             this.textBoxAddress.TabIndex = 2;
-            // 
-            // textBoxHouse
-            // 
-            this.autoCompleteHouse.SetAutoComplete(this.textBoxHouse, Syncfusion.Windows.Forms.Tools.AutoCompleteModes.AutoSuggest);
-            this.textBoxHouse.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.textBoxHouse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
-            this.textBoxHouse.Location = new System.Drawing.Point(466, 70);
-            this.textBoxHouse.Name = "textBoxHouse";
-            this.textBoxHouse.Size = new System.Drawing.Size(49, 26);
-            this.textBoxHouse.TabIndex = 3;
-            this.textBoxHouse.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // autoLabelCity
             // 
@@ -189,19 +172,6 @@ namespace PhoneBook.UserControls
             this.autoLabelApartment.Size = new System.Drawing.Size(32, 19);
             this.autoLabelApartment.TabIndex = 0;
             this.autoLabelApartment.Text = "КВ.";
-            // 
-            // autoLabelHouse
-            // 
-            this.autoLabelHouse.DX = -35;
-            this.autoLabelHouse.DY = 3;
-            this.autoLabelHouse.ForeColor = System.Drawing.Color.White;
-            this.autoLabelHouse.Gap = 10;
-            this.autoLabelHouse.LabeledControl = this.textBoxHouse;
-            this.autoLabelHouse.Location = new System.Drawing.Point(431, 73);
-            this.autoLabelHouse.Name = "autoLabelHouse";
-            this.autoLabelHouse.Size = new System.Drawing.Size(25, 19);
-            this.autoLabelHouse.TabIndex = 0;
-            this.autoLabelHouse.Text = "Д.";
             // 
             // autoLabelAddress
             // 
@@ -303,19 +273,6 @@ namespace PhoneBook.UserControls
             this.autoCompleteAddress.ThemeName = "Default";
             this.autoCompleteAddress.AutoCompleteItemSelected += new Syncfusion.Windows.Forms.Tools.AutoCompleteItemEventHandler(this.autoCompleteAddress_AutoCompleteItemSelected);
             // 
-            // autoCompleteHouse
-            // 
-            this.autoCompleteHouse.HeaderFont = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.autoCompleteHouse.ItemFont = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.autoCompleteHouse.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(158)))), ((int)(((byte)(218)))));
-            this.autoCompleteHouse.ParentForm = this;
-            this.autoCompleteHouse.ShowCloseButton = false;
-            this.autoCompleteHouse.ShowColumnHeader = true;
-            this.autoCompleteHouse.ShowGripper = false;
-            this.autoCompleteHouse.Style = Syncfusion.Windows.Forms.Tools.AutoCompleteStyle.Default;
-            this.autoCompleteHouse.ThemeName = "Default";
-            this.autoCompleteHouse.AutoCompleteItemSelected += new Syncfusion.Windows.Forms.Tools.AutoCompleteItemEventHandler(this.autoCompleteHouse_AutoCompleteItemSelected);
-            // 
             // UC_Search
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -333,7 +290,6 @@ namespace PhoneBook.UserControls
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteAddress)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.autoCompleteHouse)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -354,12 +310,9 @@ namespace PhoneBook.UserControls
         private AutoComplete autoCompleteCity;
         private AutoLabel autoLabelAddress;
         private TextBox textBoxApartment;
-        private TextBox textBoxHouse;
         private TextBox textBoxAddress;
         private AutoLabel autoLabelApartment;
-        private AutoLabel autoLabelHouse;
         private Button btnSearch;
         private AutoComplete autoCompleteAddress;
-        private AutoComplete autoCompleteHouse;
     }
 }
