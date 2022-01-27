@@ -164,9 +164,9 @@ namespace PhoneBook.UserControls
             this.btnAddRange.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnAddRange.Image = ((System.Drawing.Image)(resources.GetObject("btnAddRange.Image")));
             this.btnAddRange.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddRange.Location = new System.Drawing.Point(244, 114);
+            this.btnAddRange.Location = new System.Drawing.Point(242, 114);
             this.btnAddRange.Name = "btnAddRange";
-            this.btnAddRange.Size = new System.Drawing.Size(247, 33);
+            this.btnAddRange.Size = new System.Drawing.Size(252, 33);
             this.btnAddRange.TabIndex = 8;
             this.btnAddRange.Text = " Добавить список квартир";
             this.btnAddRange.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -181,9 +181,9 @@ namespace PhoneBook.UserControls
             this.btnEditNumber.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnEditNumber.Image = ((System.Drawing.Image)(resources.GetObject("btnEditNumber.Image")));
             this.btnEditNumber.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEditNumber.Location = new System.Drawing.Point(497, 114);
+            this.btnEditNumber.Location = new System.Drawing.Point(500, 114);
             this.btnEditNumber.Name = "btnEditNumber";
-            this.btnEditNumber.Size = new System.Drawing.Size(163, 33);
+            this.btnEditNumber.Size = new System.Drawing.Size(168, 33);
             this.btnEditNumber.TabIndex = 7;
             this.btnEditNumber.Text = " Редактировать";
             this.btnEditNumber.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -198,9 +198,9 @@ namespace PhoneBook.UserControls
             this.btnAddSingle.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnAddSingle.Image = ((System.Drawing.Image)(resources.GetObject("btnAddSingle.Image")));
             this.btnAddSingle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddSingle.Location = new System.Drawing.Point(30, 114);
+            this.btnAddSingle.Location = new System.Drawing.Point(23, 114);
             this.btnAddSingle.Name = "btnAddSingle";
-            this.btnAddSingle.Size = new System.Drawing.Size(208, 33);
+            this.btnAddSingle.Size = new System.Drawing.Size(213, 33);
             this.btnAddSingle.TabIndex = 7;
             this.btnAddSingle.Text = " Добавить 1 квартиру";
             this.btnAddSingle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;

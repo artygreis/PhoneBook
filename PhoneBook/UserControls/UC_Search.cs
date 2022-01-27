@@ -10,6 +10,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -24,11 +25,12 @@ namespace PhoneBook.UserControls
             uC_GridPhones.SelectionModeGrid = Syncfusion.WinForms.DataGrid.Enums.GridSelectionMode.Extended;
             uC_GridPhones.SelectionUnitGrid = Syncfusion.WinForms.DataGrid.Enums.SelectionUnit.Any;
 
-            UpdateData(new List<NumberPhoneView>() { new NumberPhoneView() });
-
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteCountry);
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteCity);
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteAddress);
+
+            AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteCountry1);
+            AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteCity1);
 
             uC_GridPhones.DataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
         }
@@ -53,7 +55,7 @@ namespace PhoneBook.UserControls
         /// <summary>
         /// Загрузка информации о странах
         /// </summary>
-        private void LoadDataToCountry()
+        private void LoadDataToCountry(AutoComplete country, TextBox textBox)
         {
             using (var db = new ApplicationContext())
             {
@@ -61,16 +63,39 @@ namespace PhoneBook.UserControls
                     .Select(c => new CountryCollection() { Id = c.Id, CountryData = $"{c.CountryName} ({c.CountryCode})" })
                     .ToList();
 
-                autoCompleteCountry.DataSource = countries;
-                autoCompleteCountry.RefreshColumns();
-                autoCompleteCountry.Columns[1].MatchingColumn = true;
-                autoCompleteCountry.Columns[0].Visible = false;
+                country.DataSource = countries;
+                country.RefreshColumns();
+                country.Columns[1].MatchingColumn = true;
+                country.Columns[0].Visible = false;
 
                 if (countries.Count == 1)
                 {
-                    autoCompleteCountry.ActiveFocusControl = textBoxCountry;
-                    autoCompleteCountry.SelectedValue = $"{countries.FirstOrDefault().CountryData}";
-                    autoCompleteCountry.ActiveFocusControl = null;
+                    country.ActiveFocusControl = textBox;
+                    country.SelectedValue = $"{countries.FirstOrDefault().CountryData}";
+                    country.ActiveFocusControl = null;
+                }
+            }
+        }
+        private void SelectCountryAndComplete(AutoComplete country, AutoComplete city, AutoCompleteItemEventArgs args)
+        {
+            using (var db = new ApplicationContext())
+            {
+                var countryId = country.GetItemArray(args.SelectedValue)[0];
+                var cities = db.City
+                    .Where(c => c.CountryId == Convert.ToInt32(countryId))
+                    .Select(c => new CityCollection() { Id = c.Id, CityData = $"{c.CityName} ({c.CityCode})" })
+                    .ToList();
+                //maskNumber = db.City.Where(c => c.CountryId == Convert.ToInt32(countryId)).FirstOrDefault()?.MaskNumber ?? "";
+                city.DataSource = cities;
+                city.RefreshColumns();
+                city.Columns[1].MatchingColumn = true;
+                city.Columns[0].Visible = false;
+
+                if (cities.Count == 1)
+                {
+                    city.ActiveFocusControl = textBoxCity;
+                    city.SelectedValue = $"{cities.FirstOrDefault().CityData}";
+                    city.ActiveFocusControl = null;
                 }
             }
         }
@@ -82,26 +107,7 @@ namespace PhoneBook.UserControls
         private void autoCompleteCountry_AutoCompleteItemSelected(object sender, AutoCompleteItemEventArgs args)
         {
             ClearTextEditAndAutoComplete("autoCompleteCountry");
-            using (var db = new ApplicationContext())
-            {
-                var countryId = autoCompleteCountry.GetItemArray(args.SelectedValue)[0];
-                var cities = db.City
-                    .Where(c => c.CountryId == Convert.ToInt32(countryId))
-                    .Select(c => new CityCollection() { Id = c.Id, CityData = $"{c.CityName} ({c.CityCode})" })
-                    .ToList();
-                maskNumber = db.City.Where(c => c.CountryId == Convert.ToInt32(countryId)).FirstOrDefault()?.MaskNumber ?? "";
-                autoCompleteCity.DataSource = cities;
-                autoCompleteCity.RefreshColumns();
-                autoCompleteCity.Columns[1].MatchingColumn = true;
-                autoCompleteCity.Columns[0].Visible = false;
-
-                if (cities.Count == 1)
-                {
-                    autoCompleteCity.ActiveFocusControl = textBoxCity;
-                    autoCompleteCity.SelectedValue = $"{cities.FirstOrDefault().CityData}";
-                    autoCompleteCity.ActiveFocusControl = null;
-                }
-            }
+            SelectCountryAndComplete(autoCompleteCountry, autoCompleteCity, args);
         }
         /// <summary>
         /// Выбор города и формирование списка адресов
@@ -127,11 +133,18 @@ namespace PhoneBook.UserControls
                     })
                     .ToList();
 
+                SelectMask(Convert.ToInt32(cityId));
+
                 autoCompleteAddress.DataSource = addresses;
                 autoCompleteAddress.RefreshColumns();
                 autoCompleteAddress.Columns[1].MatchingColumn = true;
                 autoCompleteAddress.Columns[0].Visible = false;
             }
+        }
+        private void SelectMask(int cityId)
+        {
+            using (var db = new ApplicationContext())
+                maskNumber = db.City.Where(c => c.Id == cityId).FirstOrDefault()?.MaskNumber ?? "";
         }
         /// <summary>
         /// Выбор адреса и формирование списка домов
@@ -162,6 +175,14 @@ namespace PhoneBook.UserControls
                     goto case "autoCompleteAddress";
                 case "autoCompleteAddress": 
                     textBoxApartment.Text = ""; break;
+                case "autoCompleteCountry1":
+                    textBoxCity1.Text = "";
+                    autoCompleteCity1.DataSource = null;
+                    autoCompleteCity1.ResetHistory();
+                    goto case "autoCompleteCity1";
+                case "autoCompleteCity1":
+                    maskedEditNumber.Text = "";
+                    break;
                 default:
                     break;
             }
@@ -200,7 +221,66 @@ namespace PhoneBook.UserControls
 
         private void UC_Search_Load(object sender, EventArgs e)
         {
-            LoadDataToCountry();
+            tabControlAdv_SelectedIndexChanged(tabControlAdv, new EventArgs());
+            //tabControlAdv.SelectedTab = searchByAddressTab;
+        }
+
+        private void autoCompleteCountry1_AutoCompleteItemSelected(object sender, AutoCompleteItemEventArgs args)
+        {
+            ClearTextEditAndAutoComplete("autoCompleteCountry1");
+            SelectCountryAndComplete(autoCompleteCountry1, autoCompleteCity1, args);
+        }
+
+        private void tabControlAdv_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateData(new List<NumberPhoneView>() { new NumberPhoneView() });
+
+            if (tabControlAdv.SelectedTab.Name == "searchByPhoneTab")
+            {
+                LoadDataToCountry(autoCompleteCountry1, textBoxCountry1);
+            }
+            if (tabControlAdv.SelectedTab.Name == "searchByAddressTab")
+            {
+                LoadDataToCountry(autoCompleteCountry, textBoxCountry);
+            }
+        }
+
+        private void autoCompleteCity1_AutoCompleteItemSelected(object sender, AutoCompleteItemEventArgs args)
+        {
+            ClearTextEditAndAutoComplete("autoCompleteCity1");
+
+            using (var db = new ApplicationContext())
+            {
+                var cityId = autoCompleteCity1.GetItemArray(args.SelectedValue)[0];
+
+                SelectMask(Convert.ToInt32(cityId));
+
+                maskedEditNumber.Mask = maskNumber;
+            }
+        }
+
+        private void btnSearchByPhone_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(autoCompleteCountry1.GetItemArray(textBoxCountry1.Text)?.ToString()) ||
+                string.IsNullOrEmpty(autoCompleteCity1.GetItemArray(textBoxCity1.Text)?.ToString()))
+            {
+                MessageBox.Show("Укажите страну и город перед вводом номера телефона для поиска.",
+                    "Дополнительная информация",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+            Regex regex = new Regex(@"[^0-9]");
+            using (var db = new ApplicationContext())
+            {
+                var numberPhones = db.NumberPhoneView
+                    .Where(n => n.Number == regex.Replace(maskedEditNumber.Text, ""))
+                    .ToList();
+
+                numberPhones.Sort();
+                UpdateData(numberPhones);
+            }
+
         }
     }
 }

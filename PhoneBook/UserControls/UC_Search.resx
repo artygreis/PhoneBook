@@ -83,4 +83,26 @@
   <metadata name="autoCompleteAddress.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="autoCompleteCity1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="autoCompleteCountry1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="btnSearchByPhone.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAm1JREFUSEvd
+        Vc2rTVEU34WEkI8MDPSICEmej4HJK/ecvW96UvIHCFHmSuQjvR6JgbzBLffsdQ7vppdkKPQMTF8+YmLw
+        Bi/5mklKkctvrb1u99y6775zLwP51a9z1u+sj73XOmcf8x/D+R3GpmM9k+NnROz3G0u/wPfG0WRhsj/H
+        cfyMaBRxfkCVYmD/f6eIvbkUTq/F2SZHVC2GwkX2pMswvBfCKNuuaoBNtiHJI/AD+NBEfqs+CeiqXc73
+        GeuPm6i6UhXV6Av4DveEKw/5syllq9SjyyLtZmLpLFg39tZasSO/LvjQGbEZhYsM1pajVW8R/NPY7Kiq
+        KOKvIsF3M1iZL3acLYD9A35XxGYULrJ3dAkSPhC6dIuqKJKWdOWPwYu4HwfrLbvtsl0bEHAe7FPFmPLt
+        RUj+TJI0OWH2VReqB+KoH9pdcJMqHdBuJjHdg4b2+BETp+ewyxGxOWnXiLMVCPwKNmfCbZM2IHkevFvR
+        s81iS0u51fQJfIWdnzIHx+bJsxaUKosRTEJuG4O/F0cVJFstdgOlZI3o/NzSSRBvH31Eofu4ToDc0uct
+        Le0Zrroeybh14zK7Blx6LBTyl1TJIfYRVjiJle9SpTNiOi3JyslGVZqw9BScUiuHdoPvBEfX4F835etz
+        VWnCUgJ+UyuHRhFLNdnqdHTpsCS2dEj8I4o1Q0B/ZQ70N+BLVXJoFinCA3IKhHNtCoV2Sw4+zW06Kj6O
+        DovWAl4Bf/lFyK+opcuSLAyfr/wJ8JuGEyF37PQM64dCYn8n/CboBHgDNs66dKd6/QFCQl55zQw8ma3q
+        X4ac2HQBLZulyjQw5jeppouVdnTmIAAAAABJRU5ErkJggg==
+</value>
+  </data>
 </root>

@@ -152,13 +152,4 @@
         brj2uXMg/xD52W2D89ggD/0MgOgQKJXgPrU8kxMAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="autoCompleteCountry.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>32, 17</value>
-  </metadata>
-  <metadata name="autoCompleteCity.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>32, 17</value>
-  </metadata>
-  <metadata name="autoCompleteAddress.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>32, 17</value>
-  </metadata>
 </root>
