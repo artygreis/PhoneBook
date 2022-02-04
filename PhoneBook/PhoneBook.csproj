@@ -23,6 +23,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="5.0.10" />
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlcipher" Version="2.0.6" />
     <PackageReference Include="squirrel.windows" Version="2.0.1" />
+    <PackageReference Include="Syncfusion.Pdf.WinForms" Version="19.4.0.48" />
     <Reference Include="NuGet.Squirrel">
       <HintPath>..\..\..\..\.nuget\packages\squirrel.windows\2.0.1\lib\Net45\NuGet.Squirrel.dll</HintPath>
     </Reference>

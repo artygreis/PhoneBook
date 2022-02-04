@@ -5,14 +5,17 @@ using Syncfusion.Windows.Forms.Tools;
 using Syncfusion.WinForms.DataGrid;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using Syncfusion.Pdf;
+//using Syncfusion.Pdf.Graphics;
+using Syncfusion.Pdf.Grid;
+using Syncfusion.Drawing;
+using System.Drawing;
+using Syncfusion.Pdf.Graphics;
 
 namespace PhoneBook.UserControls
 {
@@ -33,6 +36,8 @@ namespace PhoneBook.UserControls
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteCity1);
 
             uC_GridPhones.DataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
+
+            saveFileDialog.Filter = "Pdf files(*.pdf)|*.pdf";
         }
 
         private void DataGrid_AutoGeneratingColumn(object sender, Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnArgs e)
@@ -281,6 +286,94 @@ namespace PhoneBook.UserControls
                 UpdateData(numberPhones);
             }
 
+        }
+
+        private void btnExportToPdf_Click(object sender, EventArgs e)
+        {
+            var numberPhones = uC_GridPhones.DataGrid.DataSource as List<NumberPhoneView>;
+
+            if (numberPhones.Count < 2)
+            {
+                MessageBox.Show("Нет данных для экспорта", "Экспорт", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            //Create a new PDF document.
+            PdfDocument doc = new PdfDocument();
+            doc.PageSettings.Margins.All = 15;
+
+            //Add a page.
+            PdfPage page = doc.Pages.Add();
+            //Create a PdfGrid.
+            PdfGrid pdfGrid = new PdfGrid();
+
+            //Create a DataTable.
+            DataTable dataTable = new DataTable();
+            //Add columns to the DataTable
+            dataTable.Columns.Add("Нас. пункт");
+            dataTable.Columns.Add("Адрес");
+            dataTable.Columns.Add("Дом");
+            dataTable.Columns.Add("Кв.");
+            dataTable.Columns.Add("Номер телефона");
+            //Add rows to the DataTable.
+            foreach (var numberPhone in numberPhones)
+            {
+                dataTable.Rows.Add(new object[] 
+                { 
+                    numberPhone.Locality, 
+                    numberPhone.TypeName + " "+ numberPhone.StreetName, 
+                    numberPhone.House,
+                    numberPhone.Apartment,
+                    string.IsNullOrEmpty(numberPhone.Number) ? "" : string.Format("{0:"+ maskNumber +"}", Convert.ToInt64(numberPhone.Number))
+                });
+            }
+            
+            //Assign data source.
+            pdfGrid.DataSource = dataTable;
+            pdfGrid.Columns[0].Width = 150;
+            pdfGrid.Columns[2].Width = 50;
+            pdfGrid.Columns[3].Width = 50;
+            pdfGrid.Columns[4].Width = 100;
+            for (int i =0; i < pdfGrid.Columns.Count; i++)
+            {
+                pdfGrid.Columns[i].Format = new PdfStringFormat() { Alignment = PdfTextAlignment.Center, LineAlignment = PdfVerticalAlignment.Middle };
+
+            }
+
+            //Creates the grid cell styles
+            PdfGridRow header = pdfGrid.Headers[0];
+            //Creates the header style
+            PdfGridCellStyle headerStyle = new PdfGridCellStyle();
+            headerStyle.Borders.All = PdfPens.Black;
+            headerStyle.BackgroundBrush = new PdfSolidBrush(new PdfColor(0, 71, 160));
+            headerStyle.TextBrush = PdfBrushes.White;
+            headerStyle.Font = new PdfTrueTypeFont(new Font("Arial Unicode MS", 14, FontStyle.Bold),  true);
+            //Adds cell customizations
+            for (int i = 0; i < header.Cells.Count; i++)
+            {
+                header.Cells[i].StringFormat = new PdfStringFormat(PdfTextAlignment.Center, PdfVerticalAlignment.Middle);
+            }
+            //Applies the header style
+            header.ApplyStyle(headerStyle);
+
+            PdfGridCellStyle cellStyle = new PdfGridCellStyle();
+            cellStyle.Borders.All = PdfPens.Black;
+            cellStyle.Font = new PdfTrueTypeFont(new Font("Arial Unicode MS", 12), true);
+            cellStyle.TextBrush = PdfBrushes.Black;
+            pdfGrid.Rows.ApplyStyle(cellStyle);
+
+            //Draw grid to the page of PDF document.
+            pdfGrid.Draw(page, new PointF(10, 10));
+            saveFileDialog.FileName = textBoxAddress.Text;
+            if (saveFileDialog.ShowDialog() == DialogResult.Cancel)
+                return;
+            // получаем выбранный файл
+            string filename = saveFileDialog.FileName;
+            //Save the document.
+            doc.Save(filename);
+            //close the document
+            doc.Close(true);
+            MessageBox.Show("Файл успешно сохранен", "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
