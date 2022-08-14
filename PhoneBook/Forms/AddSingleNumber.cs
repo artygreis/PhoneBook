@@ -24,6 +24,10 @@ namespace PhoneBook.Forms
         private void AddOneApartment_Load(object sender, System.EventArgs e)
         {
             labelAddress.Text = $"{Address}";
+            if (!string.IsNullOrEmpty(Mask))
+            {
+                maskedEditNumber.Mask = Mask;
+            }
             if (NumberPhone != null)
             {
                 textBoxApartment.Text = NumberPhone.Apartment;
@@ -32,10 +36,6 @@ namespace PhoneBook.Forms
             else
             {
                 NumberPhone = new NumberPhone();
-            }
-            if (!string.IsNullOrEmpty(Mask))
-            {
-                maskedEditNumber.Mask = Mask;
             }
         }
         private void btnAdd_Click(object sender, EventArgs e)
