@@ -12,7 +12,9 @@ namespace PhoneBook
             using (var db = new ApplicationContext())
             {
                 if (!db.Database.EnsureCreated())
+                {
                     return;
+                }    
 
                 db.Database.ExecuteSqlRaw(@"CREATE VIEW NumberPhoneView AS 
                                             SELECT NumberPhone.Id, NumberPhone.AddressId, Address.Locality, TypeStreet.TypeName,
@@ -80,6 +82,20 @@ namespace PhoneBook
                 //address1.Cities.Add(city);
 
                 db.SaveChanges();
+            }
+        }
+
+        public static void AddInDb()
+        {
+            using (var db = new ApplicationContext())
+            {
+                db.Database.ExecuteSqlRaw(@"CREATE TABLE IF NOT EXISTS NotCall( 
+                                                Id INTEGER NOT NULL CONSTRAINT PK_NoCall PRIMARY KEY AUTOINCREMENT,
+                                                Number TEXT,
+                                                Notes TEXT,
+                                                CityId INTEGER NOT NULL,
+                                                    CONSTRAINT FK_NoCall_City_CityId FOREIGN KEY (CityId)
+                                                REFERENCES City (Id) ON DELETE CASCADE)");
             }
         }
     }

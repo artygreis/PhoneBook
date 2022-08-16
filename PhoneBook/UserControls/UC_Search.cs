@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 using Syncfusion.Pdf;
@@ -16,12 +15,16 @@ using Syncfusion.Pdf.Grid;
 using Syncfusion.Drawing;
 using System.Drawing;
 using Syncfusion.Pdf.Graphics;
+using PhoneBook.Forms;
+using System.Text.RegularExpressions;
 
 namespace PhoneBook.UserControls
 {
     public partial class UC_Search : UserControl
     {
         private string maskNumber = "";
+
+        private NotCallView currentNotCallNumber => uC_GridPhones.DataGrid.SelectedItem as NotCallView;
         public UC_Search()
         {
             InitializeComponent();
@@ -34,6 +37,9 @@ namespace PhoneBook.UserControls
 
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteCountry1);
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteCity1);
+
+            AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteCountryNotCall);
+            AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteCityNotCall);
 
             uC_GridPhones.DataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
 
@@ -56,6 +62,65 @@ namespace PhoneBook.UserControls
             uC_GridPhones.DataGrid.Columns["StreetName"].Width = 180;
             uC_GridPhones.DataGrid.Columns["House"].Width = 50;
             uC_GridPhones.DataGrid.Columns["Apartment"].Width = 50;
+        }
+
+        private void UpdateDataNotCall(int cityId)
+        {
+            var numberPhones = new List<NumberPhoneView>();
+            var notCalls = new List<NotCall>();
+            uC_GridPhones.DataGrid.DataSource = new List<NotCallView>() { new NotCallView() };
+
+            using (var db = new ApplicationContext())
+            {
+                notCalls = db.NotCall.Where(n => n.CityId == cityId).ToList();
+
+                if (notCalls.Count() == 0)
+                {
+                    MessageBox.Show("Отсутствуют номера для данного города.",
+                        "Информация",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    return;
+                }
+
+                numberPhones = db.NumberPhone
+                    .Include(a => a.Address)
+                        .ThenInclude(t => t.TypeStreet)
+                    .Include(a => a.Address)
+                        .ThenInclude(c => c.Cities)
+                    .Where(t => t.Address.Cities.FirstOrDefault().Id == cityId)
+                    .Select(n => new NumberPhoneView()
+                    {
+                        Id = n.Id,
+                        AddressId = n.AddressId,
+                        Locality = n.Address.Locality,
+                        TypeName = n.Address.TypeStreet.TypeName,
+                        StreetName = n.Address.StreetName,
+                        House = n.Address.House,
+                        Apartment = n.Apartment,
+                        Number = n.Number
+                    }).ToList();
+            }
+
+            var notCallViews = new List<NotCallView>();
+
+            foreach (var notCall in notCalls)
+            {
+                var findNumberPhones = numberPhones.Where(n => n.Number == notCall.Number).ToList();
+                var address = findNumberPhones.Count() > 0 ? $"{(string.IsNullOrEmpty(findNumberPhones.First().Locality) ? "" : findNumberPhones.First().Locality + ", ")}{findNumberPhones.First().TypeName} {findNumberPhones.First().StreetName}, {findNumberPhones.First().House}" : "";
+                notCallViews.Add(new NotCallView()
+                {
+                    Id = notCall.Id,
+                    Number = notCall.Number,
+                    Address = address,
+                    Notes = notCall.Notes,
+                    CityId = notCall.CityId
+                });
+            }
+
+            uC_GridPhones.DataGrid.DataSource = notCallViews;
+            uC_GridPhones.DataGrid.Columns["Number"].Width = 130;
+            uC_GridPhones.DataGrid.Columns["Address"].Width = 270;
         }
         /// <summary>
         /// Загрузка информации о странах
@@ -188,6 +253,14 @@ namespace PhoneBook.UserControls
                 case "autoCompleteCity1":
                     maskedEditNumber.Text = "";
                     break;
+                case "autoCompleteCountryNotCall":
+                    textBoxCityNotCall.Text = "";
+                    btnAdd.Enabled = false;
+                    btnEdit.Enabled = false;
+                    btnDelete.Enabled = false;
+                    autoCompleteCityNotCall.DataSource = null;
+                    autoCompleteCityNotCall.ResetHistory();
+                    break;
                 default:
                     break;
             }
@@ -236,6 +309,13 @@ namespace PhoneBook.UserControls
             SelectCountryAndComplete(autoCompleteCountry1, autoCompleteCity1, args);
         }
 
+        private void autoCompleteCountryNotCall_AutoCompleteItemSelected(object sender, AutoCompleteItemEventArgs args)
+        {
+            ClearTextEditAndAutoComplete("autoCompleteCountryNotCall");
+            SelectCountryAndComplete(autoCompleteCountryNotCall, autoCompleteCityNotCall, args);
+            uC_GridPhones.DataGrid.DataSource = new List<NotCallView>() { new NotCallView() };
+        }
+
         private void tabControlAdv_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateData(new List<NumberPhoneView>() { new NumberPhoneView() });
@@ -247,6 +327,10 @@ namespace PhoneBook.UserControls
             if (tabControlAdv.SelectedTab.Name == "searchByAddressTab")
             {
                 LoadDataToCountry(autoCompleteCountry, textBoxCountry);
+            }
+            if (tabControlAdv.SelectedTab.Name == "searchNotCallTab")
+            {
+                LoadDataToCountry(autoCompleteCountryNotCall, textBoxCountryNotCall);
             }
         }
 
@@ -263,7 +347,22 @@ namespace PhoneBook.UserControls
                 maskedEditNumber.Mask = maskNumber;
             }
         }
+        private void autoCompleteCityNotCall_AutoCompleteItemSelected(object sender, AutoCompleteItemEventArgs args)
+        {
 
+            using (var db = new ApplicationContext())
+            {
+                var cityId = autoCompleteCityNotCall.GetItemArray(args.SelectedValue)[0];
+
+                SelectMask(Convert.ToInt32(cityId));
+
+                UpdateDataNotCall(Convert.ToInt32(cityId));
+
+                btnAdd.Enabled = true;
+                btnEdit.Enabled = true;
+                btnDelete.Enabled = true;
+            }
+        }
         private void btnSearchByPhone_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(autoCompleteCountry1.GetItemArray(textBoxCountry1.Text)?.ToString()) ||
@@ -374,6 +473,75 @@ namespace PhoneBook.UserControls
             //close the document
             doc.Close(true);
             MessageBox.Show("Файл успешно сохранен", "Сохранение файла", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            var addNotCall = new AddNotCallNumber();
+            addNotCall.Mask = maskNumber;
+            addNotCall.NotCall = new NotCall() { CityId = Convert.ToInt32(autoCompleteCityNotCall.GetItemArray(textBoxCityNotCall.Text)[0]) };
+            if (addNotCall.ShowDialog() == DialogResult.OK)
+            {
+                using (var db = new ApplicationContext())
+                {
+                    db.NotCall.Add(addNotCall.NotCall);
+                    db.SaveChanges();
+                }
+            }
+            UpdateDataNotCall(Convert.ToInt32(autoCompleteCityNotCall.GetItemArray(textBoxCityNotCall.Text)[0]));
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (currentNotCallNumber != null)
+            {
+                var editNotCall = new AddNotCallNumber();
+                editNotCall.Mask = maskNumber;
+                editNotCall.NameForm = "Редактирование информации:";
+                using (var db = new ApplicationContext())
+                {
+                    var notCall = db.NotCall.Where(n => n.Id == currentNotCallNumber.Id).FirstOrDefault();
+                    editNotCall.NotCall = notCall;
+                }
+                if (editNotCall.ShowDialog() == DialogResult.OK)
+                {
+                    using (var db = new ApplicationContext())
+                    {
+                        db.NotCall.Update(editNotCall.NotCall);
+                        db.SaveChanges();
+                    }
+                }
+                UpdateDataNotCall(Convert.ToInt32(autoCompleteCityNotCall.GetItemArray(textBoxCityNotCall.Text)[0]));
+            }
+            else
+            {
+                MessageBox.Show("Выберите в таблице номер для редактирования.", "Уведомление",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (currentNotCallNumber != null)
+            {
+                var dialog = MessageBox.Show($"Вы действительно хотите информацию о номере\n " +
+                    $"{currentNotCallNumber.Number}", "Уведомление",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialog == DialogResult.No) return;
+                using (var db = new ApplicationContext())
+                {
+                    var notCall = db.NotCall.Where(n => n.Id == currentNotCallNumber.Id).FirstOrDefault();
+                    db.NotCall.Remove(notCall);
+                    db.SaveChanges();
+                }
+
+                UpdateDataNotCall(Convert.ToInt32(autoCompleteCityNotCall.GetItemArray(textBoxCityNotCall.Text)[0]));
+            }
+            else
+            {
+                MessageBox.Show("Выберите в таблице номер для удаления.", "Уведомление",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

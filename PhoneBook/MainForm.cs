@@ -30,6 +30,9 @@ namespace PhoneBook
                 var settingsForm = new SettingsApp();
                 settingsForm.ShowDialog();
             }
+
+            DbInitializer.AddInDb();
+
             btnSearchClick(btnSearch, new EventArgs());
 #if (!DEBUG)
             CheckForUpdates();

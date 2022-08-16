@@ -38,6 +38,17 @@ namespace PhoneBook.UserControls
             this.textBoxCountry1 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControlAdv = new Syncfusion.Windows.Forms.Tools.TabControlAdv();
+            this.searchNotCallTab = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.textBoxCountryNotCall = new System.Windows.Forms.TextBox();
+            this.autoLabelCountryNotCall = new Syncfusion.Windows.Forms.Tools.AutoLabel();
+            this.textBoxCityNotCall = new System.Windows.Forms.TextBox();
+            this.autoLabelCityNotCall = new Syncfusion.Windows.Forms.Tools.AutoLabel();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.searchByAddressTab = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
             this.btnExportToPdf = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -55,9 +66,6 @@ namespace PhoneBook.UserControls
             this.autoLabelNumber = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.autoLabelCountry1 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.btnSearchByPhone = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.uC_GridPhones = new PhoneBook.UserControls.UC_GridPhones();
             this.panel5 = new System.Windows.Forms.Panel();
             this.autoCompleteCity = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
@@ -65,10 +73,13 @@ namespace PhoneBook.UserControls
             this.autoCompleteCountry1 = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
             this.autoCompleteCity1 = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.autoCompleteCountryNotCall = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
+            this.autoCompleteCityNotCall = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCountry)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlAdv)).BeginInit();
             this.tabControlAdv.SuspendLayout();
+            this.searchNotCallTab.SuspendLayout();
             this.searchByAddressTab.SuspendLayout();
             this.searchByPhoneTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.maskedEditNumber)).BeginInit();
@@ -77,6 +88,8 @@ namespace PhoneBook.UserControls
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteAddress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCountry1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCity1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCountryNotCall)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCityNotCall)).BeginInit();
             this.SuspendLayout();
             // 
             // autoCompleteCountry
@@ -130,12 +143,160 @@ namespace PhoneBook.UserControls
             this.tabControlAdv.BeforeTouchSize = new System.Drawing.Size(674, 154);
             this.tabControlAdv.Controls.Add(this.searchByAddressTab);
             this.tabControlAdv.Controls.Add(this.searchByPhoneTab);
+            this.tabControlAdv.Controls.Add(this.searchNotCallTab);
             this.tabControlAdv.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlAdv.Location = new System.Drawing.Point(8, 8);
             this.tabControlAdv.Name = "tabControlAdv";
             this.tabControlAdv.Size = new System.Drawing.Size(674, 154);
             this.tabControlAdv.TabIndex = 6;
             this.tabControlAdv.SelectedIndexChanged += new System.EventHandler(this.tabControlAdv_SelectedIndexChanged);
+            // 
+            // searchNotCallTab
+            // 
+            this.searchNotCallTab.Controls.Add(this.btnDelete);
+            this.searchNotCallTab.Controls.Add(this.btnEdit);
+            this.searchNotCallTab.Controls.Add(this.textBoxCountryNotCall);
+            this.searchNotCallTab.Controls.Add(this.autoLabelCountryNotCall);
+            this.searchNotCallTab.Controls.Add(this.textBoxCityNotCall);
+            this.searchNotCallTab.Controls.Add(this.autoLabelCityNotCall);
+            this.searchNotCallTab.Controls.Add(this.btnAdd);
+            this.searchNotCallTab.Image = null;
+            this.searchNotCallTab.ImageSize = new System.Drawing.Size(16, 16);
+            this.searchNotCallTab.Location = new System.Drawing.Point(1, 31);
+            this.searchNotCallTab.Name = "searchNotCallTab";
+            this.searchNotCallTab.ShowCloseButton = true;
+            this.searchNotCallTab.Size = new System.Drawing.Size(671, 121);
+            this.searchNotCallTab.TabForeColor = System.Drawing.Color.White;
+            this.searchNotCallTab.TabIndex = 1;
+            this.searchNotCallTab.Text = "Не звонить";
+            this.searchNotCallTab.ThemesEnabled = false;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.White;
+            this.btnDelete.FlatAppearance.BorderSize = 0;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnDelete.Enabled = false;
+            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDelete.Location = new System.Drawing.Point(533, 66);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(112, 33);
+            this.btnDelete.TabIndex = 15;
+            this.btnDelete.Text = " Удалить";
+            this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.BackColor = System.Drawing.Color.White;
+            this.btnEdit.FlatAppearance.BorderSize = 0;
+            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEdit.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnEdit.Enabled = false;
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEdit.Location = new System.Drawing.Point(359, 66);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(168, 33);
+            this.btnEdit.TabIndex = 14;
+            this.btnEdit.Text = " Редактировать";
+            this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnEdit.UseVisualStyleBackColor = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // textBoxCountryNotCall
+            // 
+            this.autoCompleteCountryNotCall.SetAutoComplete(this.textBoxCountryNotCall, Syncfusion.Windows.Forms.Tools.AutoCompleteModes.AutoSuggest);
+            this.textBoxCountryNotCall.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.textBoxCountryNotCall.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
+            this.textBoxCountryNotCall.Location = new System.Drawing.Point(103, 15);
+            this.textBoxCountryNotCall.Name = "textBoxCountryNotCall";
+            this.textBoxCountryNotCall.Size = new System.Drawing.Size(170, 26);
+            this.textBoxCountryNotCall.TabIndex = 7;
+            // 
+            // autoLabelCountryNotCall
+            // 
+            this.autoLabelCountryNotCall.DX = -86;
+            this.autoLabelCountryNotCall.DY = 3;
+            this.autoLabelCountryNotCall.ForeColor = System.Drawing.Color.White;
+            this.autoLabelCountryNotCall.Gap = 10;
+            this.autoLabelCountryNotCall.LabeledControl = this.textBoxCountryNotCall;
+            this.autoLabelCountryNotCall.Location = new System.Drawing.Point(17, 18);
+            this.autoLabelCountryNotCall.Name = "autoLabelCountryNotCall";
+            this.autoLabelCountryNotCall.Size = new System.Drawing.Size(76, 19);
+            this.autoLabelCountryNotCall.TabIndex = 8;
+            this.autoLabelCountryNotCall.Text = "Страна:";
+            // 
+            // textBoxCityNotCall
+            // 
+            this.autoCompleteCityNotCall.SetAutoComplete(this.textBoxCityNotCall, Syncfusion.Windows.Forms.Tools.AutoCompleteModes.AutoSuggest);
+            this.textBoxCityNotCall.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.textBoxCityNotCall.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
+            this.textBoxCityNotCall.Location = new System.Drawing.Point(414, 15);
+            this.textBoxCityNotCall.Name = "textBoxCityNotCall";
+            this.textBoxCityNotCall.Size = new System.Drawing.Size(170, 26);
+            this.textBoxCityNotCall.TabIndex = 12;
+            // 
+            // autoLabelCityNotCall
+            // 
+            this.autoLabelCityNotCall.DX = -71;
+            this.autoLabelCityNotCall.DY = 3;
+            this.autoLabelCityNotCall.ForeColor = System.Drawing.Color.White;
+            this.autoLabelCityNotCall.Gap = 10;
+            this.autoLabelCityNotCall.LabeledControl = this.textBoxCityNotCall;
+            this.autoLabelCityNotCall.Location = new System.Drawing.Point(343, 18);
+            this.autoLabelCityNotCall.Name = "autoLabelCityNotCall";
+            this.autoLabelCityNotCall.Size = new System.Drawing.Size(61, 19);
+            this.autoLabelCityNotCall.TabIndex = 12;
+            this.autoLabelCityNotCall.Text = "Город:";
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.BackColor = System.Drawing.Color.White;
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnAdd.Enabled = false;
+            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
+            this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAdd.Location = new System.Drawing.Point(222, 66);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(131, 33);
+            this.btnAdd.TabIndex = 13;
+            this.btnAdd.Text = " Добавить";
+            this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.White;
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(8, 0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(674, 8);
+            this.panel4.TabIndex = 0;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel3.Location = new System.Drawing.Point(682, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(8, 162);
+            this.panel3.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(8, 162);
+            this.panel2.TabIndex = 0;
             // 
             // searchByAddressTab
             // 
@@ -155,6 +316,7 @@ namespace PhoneBook.UserControls
             this.searchByAddressTab.Name = "searchByAddressTab";
             this.searchByAddressTab.ShowCloseButton = true;
             this.searchByAddressTab.Size = new System.Drawing.Size(671, 121);
+            this.searchByAddressTab.TabFont = null;
             this.searchByAddressTab.TabForeColor = System.Drawing.Color.White;
             this.searchByAddressTab.TabIndex = 1;
             this.searchByAddressTab.Text = "Поиск по адресу";
@@ -222,53 +384,53 @@ namespace PhoneBook.UserControls
             // 
             // autoLabelCity
             // 
-            this.autoLabelCity.DX = -71;
-            this.autoLabelCity.DY = 3;
+            this.autoLabelCity.DX = -110;
+            this.autoLabelCity.DY = 1;
             this.autoLabelCity.ForeColor = System.Drawing.Color.White;
             this.autoLabelCity.Gap = 10;
             this.autoLabelCity.LabeledControl = this.textBoxCity;
-            this.autoLabelCity.Location = new System.Drawing.Point(343, 18);
+            this.autoLabelCity.Location = new System.Drawing.Point(304, 16);
             this.autoLabelCity.Name = "autoLabelCity";
-            this.autoLabelCity.Size = new System.Drawing.Size(61, 19);
+            this.autoLabelCity.Size = new System.Drawing.Size(43, 15);
             this.autoLabelCity.TabIndex = 0;
             this.autoLabelCity.Text = "Город:";
             // 
             // autoLabelApartment
             // 
-            this.autoLabelApartment.DX = -42;
-            this.autoLabelApartment.DY = 3;
+            this.autoLabelApartment.DX = -110;
+            this.autoLabelApartment.DY = 1;
             this.autoLabelApartment.ForeColor = System.Drawing.Color.White;
             this.autoLabelApartment.Gap = 10;
             this.autoLabelApartment.LabeledControl = this.textBoxApartment;
-            this.autoLabelApartment.Location = new System.Drawing.Point(526, 53);
+            this.autoLabelApartment.Location = new System.Drawing.Point(458, 51);
             this.autoLabelApartment.Name = "autoLabelApartment";
-            this.autoLabelApartment.Size = new System.Drawing.Size(32, 19);
+            this.autoLabelApartment.Size = new System.Drawing.Size(24, 15);
             this.autoLabelApartment.TabIndex = 0;
             this.autoLabelApartment.Text = "КВ.";
             // 
             // autoLabelAddress
             // 
-            this.autoLabelAddress.DX = -86;
-            this.autoLabelAddress.DY = 3;
+            this.autoLabelAddress.DX = -120;
+            this.autoLabelAddress.DY = 1;
             this.autoLabelAddress.ForeColor = System.Drawing.Color.White;
             this.autoLabelAddress.Gap = 20;
             this.autoLabelAddress.LabeledControl = this.textBoxAddress;
-            this.autoLabelAddress.Location = new System.Drawing.Point(17, 53);
+            this.autoLabelAddress.Location = new System.Drawing.Point(-17, 51);
             this.autoLabelAddress.Name = "autoLabelAddress";
-            this.autoLabelAddress.Size = new System.Drawing.Size(66, 19);
+            this.autoLabelAddress.Size = new System.Drawing.Size(43, 15);
             this.autoLabelAddress.TabIndex = 0;
             this.autoLabelAddress.Text = "Адрес:";
             // 
             // autoLabelCountry
             // 
-            this.autoLabelCountry.DX = -86;
-            this.autoLabelCountry.DY = 3;
+            this.autoLabelCountry.DX = -110;
+            this.autoLabelCountry.DY = 1;
             this.autoLabelCountry.ForeColor = System.Drawing.Color.White;
             this.autoLabelCountry.Gap = 10;
             this.autoLabelCountry.LabeledControl = this.textBoxCountry;
-            this.autoLabelCountry.Location = new System.Drawing.Point(17, 18);
+            this.autoLabelCountry.Location = new System.Drawing.Point(-7, 16);
             this.autoLabelCountry.Name = "autoLabelCountry";
-            this.autoLabelCountry.Size = new System.Drawing.Size(76, 19);
+            this.autoLabelCountry.Size = new System.Drawing.Size(49, 15);
             this.autoLabelCountry.TabIndex = 0;
             this.autoLabelCountry.Text = "Страна:";
             // 
@@ -287,6 +449,7 @@ namespace PhoneBook.UserControls
             this.searchByPhoneTab.Name = "searchByPhoneTab";
             this.searchByPhoneTab.ShowCloseButton = true;
             this.searchByPhoneTab.Size = new System.Drawing.Size(671, 121);
+            this.searchByPhoneTab.TabFont = null;
             this.searchByPhoneTab.TabForeColor = System.Drawing.Color.White;
             this.searchByPhoneTab.TabIndex = 1;
             this.searchByPhoneTab.Text = "Поиск по номеру телефону";
@@ -307,14 +470,14 @@ namespace PhoneBook.UserControls
             // 
             // autoLabelCity1
             // 
-            this.autoLabelCity1.DX = -71;
-            this.autoLabelCity1.DY = 3;
+            this.autoLabelCity1.DX = -53;
+            this.autoLabelCity1.DY = 5;
             this.autoLabelCity1.ForeColor = System.Drawing.Color.White;
             this.autoLabelCity1.Gap = 10;
             this.autoLabelCity1.LabeledControl = this.textBoxCity1;
-            this.autoLabelCity1.Location = new System.Drawing.Point(343, 18);
+            this.autoLabelCity1.Location = new System.Drawing.Point(361, 20);
             this.autoLabelCity1.Name = "autoLabelCity1";
-            this.autoLabelCity1.Size = new System.Drawing.Size(61, 19);
+            this.autoLabelCity1.Size = new System.Drawing.Size(43, 15);
             this.autoLabelCity1.TabIndex = 12;
             this.autoLabelCity1.Text = "Город:";
             // 
@@ -330,27 +493,27 @@ namespace PhoneBook.UserControls
             // 
             // autoLabelNumber
             // 
-            this.autoLabelNumber.DX = -176;
-            this.autoLabelNumber.DY = 3;
+            this.autoLabelNumber.DX = -120;
+            this.autoLabelNumber.DY = 1;
             this.autoLabelNumber.ForeColor = System.Drawing.Color.White;
             this.autoLabelNumber.Gap = 20;
             this.autoLabelNumber.LabeledControl = this.maskedEditNumber;
-            this.autoLabelNumber.Location = new System.Drawing.Point(17, 53);
+            this.autoLabelNumber.Location = new System.Drawing.Point(73, 51);
             this.autoLabelNumber.Name = "autoLabelNumber";
-            this.autoLabelNumber.Size = new System.Drawing.Size(156, 19);
+            this.autoLabelNumber.Size = new System.Drawing.Size(104, 15);
             this.autoLabelNumber.TabIndex = 10;
             this.autoLabelNumber.Text = "Номер телефона:";
             // 
             // autoLabelCountry1
             // 
-            this.autoLabelCountry1.DX = -86;
-            this.autoLabelCountry1.DY = 3;
+            this.autoLabelCountry1.DX = -59;
+            this.autoLabelCountry1.DY = 5;
             this.autoLabelCountry1.ForeColor = System.Drawing.Color.White;
             this.autoLabelCountry1.Gap = 10;
             this.autoLabelCountry1.LabeledControl = this.textBoxCountry1;
-            this.autoLabelCountry1.Location = new System.Drawing.Point(17, 18);
+            this.autoLabelCountry1.Location = new System.Drawing.Point(44, 20);
             this.autoLabelCountry1.Name = "autoLabelCountry1";
-            this.autoLabelCountry1.Size = new System.Drawing.Size(76, 19);
+            this.autoLabelCountry1.Size = new System.Drawing.Size(49, 15);
             this.autoLabelCountry1.TabIndex = 8;
             this.autoLabelCountry1.Text = "Страна:";
             // 
@@ -368,33 +531,6 @@ namespace PhoneBook.UserControls
             this.btnSearchByPhone.Text = "     Найти";
             this.btnSearchByPhone.UseVisualStyleBackColor = false;
             this.btnSearchByPhone.Click += new System.EventHandler(this.btnSearchByPhone_Click);
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.Color.White;
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(8, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(674, 8);
-            this.panel4.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(682, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(8, 162);
-            this.panel3.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(8, 162);
-            this.panel2.TabIndex = 0;
             // 
             // uC_GridPhones
             // 
@@ -469,6 +605,32 @@ namespace PhoneBook.UserControls
             this.autoCompleteCity1.ThemeName = "Default";
             this.autoCompleteCity1.AutoCompleteItemSelected += new Syncfusion.Windows.Forms.Tools.AutoCompleteItemEventHandler(this.autoCompleteCity1_AutoCompleteItemSelected);
             // 
+            // autoCompleteCountryNotCall
+            // 
+            this.autoCompleteCountryNotCall.HeaderFont = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.autoCompleteCountryNotCall.ItemFont = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.autoCompleteCountryNotCall.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(158)))), ((int)(((byte)(218)))));
+            this.autoCompleteCountryNotCall.ParentForm = this;
+            this.autoCompleteCountryNotCall.ShowCloseButton = false;
+            this.autoCompleteCountryNotCall.ShowColumnHeader = true;
+            this.autoCompleteCountryNotCall.ShowGripper = false;
+            this.autoCompleteCountryNotCall.Style = Syncfusion.Windows.Forms.Tools.AutoCompleteStyle.Default;
+            this.autoCompleteCountryNotCall.ThemeName = "Default";
+            this.autoCompleteCountryNotCall.AutoCompleteItemSelected += new Syncfusion.Windows.Forms.Tools.AutoCompleteItemEventHandler(this.autoCompleteCountryNotCall_AutoCompleteItemSelected);
+            // 
+            // autoCompleteCityNotCall
+            // 
+            this.autoCompleteCityNotCall.HeaderFont = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.autoCompleteCityNotCall.ItemFont = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.autoCompleteCityNotCall.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(158)))), ((int)(((byte)(218)))));
+            this.autoCompleteCityNotCall.ParentForm = this;
+            this.autoCompleteCityNotCall.ShowCloseButton = false;
+            this.autoCompleteCityNotCall.ShowColumnHeader = true;
+            this.autoCompleteCityNotCall.ShowGripper = false;
+            this.autoCompleteCityNotCall.Style = Syncfusion.Windows.Forms.Tools.AutoCompleteStyle.Default;
+            this.autoCompleteCityNotCall.ThemeName = "Default";
+            this.autoCompleteCityNotCall.AutoCompleteItemSelected += new Syncfusion.Windows.Forms.Tools.AutoCompleteItemEventHandler(this.autoCompleteCityNotCall_AutoCompleteItemSelected);
+            // 
             // UC_Search
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -484,6 +646,8 @@ namespace PhoneBook.UserControls
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabControlAdv)).EndInit();
             this.tabControlAdv.ResumeLayout(false);
+            this.searchNotCallTab.ResumeLayout(false);
+            this.searchNotCallTab.PerformLayout();
             this.searchByAddressTab.ResumeLayout(false);
             this.searchByAddressTab.PerformLayout();
             this.searchByPhoneTab.ResumeLayout(false);
@@ -494,6 +658,8 @@ namespace PhoneBook.UserControls
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteAddress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCountry1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCity1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCountryNotCall)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCityNotCall)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -506,7 +672,7 @@ namespace PhoneBook.UserControls
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel5;
-        private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabelCountry;
+        private AutoLabel autoLabelCountry;
         private AutoComplete autoCompleteCountry;
         private TextBox textBoxCountry;
         private TextBox textBoxCity;
@@ -521,6 +687,7 @@ namespace PhoneBook.UserControls
         private TabControlAdv tabControlAdv;
         private TabPageAdv searchByAddressTab;
         private TabPageAdv searchByPhoneTab;
+        private TabPageAdv searchNotCallTab;
         private AutoLabel autoLabelCountry1;
         private TextBox textBoxCountry1;
         private Button btnSearchByPhone;
@@ -529,8 +696,17 @@ namespace PhoneBook.UserControls
         private TextBox textBoxCity1;
         private AutoComplete autoCompleteCountry1;
         private AutoComplete autoCompleteCity1;
+        private AutoComplete autoCompleteCountryNotCall;
+        private AutoComplete autoCompleteCityNotCall;
+        private AutoLabel autoLabelCountryNotCall;
+        private TextBox textBoxCountryNotCall;
+        private AutoLabel autoLabelCityNotCall;
+        private TextBox textBoxCityNotCall;
         private MaskedEditBox maskedEditNumber;
         private Button btnExportToPdf;
         private SaveFileDialog saveFileDialog;
+        private Button btnAdd;
+        private Button btnDelete;
+        private Button btnEdit;
     }
 }

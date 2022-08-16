@@ -19,6 +19,7 @@ namespace PhoneBook
         public DbSet<Address> Address { get; set; }
         public DbSet<NumberPhone> NumberPhone { get; set; }
         public DbSet<NumberPhoneView> NumberPhoneView { get; set; }
+        public DbSet<NotCall> NotCall { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
