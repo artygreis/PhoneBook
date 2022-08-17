@@ -10,7 +10,7 @@ namespace PhoneBook.Types
         public string Number { get; set; }
         [Display(Name = "Адрес")]
         public string Address { get; set; }
-        [Display(Name = "Примечания")]
+        [Display(Name = "Примечание")]
         public string Notes { get; set; }
         [Display(AutoGenerateField = false)]
         public int CityId { get; set; }

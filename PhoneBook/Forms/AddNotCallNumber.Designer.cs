@@ -39,12 +39,12 @@ namespace PhoneBook.Forms
             this.autoLabelNumber = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.maskedEditNumber = new Syncfusion.Windows.Forms.Tools.MaskedEditBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.rtxtNotes = new System.Windows.Forms.RichTextBox();
+            this.autoLabelNotes = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblHeader = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.errorValidating = new System.Windows.Forms.ErrorProvider(this.components);
-            this.autoLabelNotes = new Syncfusion.Windows.Forms.Tools.AutoLabel();
-            this.rtxtNotes = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.maskedEditNumber)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorValidating)).BeginInit();
@@ -72,7 +72,7 @@ namespace PhoneBook.Forms
             this.maskedEditNumber.Name = "maskedEditNumber";
             this.maskedEditNumber.PositionAt = Syncfusion.Windows.Forms.Tools.SpecialCursorPosition.FirstMaskPosition;
             this.maskedEditNumber.Size = new System.Drawing.Size(341, 27);
-            this.maskedEditNumber.TabIndex = 1;
+            this.maskedEditNumber.TabIndex = 0;
             this.maskedEditNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // panel1
@@ -92,6 +92,29 @@ namespace PhoneBook.Forms
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(388, 299);
             this.panel1.TabIndex = 1;
+            // 
+            // rtxtNotes
+            // 
+            this.rtxtNotes.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtxtNotes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
+            this.rtxtNotes.Location = new System.Drawing.Point(22, 141);
+            this.rtxtNotes.Name = "rtxtNotes";
+            this.rtxtNotes.Size = new System.Drawing.Size(341, 96);
+            this.rtxtNotes.TabIndex = 1;
+            this.rtxtNotes.Text = "";
+            // 
+            // autoLabelNotes
+            // 
+            this.autoLabelNotes.DY = -24;
+            this.autoLabelNotes.ForeColor = System.Drawing.Color.White;
+            this.autoLabelNotes.Gap = 5;
+            this.autoLabelNotes.LabeledControl = this.rtxtNotes;
+            this.autoLabelNotes.Location = new System.Drawing.Point(22, 117);
+            this.autoLabelNotes.Name = "autoLabelNotes";
+            this.autoLabelNotes.Position = Syncfusion.Windows.Forms.Tools.AutoLabelPosition.Top;
+            this.autoLabelNotes.Size = new System.Drawing.Size(118, 19);
+            this.autoLabelNotes.TabIndex = 8;
+            this.autoLabelNotes.Text = "Примечание:";
             // 
             // btnClose
             // 
@@ -138,28 +161,6 @@ namespace PhoneBook.Forms
             // 
             this.errorValidating.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this.errorValidating.ContainerControl = this;
-            // 
-            // autoLabelNotes
-            // 
-            this.autoLabelNotes.DY = -24;
-            this.autoLabelNotes.ForeColor = System.Drawing.Color.White;
-            this.autoLabelNotes.Gap = 5;
-            this.autoLabelNotes.LabeledControl = this.rtxtNotes;
-            this.autoLabelNotes.Location = new System.Drawing.Point(22, 117);
-            this.autoLabelNotes.Name = "autoLabelNotes";
-            this.autoLabelNotes.Position = Syncfusion.Windows.Forms.Tools.AutoLabelPosition.Top;
-            this.autoLabelNotes.Size = new System.Drawing.Size(118, 19);
-            this.autoLabelNotes.TabIndex = 8;
-            this.autoLabelNotes.Text = "Примечание:";
-            // 
-            // rtxtNotes
-            // 
-            this.rtxtNotes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtxtNotes.Location = new System.Drawing.Point(22, 141);
-            this.rtxtNotes.Name = "rtxtNotes";
-            this.rtxtNotes.Size = new System.Drawing.Size(341, 96);
-            this.rtxtNotes.TabIndex = 9;
-            this.rtxtNotes.Text = "";
             // 
             // AddNotCallNumber
             // 

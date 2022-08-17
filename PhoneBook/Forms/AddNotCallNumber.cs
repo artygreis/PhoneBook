@@ -1,5 +1,6 @@
 ﻿using PhoneBook.Types;
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -40,6 +41,19 @@ namespace PhoneBook.Forms
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            using (var db = new ApplicationContext())
+            {
+                var notCallExist = db.NotCall.Where(n => n.Number == regex.Replace(maskedEditNumber.Text, "")).Count();
+                if (notCallExist > 0)
+                {
+                    MessageBox.Show("Данный номер уже внесен в базу.",
+                        "Информация",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    return;
+                }
+            }
+
             if (regex.Replace(maskedEditNumber.Text, "").Length != 0 && regex.Replace(maskedEditNumber.Text, "").Length != Mask.Replace("-", "").Length)
             {
                 errorValidating.SetError(maskedEditNumber, $"В номере должно быть {Mask.Replace("-", "").Length} цифр");

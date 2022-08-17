@@ -17,6 +17,7 @@ using System.Drawing;
 using Syncfusion.Pdf.Graphics;
 using PhoneBook.Forms;
 using System.Text.RegularExpressions;
+using Syncfusion.WinForms.DataGrid.Enums;
 
 namespace PhoneBook.UserControls
 {
@@ -42,8 +43,41 @@ namespace PhoneBook.UserControls
             AutoCompleteSetting.SetAutoCompleteSetting(autoCompleteCityNotCall);
 
             uC_GridPhones.DataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
+            uC_GridPhones.DataGrid.QueryRowHeight += DataGrid_QueryRowHeight;
+            uC_GridPhones.DataGrid.QueryRowStyle += DataGrid_QueryRowStyle;
 
             saveFileDialog.Filter = "Pdf files(*.pdf)|*.pdf";
+        }
+
+        private void DataGrid_QueryRowStyle(object sender, Syncfusion.WinForms.DataGrid.Events.QueryRowStyleEventArgs e)
+        {
+            if (e.RowType == RowType.DefaultRow)
+            {
+                if (e.RowData is NumberPhoneView)
+                {
+                    var currentNumber = (e.RowData as NumberPhoneView).Number;
+                    using (var db = new ApplicationContext())
+                    {
+                        var notCallCount = db.NotCall.Where(n => n.Number == currentNumber).Count();
+                        if (notCallCount > 0)
+                            e.Style.BackColor = Color.IndianRed;
+                    }
+                }
+            }
+        }
+
+        RowAutoFitOptions autoFitOptions = new RowAutoFitOptions();
+        int autoHeight;
+        private void DataGrid_QueryRowHeight(object sender, Syncfusion.WinForms.DataGrid.Events.QueryRowHeightEventArgs e)
+        {
+            if (this.uC_GridPhones.DataGrid.AutoSizeController.GetAutoRowHeight(e.RowIndex, autoFitOptions, out autoHeight))
+            {
+                if (autoHeight > 24)
+                {
+                    e.Height = autoHeight;
+                    e.Handled = true;
+                }
+            }
         }
 
         private void DataGrid_AutoGeneratingColumn(object sender, Syncfusion.WinForms.DataGrid.Events.AutoGeneratingColumnArgs e)
@@ -107,7 +141,7 @@ namespace PhoneBook.UserControls
             foreach (var notCall in notCalls)
             {
                 var findNumberPhones = numberPhones.Where(n => n.Number == notCall.Number).ToList();
-                var address = findNumberPhones.Count() > 0 ? $"{(string.IsNullOrEmpty(findNumberPhones.First().Locality) ? "" : findNumberPhones.First().Locality + ", ")}{findNumberPhones.First().TypeName} {findNumberPhones.First().StreetName}, {findNumberPhones.First().House}" : "";
+                var address = findNumberPhones.Count() > 0 ? $"{(string.IsNullOrEmpty(findNumberPhones.First().Locality) ? "" : findNumberPhones.First().Locality + ", ")}{findNumberPhones.First().TypeName} {findNumberPhones.First().StreetName}, д. {findNumberPhones.First().House}, кв. {findNumberPhones.First().Apartment}" : "";
                 notCallViews.Add(new NotCallView()
                 {
                     Id = notCall.Id,
@@ -119,8 +153,12 @@ namespace PhoneBook.UserControls
             }
 
             uC_GridPhones.DataGrid.DataSource = notCallViews;
-            uC_GridPhones.DataGrid.Columns["Number"].Width = 130;
+            uC_GridPhones.DataGrid.Columns["Number"].AllowHeaderTextWrapping = true;
+            uC_GridPhones.DataGrid.HeaderRowHeight = 45;
+            uC_GridPhones.DataGrid.Columns["Number"].Width = 90;
             uC_GridPhones.DataGrid.Columns["Address"].Width = 270;
+            uC_GridPhones.DataGrid.Columns["Notes"].AllowTextWrapping = true;
+            lblCount.Text = $"Количество: {notCallViews.Count()}";
         }
         /// <summary>
         /// Загрузка информации о странах
@@ -391,6 +429,8 @@ namespace PhoneBook.UserControls
         {
             var numberPhones = uC_GridPhones.DataGrid.DataSource as List<NumberPhoneView>;
 
+            var listNotCall = new List<int>();
+
             if (numberPhones.Count < 2)
             {
                 MessageBox.Show("Нет данных для экспорта", "Экспорт", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -425,6 +465,17 @@ namespace PhoneBook.UserControls
                     numberPhone.Apartment,
                     string.IsNullOrEmpty(numberPhone.Number) ? "" : string.Format("{0:"+ maskNumber +"}", Convert.ToInt64(numberPhone.Number))
                 });
+                
+                Regex regex = new Regex(@"[^0-9]");
+                var currentNumber = regex.Replace(numberPhone.Number, "");
+                using (var db = new ApplicationContext())
+                {
+                    var notCallCount = db.NotCall.Where(n => n.Number == currentNumber).Count();
+                    if (notCallCount > 0)
+                    {
+                        listNotCall.Add(dataTable.Rows.Count - 1);
+                    }
+                }
             }
             
             //Assign data source.
@@ -437,6 +488,13 @@ namespace PhoneBook.UserControls
             {
                 pdfGrid.Columns[i].Format = new PdfStringFormat() { Alignment = PdfTextAlignment.Center, LineAlignment = PdfVerticalAlignment.Middle };
 
+            }
+
+            PdfGridRowStyle pdfGridRowStyle = new PdfGridRowStyle();
+            pdfGridRowStyle.BackgroundBrush = PdfBrushes.IndianRed;
+            foreach (var row in listNotCall)
+            {
+                pdfGrid.Rows[row].Style = pdfGridRowStyle;
             }
 
             //Creates the grid cell styles

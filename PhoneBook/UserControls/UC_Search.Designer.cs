@@ -75,6 +75,7 @@ namespace PhoneBook.UserControls
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.autoCompleteCountryNotCall = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
             this.autoCompleteCityNotCall = new Syncfusion.Windows.Forms.Tools.AutoComplete(this.components);
+            this.lblCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.autoCompleteCountry)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabControlAdv)).BeginInit();
@@ -153,6 +154,7 @@ namespace PhoneBook.UserControls
             // 
             // searchNotCallTab
             // 
+            this.searchNotCallTab.Controls.Add(this.lblCount);
             this.searchNotCallTab.Controls.Add(this.btnDelete);
             this.searchNotCallTab.Controls.Add(this.btnEdit);
             this.searchNotCallTab.Controls.Add(this.textBoxCountryNotCall);
@@ -174,10 +176,10 @@ namespace PhoneBook.UserControls
             // btnDelete
             // 
             this.btnDelete.BackColor = System.Drawing.Color.White;
+            this.btnDelete.Enabled = false;
             this.btnDelete.FlatAppearance.BorderSize = 0;
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnDelete.Enabled = false;
             this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDelete.Location = new System.Drawing.Point(533, 66);
@@ -192,10 +194,10 @@ namespace PhoneBook.UserControls
             // btnEdit
             // 
             this.btnEdit.BackColor = System.Drawing.Color.White;
+            this.btnEdit.Enabled = false;
             this.btnEdit.FlatAppearance.BorderSize = 0;
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnEdit.Enabled = false;
             this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
             this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnEdit.Location = new System.Drawing.Point(359, 66);
@@ -256,10 +258,10 @@ namespace PhoneBook.UserControls
             // btnAdd
             // 
             this.btnAdd.BackColor = System.Drawing.Color.White;
+            this.btnAdd.Enabled = false;
             this.btnAdd.FlatAppearance.BorderSize = 0;
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnAdd.Enabled = false;
             this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
             this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAdd.Location = new System.Drawing.Point(222, 66);
@@ -631,6 +633,16 @@ namespace PhoneBook.UserControls
             this.autoCompleteCityNotCall.ThemeName = "Default";
             this.autoCompleteCityNotCall.AutoCompleteItemSelected += new Syncfusion.Windows.Forms.Tools.AutoCompleteItemEventHandler(this.autoCompleteCityNotCall_AutoCompleteItemSelected);
             // 
+            // lblCount
+            // 
+            this.lblCount.AutoSize = true;
+            this.lblCount.ForeColor = System.Drawing.Color.White;
+            this.lblCount.Location = new System.Drawing.Point(5, 80);
+            this.lblCount.Name = "lblCount";
+            this.lblCount.Size = new System.Drawing.Size(112, 19);
+            this.lblCount.TabIndex = 16;
+            this.lblCount.Text = "Количество: ";
+            // 
             // UC_Search
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -708,5 +720,6 @@ namespace PhoneBook.UserControls
         private Button btnAdd;
         private Button btnDelete;
         private Button btnEdit;
+        private Label lblCount;
     }
 }
