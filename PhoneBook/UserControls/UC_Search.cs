@@ -51,6 +51,8 @@ namespace PhoneBook.UserControls
 
         private void DataGrid_QueryRowStyle(object sender, Syncfusion.WinForms.DataGrid.Events.QueryRowStyleEventArgs e)
         {
+            if (string.IsNullOrEmpty(textBoxCity.Text)) return;
+
             if (e.RowType == RowType.DefaultRow)
             {
                 if (e.RowData is NumberPhoneView)
@@ -58,7 +60,7 @@ namespace PhoneBook.UserControls
                     var currentNumber = (e.RowData as NumberPhoneView).Number;
                     using (var db = new ApplicationContext())
                     {
-                        var notCallCount = db.NotCall.Where(n => n.Number == currentNumber).Count();
+                        var notCallCount = db.NotCall.Where(n => n.Number == currentNumber && n.CityId == Convert.ToInt32(autoCompleteCity.GetItemArray(textBoxCity.Text)[0])).Count();
                         if (notCallCount > 0)
                             e.Style.BackColor = Color.IndianRed;
                     }
@@ -470,7 +472,7 @@ namespace PhoneBook.UserControls
                 var currentNumber = regex.Replace(numberPhone.Number, "");
                 using (var db = new ApplicationContext())
                 {
-                    var notCallCount = db.NotCall.Where(n => n.Number == currentNumber).Count();
+                    var notCallCount = db.NotCall.Where(n => n.Number == currentNumber && n.CityId == Convert.ToInt32(autoCompleteCity.GetItemArray(textBoxCity.Text)[0])).Count();
                     if (notCallCount > 0)
                     {
                         listNotCall.Add(dataTable.Rows.Count - 1);
