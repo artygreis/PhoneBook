@@ -3,12 +3,13 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>
+    <UseWindowsForms>True</UseWindowsForms>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 
     <RootNamespace>PhoneBook</RootNamespace>
     <AssemblyName>PhoneBook</AssemblyName>
     <ApplicationIcon>Icons\phone_logo.ico</ApplicationIcon>
+    <ImplicitUsings>disable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">
@@ -23,46 +24,19 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="5.0.10" />
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlcipher" Version="2.0.6" />
     <PackageReference Include="squirrel.windows" Version="2.0.1" />
-    <PackageReference Include="Syncfusion.Pdf.WinForms" Version="19.4.0.48" />
+    <PackageReference Include="Syncfusion.Core.WinForms" Version="20.2.0.43" />
+    <PackageReference Include="Syncfusion.Pdf.WinForms" Version="20.2.0.43" />
+    <PackageReference Include="Syncfusion.SfDataGrid.WinForms" Version="20.2.0.43" />
+    <PackageReference Include="Syncfusion.Shared.Base" Version="20.2.0.43" />
+    <PackageReference Include="Syncfusion.Tools.Windows" Version="20.2.0.43" />
     <Reference Include="NuGet.Squirrel">
       <HintPath>..\..\..\..\.nuget\packages\squirrel.windows\2.0.1\lib\Net45\NuGet.Squirrel.dll</HintPath>
     </Reference>
     <Reference Include="Squirrel">
       <HintPath>..\..\..\..\.nuget\packages\squirrel.windows\2.0.1\lib\Net45\Squirrel.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Core.WinForms">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.2.0.44\precompiledassemblies\net5.0\Syncfusion.Core.WinForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Data.WinForms">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.2.0.44\precompiledassemblies\net5.0\Syncfusion.Data.WinForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Grid.Windows">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.2.0.44\precompiledassemblies\net5.0\Syncfusion.Grid.Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.SfDataGrid.WinForms">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.2.0.44\precompiledassemblies\net5.0\Syncfusion.SfDataGrid.WinForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Shared.Base">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.2.0.44\precompiledassemblies\net5.0\Syncfusion.Shared.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Shared.Windows">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.2.0.44\precompiledassemblies\net5.0\Syncfusion.Shared.Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.SpellChecker.Base">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.2.0.44\precompiledassemblies\net5.0\Syncfusion.SpellChecker.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Tools.Base">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.2.0.44\precompiledassemblies\net5.0\Syncfusion.Tools.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.Tools.Windows">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Syncfusion\Essential Studio\Windows\19.2.0.44\precompiledassemblies\net5.0\Syncfusion.Tools.Windows.dll</HintPath>
-    </Reference>
-    <Compile Update="Forms\AddNotCallNumber.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\AddNotCallNumber.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Forms\AddNotCallNumber.cs" />
+    <Compile Update="Forms\AddNotCallNumber.cs" />
     <Compile Update="Forms\EditCountry - Копировать.Designer.cs">
       <DependentUpon>EditCountry.Designer.cs</DependentUpon>
     </Compile>

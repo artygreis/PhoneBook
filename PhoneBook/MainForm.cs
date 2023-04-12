@@ -19,7 +19,7 @@ using Syncfusion.Windows.Forms;
 
 namespace PhoneBook
 {
-    public partial class MainForm : MetroForm
+    public partial class MainForm : Form
     {
         private bool availableUpdate = false;
         public MainForm()
@@ -43,7 +43,7 @@ namespace PhoneBook
         {
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
             FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
-            CaptionLabels[1].Text = $"v.{versionInfo.FileVersion}";
+            //CaptionLabels[1].Text = $"v.{versionInfo.FileVersion}";
         }
         private bool CheckExistDb()
         {

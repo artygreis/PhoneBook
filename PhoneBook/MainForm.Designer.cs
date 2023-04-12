@@ -134,13 +134,13 @@ namespace PhoneBook
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
-            this.CaptionAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.CaptionBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
-            this.CaptionBarHeight = 50;
-            this.CaptionButtonColor = System.Drawing.Color.White;
-            this.CaptionButtonHoverColor = System.Drawing.Color.LightGray;
-            this.CaptionFont = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.CaptionForeColor = System.Drawing.Color.White;
+            //this.CaptionAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            //this.CaptionBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(71)))), ((int)(((byte)(160)))));
+            //this.CaptionBarHeight = 50;
+            //this.CaptionButtonColor = System.Drawing.Color.White;
+            //this.CaptionButtonHoverColor = System.Drawing.Color.LightGray;
+            //this.CaptionFont = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            //this.CaptionForeColor = System.Drawing.Color.White;
             captionImage1.Image = ((System.Drawing.Image)(resources.GetObject("captionImage1.Image")));
             captionImage1.Location = new System.Drawing.Point(0, 0);
             captionImage1.Name = "CaptionImage2";
@@ -150,8 +150,8 @@ namespace PhoneBook
             captionImage2.Location = new System.Drawing.Point(28, 10);
             captionImage2.Name = "CaptionImage1";
             captionImage2.Size = new System.Drawing.Size(34, 34);
-            this.CaptionImages.Add(captionImage1);
-            this.CaptionImages.Add(captionImage2);
+            //this.CaptionImages.Add(captionImage1);
+            //this.CaptionImages.Add(captionImage2);
             captionLabel1.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             captionLabel1.ForeColor = System.Drawing.Color.White;
             captionLabel1.Location = new System.Drawing.Point(76, 12);
@@ -163,8 +163,8 @@ namespace PhoneBook
             captionLabel2.Location = new System.Drawing.Point(355, 12);
             captionLabel2.Name = "Version";
             captionLabel2.Size = new System.Drawing.Size(180, 24);
-            this.CaptionLabels.Add(captionLabel1);
-            this.CaptionLabels.Add(captionLabel2);
+            //this.CaptionLabels.Add(captionLabel1);
+            //this.CaptionLabels.Add(captionLabel2);
             this.ClientSize = new System.Drawing.Size(888, 444);
             this.Controls.Add(this.panelControls);
             this.Controls.Add(this.panel1);
@@ -173,9 +173,9 @@ namespace PhoneBook
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MetroColor = System.Drawing.Color.Empty;
+            //this.MetroColor = System.Drawing.Color.Empty;
             this.Name = "MainForm";
-            this.ShowMaximizeBox = false;
+            //this.ShowMaximizeBox = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panel1.ResumeLayout(false);
